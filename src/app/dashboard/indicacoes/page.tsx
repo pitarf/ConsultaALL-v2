@@ -99,7 +99,7 @@ export default function IndicacoesPage() {
             <span className="text-xs text-slate-400 dark:text-gray-400 font-bold uppercase tracking-wider block">Pessoas Indicadas</span>
             <span className="text-3xl font-black text-slate-900 dark:text-white block">{data?.referralsCount}</span>
           </div>
-          <div className="p-4 bg-blue-500/10 text-blue-500 rounded-2xl">
+          <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl">
             <Users className="w-6 h-6" />
           </div>
         </div>

@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await prisma.systemSetting.findFirst();
-  const title = `Blog & Artigos - ${settings?.siteTitle || 'Detetive Buscas'}`;
+  const title = `Blog & Artigos - ${settings?.siteTitle || 'ConsultasBrasil'}`;
   const description = 'Leia notícias, tutoriais, novidades sobre enriquecimento de dados, proteção de dados (LGPD) e background check.';
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://detetivebuscas.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://consultasbrasil.net';
 
   return {
     title,

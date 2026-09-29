@@ -69,18 +69,18 @@ export function AdminMobileMenu({ role }: { role: string }) {
           />
 
           {/* Drawer Lateral Deslizante com posicionamento correto e fundo totalmente opaco */}
-          <aside className="relative w-72 max-w-[85vw] bg-[#0f172a] h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-300 border-r border-white/5 text-white">
+          <aside className="relative w-72 max-w-[85vw] bg-[#04130d] h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-300 border-r border-[#133829] text-white">
             {/* Efeito Glow Administrativo/SEO no Fundo */}
-            <div className={`absolute top-0 left-0 w-full h-32 blur-3xl -z-10 ${role === 'SEO' ? 'bg-blue-500/10' : 'bg-red-500/10'}`}></div>
+            <div className={`absolute top-0 left-0 w-full h-32 blur-3xl -z-10 ${role === 'SEO' ? 'bg-emerald-500/10' : 'bg-red-500/10'}`}></div>
 
             {/* Cabeçalho da Sidebar Móvel */}
-            <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 bg-[#0b1120]">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-[#133829] bg-[#020b07]">
               <div className="flex items-center">
                 {role === 'SEO' ? (
                   <>
-                    <Globe className="text-blue-500 w-6 h-6 mr-2 animate-pulse" />
+                    <Globe className="text-emerald-500 w-6 h-6 mr-2 animate-pulse" />
                     <span className="text-lg font-bold text-white">
-                      SEO<span className="text-blue-500">Panel</span>
+                      SEO<span className="text-emerald-500">Panel</span>
                     </span>
                   </>
                 ) : (
@@ -102,7 +102,7 @@ export function AdminMobileMenu({ role }: { role: string }) {
             </div>
 
             {/* Links de Navegação do Admin */}
-            <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto bg-[#0f172a]">
+            <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto bg-[#04130d]">
               {role === 'ADMIN' && (
                 <>
                   <Link
@@ -185,7 +185,7 @@ export function AdminMobileMenu({ role }: { role: string }) {
                 </>
               )}
 
-              <div className="pt-2 pb-1 px-3 text-[11px] font-bold tracking-wider text-blue-400 uppercase flex items-center gap-1.5">
+              <div className="pt-2 pb-1 px-3 text-[11px] font-bold tracking-wider text-emerald-400 uppercase flex items-center gap-1.5">
                 <Globe className="w-3.5 h-3.5" />
                 Gestão de SEO
               </div>
@@ -194,33 +194,33 @@ export function AdminMobileMenu({ role }: { role: string }) {
                 href="/admin/paginas"
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   pathname.startsWith('/admin/paginas')
-                    ? 'bg-blue-500/10 text-white border border-blue-500/20 shadow-md shadow-blue-500/5'
+                    ? 'bg-emerald-500/10 text-white border border-emerald-500/20 shadow-md shadow-emerald-500/5'
                     : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <FileText className="w-5 h-5 text-blue-400" />
+                <FileText className="w-5 h-5 text-emerald-400" />
                 Páginas SEO
               </Link>
               <Link
                 href="/admin/blog"
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   pathname.startsWith('/admin/blog')
-                    ? 'bg-blue-500/10 text-white border border-blue-500/20 shadow-md shadow-blue-500/5'
+                    ? 'bg-emerald-500/10 text-white border border-emerald-500/20 shadow-md shadow-emerald-500/5'
                     : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <BookOpen className="w-5 h-5 text-blue-400" />
+                <BookOpen className="w-5 h-5 text-emerald-400" />
                 Blog CMS
               </Link>
               <Link
                 href="/admin/configuracoes"
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   pathname.startsWith('/admin/configuracoes')
-                    ? 'bg-blue-500/10 text-white border border-blue-500/20 shadow-md shadow-blue-500/5'
+                    ? 'bg-emerald-500/10 text-white border border-emerald-500/20 shadow-md shadow-emerald-500/5'
                     : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Settings className="w-5 h-5 text-blue-400" />
+                <Settings className="w-5 h-5 text-emerald-400" />
                 Configurações SEO
               </Link>
 

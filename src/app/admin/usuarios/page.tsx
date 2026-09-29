@@ -12,7 +12,7 @@ export default async function AdminUsuariosPage() {
     <div className="max-w-6xl mx-auto">
       <div className="mb-8 border-b border-slate-200 dark:border-white/10 pb-6">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-          <Users className="text-blue-500 w-8 h-8" />
+          <Users className="text-emerald-500 w-8 h-8" />
           Gestão de Usuários
         </h1>
         <p className="text-slate-500 dark:text-gray-400 mt-2">Lista completa de clientes, controle de saldos e banimentos.</p>

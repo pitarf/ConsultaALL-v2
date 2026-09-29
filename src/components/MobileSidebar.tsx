@@ -24,45 +24,60 @@ export function MobileSidebar({ isAdmin, isSeo, role, whatsappLink, logoUrl }: M
   }, []);
 
   const drawerContent = isOpen ? (
-    <div className="fixed inset-0 z-[100] flex">
-      {/* Overlay Escuro */}
+    <div className="fixed inset-0 z-[100] flex justify-end">
+      {/* Overlay Escuro com transição suave */}
       <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300"
         onClick={() => setIsOpen(false)}
+        aria-hidden="true"
       />
 
-      {/* Drawer Conteúdo */}
-      <div className="relative w-72 h-full bg-[#0f172a] shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col">
-        <div className="h-20 flex items-center justify-between px-6 border-b border-white/5">
-          <Link href="/dashboard" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+      {/* Drawer Conteúdo à Direita - Limite de tela respeitado com max-w-[85vw] */}
+      <div 
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navegação móvel"
+        className="relative w-full max-w-[85vw] sm:w-80 h-full bg-[#04130d] border-l border-[#133829] shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col z-10"
+      >
+        <div className="h-16 sm:h-20 flex items-center justify-between px-4 sm:px-6 border-b border-white/5 shrink-0">
+          <Link 
+            href="/dashboard" 
+            className="flex items-center gap-2 min-h-[44px] py-1" 
+            onClick={() => setIsOpen(false)}
+          >
             {logoUrl ? (
               <img src={logoUrl} alt="Logo" className="h-7 w-auto object-contain" />
             ) : (
-              <Database className="text-primary w-5 h-5" />
+              <Database className="text-primary w-5 h-5 shrink-0" />
             )}
-            <span className="text-lg font-bold tracking-tight text-white">
-              Detetive<span className="text-primary">Buscas</span>
+            <span className="text-base sm:text-lg font-bold tracking-tight text-white whitespace-nowrap truncate">
+              Consultas<span className="text-primary">Brasil</span>
             </span>
           </Link>
           <button 
+            type="button"
             onClick={() => setIsOpen(false)}
-            className="p-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg"
+            aria-label="Fechar menu"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-xl active:scale-95 transition-all"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-1">
           {/* Quando clica em um link, fecha o menu */}
           <div onClick={() => setIsOpen(false)}>
             <SidebarNav isAdmin={isAdmin} isSeo={isSeo} role={role} whatsappLink={whatsappLink} />
           </div>
         </div>
 
-        <div className="p-4 border-t border-white/5">
+        <div className="p-4 border-t border-white/5 shrink-0 bg-[#04130d]/80 backdrop-blur-sm">
           <form action={logout}>
-            <button type="submit" className="flex w-full items-center gap-3 px-3 py-3 text-sm text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors">
-              <LogOut className="w-4 h-4" />
+            <button 
+              type="submit" 
+              className="flex w-full items-center justify-center sm:justify-start gap-3 px-4 min-h-[44px] text-sm font-semibold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-xl transition-all active:scale-98"
+            >
+              <LogOut className="w-4 h-4 shrink-0" />
               Sair da conta
             </button>
           </form>
@@ -72,11 +87,13 @@ export function MobileSidebar({ isAdmin, isSeo, role, whatsappLink, logoUrl }: M
   ) : null;
 
   return (
-    <div className="md:hidden">
-      {/* Botão Hambúrguer */}
+    <div className="md:hidden flex items-center">
+      {/* Botão Hambúrguer com área de toque mínima de 44x44px */}
       <button 
+        type="button"
         onClick={() => setIsOpen(true)}
-        className="p-2 text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors"
+        aria-label="Abrir menu de navegação"
+        className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl transition-all active:scale-95"
       >
         <Menu className="w-6 h-6" />
       </button>

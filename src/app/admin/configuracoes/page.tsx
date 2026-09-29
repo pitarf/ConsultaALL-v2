@@ -231,7 +231,7 @@ export default function AdminSettingsPage() {
                 value={settings.siteTitle}
                 onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })}
                 className="w-full bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-black/80 focus:border-primary outline-none transition-all text-sm"
-                placeholder="Ex: Detetive Buscas - Investigação de Dados"
+                placeholder="Ex: ConsultasBrasil - Investigação de Dados"
               />
             </div>
 

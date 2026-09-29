@@ -156,13 +156,13 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
             <div className="space-y-6">
               <div className="space-y-3">
                 <label className="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider">Selecione o Valor</label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {PRESET_VALUES.map(v => (
                     <button
                       key={v}
                       type="button"
                       onClick={() => setAmount(v.toString())}
-                      className={`py-3 px-4 rounded-xl border font-bold transition-all ${
+                      className={`min-h-[48px] py-3 px-4 rounded-xl border font-bold transition-all text-base sm:text-sm active:scale-95 ${
                         amount === v.toString() 
                           ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20 scale-[1.02]' 
                           : 'bg-slate-50 dark:bg-black/30 border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-primary/50'
@@ -171,22 +171,23 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
                       R$ {v}
                     </button>
                   ))}
-                  <div className="relative col-span-3">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-400 font-bold">R$</span>
+                  <div className="relative col-span-2 sm:col-span-3">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-400 font-bold text-base sm:text-sm">R$</span>
                     <input 
                       type="text"
+                      inputMode="decimal"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="Digitar outro valor"
-                      className="w-full bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-xl py-3.5 pl-12 pr-4 text-slate-900 dark:text-white font-bold outline-none focus:border-primary transition-all text-sm"
+                      className="w-full min-h-[48px] bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-12 pr-4 text-slate-900 dark:text-white font-bold outline-none focus:border-primary transition-all text-base sm:text-sm"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 p-4 rounded-2xl flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                <p className="text-xs text-blue-900 dark:text-blue-200/80 leading-relaxed">
+              <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 p-4 rounded-2xl flex items-start gap-3">
+                <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                <p className="text-xs text-emerald-900 dark:text-emerald-200/80 leading-relaxed">
                   Sistema de pagamento automatizado com liberação imediata em segundos via PushinPay.
                 </p>
               </div>
@@ -195,7 +196,7 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
                 type="button"
                 onClick={handleGeneratePix}
                 disabled={loading}
-                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-2xl shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-base active:scale-98"
+                className="w-full min-h-[50px] bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-6 rounded-2xl shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-base active:scale-98 select-none"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <QrCode className="w-5 h-5" />}
                 Gerar QR Code Pix
@@ -205,12 +206,12 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
 
           {step === 'pay' && pixData && (
             <div className="space-y-6 text-center animate-in fade-in zoom-in-95 duration-300">
-              <div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-md inline-block mx-auto">
+              <div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-md inline-block mx-auto max-w-full overflow-hidden">
                 {pixData.qrCodeBase64 ? (
                   <img 
                     src={pixData.qrCodeBase64.startsWith('data:') ? pixData.qrCodeBase64 : `data:image/png;base64,${pixData.qrCodeBase64}`} 
                     alt="QR Code Pix" 
-                    className="w-48 h-48 mx-auto"
+                    className="w-48 h-48 max-w-full mx-auto object-contain"
                   />
                 ) : (
                   <div className="w-48 h-48 bg-slate-100 flex items-center justify-center text-slate-400 rounded-xl">
@@ -221,33 +222,33 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
 
               <div className="space-y-2">
                 <p className="text-xs text-slate-500 dark:text-gray-400">Escaneie o QR Code com o aplicativo do seu banco ou use a chave Copia e Cola abaixo:</p>
-                <div className="flex items-center gap-2 bg-slate-100 dark:bg-black/50 p-2.5 rounded-xl border border-slate-200 dark:border-white/10">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-slate-100 dark:bg-black/50 p-2.5 rounded-xl border border-slate-200 dark:border-white/10">
                   <input 
                     type="text" 
                     readOnly 
                     value={pixData.qrCode} 
-                    className="bg-transparent text-xs font-mono text-slate-700 dark:text-gray-300 w-full outline-none truncate"
+                    className="bg-transparent text-xs sm:text-xs font-mono text-slate-700 dark:text-gray-300 w-full min-h-[44px] sm:min-h-0 px-2 outline-none truncate"
                   />
                   <button
                     type="button"
                     onClick={copyToClipboard}
-                    className="bg-primary hover:bg-primary/90 text-white font-bold px-4 py-2 rounded-lg text-xs transition-all shrink-0 flex items-center gap-1.5"
+                    className="w-full sm:w-auto min-h-[44px] bg-primary hover:bg-primary/90 text-white font-bold px-5 py-2.5 rounded-lg text-sm sm:text-xs transition-all shrink-0 flex items-center justify-center gap-2 active:scale-95"
                   >
-                    {copied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                    {copied ? 'Copiado!' : 'Copiar'}
+                    {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    {copied ? 'Copiado!' : 'Copiar Chave'}
                   </button>
                 </div>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Aguardando confirmação do pagamento...
+                <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                <span>Aguardando confirmação do pagamento...</span>
               </div>
 
               <button
                 type="button"
                 onClick={() => setStep('select')}
-                className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors underline"
+                className="inline-flex items-center justify-center min-h-[44px] px-4 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors underline"
               >
                 Voltar e alterar valor
               </button>
@@ -266,7 +267,7 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
               <button
                 type="button"
                 onClick={() => setStep('select')}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl text-sm transition-all shadow-lg"
+                className="w-full sm:w-auto min-h-[48px] bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl text-base transition-all shadow-lg active:scale-95 flex items-center justify-center mx-auto"
               >
                 Fazer Nova Recarga
               </button>
@@ -278,7 +279,7 @@ export default function FaturasClient({ initialUser, initialDeposits }: FaturasC
         <div className="lg:col-span-6 bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-500/20 rounded-xl text-blue-600 dark:text-blue-400">
+              <div className="p-2 bg-emerald-500/20 rounded-xl text-emerald-600 dark:text-emerald-400">
                 <Clock className="w-5 h-5" />
               </div>
               <div>

@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let baseUrl = 'https://detetivebuscas.com';
+  let baseUrl = 'https://consultasbrasil.net';
   
   try {
     const settings = await prisma.systemSetting.findFirst();

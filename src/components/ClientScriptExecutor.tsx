@@ -125,7 +125,7 @@ export default function ClientScriptExecutor({ scripts }: ClientScriptExecutorPr
 
         // Espera mais 800ms e redireciona para o cadastro
         await new Promise((resolve) => setTimeout(resolve, 800));
-        window.location.href = 'https://detetivebuscas.com/cadastro';
+        window.location.href = '/cadastro';
       };
 
       if (form) {

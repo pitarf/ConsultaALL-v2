@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 /**
- * Landing Page Principal do Detetive Buscas (Arquivada para /home2)
+ * Landing Page Principal do ConsultasBrasil (Arquivada para /home2)
  * Design original escuro com glassmorphism, gradientes azul/roxo e identidade investigativa.
  */
 export default async function Home2() {
@@ -39,12 +39,12 @@ export default async function Home2() {
                 className="h-9 w-auto object-contain"
               />
             ) : (
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.4)]">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.4)]">
                 <Search className="w-5 h-5 text-white" />
               </div>
             )}
             <span className="text-xl font-bold tracking-wider text-white">
-              Detetive<span className="text-primary">Buscas</span>
+              Consultas<span className="text-primary">Brasil</span>
             </span>
           </div>
 
@@ -77,8 +77,8 @@ export default async function Home2() {
       {/* ===================== HERO ===================== */}
       <section className="relative flex flex-col justify-center items-center text-center px-4 py-28 lg:py-40 overflow-hidden">
         {/* Orbs de fundo */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[130px] -z-10 animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] -z-10" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-600/15 rounded-full blur-[130px] -z-10 animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-teal-600/10 rounded-full blur-[100px] -z-10" />
 
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8 backdrop-blur-sm">
@@ -86,7 +86,7 @@ export default async function Home2() {
           Plataforma Online • Acesso Imediato
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-indigo-300 mb-6 max-w-5xl mx-auto leading-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-teal-300 mb-6 max-w-5xl mx-auto leading-tight">
           Painel Completo de <br className="hidden md:block" /> Consultas Online
         </h1>
         <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -114,7 +114,7 @@ export default async function Home2() {
               { value: "100%", label: "Legal e Seguro" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
                   {stat.value}
                 </p>
                 <p className="text-gray-500 text-sm mt-1">{stat.label}</p>
@@ -141,16 +141,16 @@ export default async function Home2() {
             {[
               {
                 icon: User,
-                color: "from-blue-500 to-indigo-600",
-                glow: "rgba(99,102,241,0.3)",
+                color: "from-emerald-500 to-green-600",
+                glow: "rgba(16,185,129,0.3)",
                 title: "Consulta de Pessoas",
                 desc: "CPF, nome completo, endereço atual, histórico, vínculos familiares, e-mails e telefones associados.",
                 tags: ["CPF", "Nome", "Histórico"],
               },
               {
                 icon: Phone,
-                color: "from-cyan-500 to-blue-600",
-                glow: "rgba(6,182,212,0.3)",
+                color: "from-teal-500 to-emerald-600",
+                glow: "rgba(20,184,166,0.3)",
                 title: "Consulta por Telefone",
                 desc: "Descubra o proprietário de qualquer número, operadora, histórico e dados cadastrais vinculados.",
                 tags: ["Celular", "Fixo", "WhatsApp"],
@@ -198,7 +198,7 @@ export default async function Home2() {
                 >
                   <item.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">{item.title}</h3>
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">{item.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">{item.desc}</p>
                 <div className="flex flex-wrap gap-2">
                   {item.tags.map((tag) => (
@@ -238,7 +238,7 @@ export default async function Home2() {
                   <div className="w-20 h-20 rounded-2xl glass-panel flex items-center justify-center border border-primary/30">
                     <item.icon className="w-8 h-8 text-primary" />
                   </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xs font-bold text-white">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-xs font-bold text-white">
                     {item.step}
                   </span>
                 </div>
@@ -258,7 +258,7 @@ export default async function Home2() {
               <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">Proteção Total</p>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                 Sua Segurança é Nossa<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Prioridade Máxima</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">Prioridade Máxima</span>
               </h2>
               <p className="text-gray-400 mb-8 leading-relaxed">
                 Operamos com total conformidade legal. Todas as consultas são registradas e auditadas. Seus dados de pagamento são protegidos com criptografia de ponta a ponta.
@@ -299,12 +299,12 @@ export default async function Home2() {
 
       {/* ===================== CTA FINAL ===================== */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/20 to-teal-900/20 -z-10" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-primary/10 rounded-full blur-[80px] -z-10" />
         <div className="container-premium text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
             Pronto para Encontrar<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
               o que Precisa?
             </span>
           </h2>
@@ -334,12 +334,12 @@ export default async function Home2() {
                   className="h-7 w-auto object-contain"
                 />
               ) : (
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center">
                   <Search className="w-4 h-4 text-white" />
                 </div>
               )}
               <span className="text-lg font-bold text-white">
-                Detetive<span className="text-primary">Buscas</span>
+                Consultas<span className="text-primary">Brasil</span>
               </span>
             </div>
             <div className="flex gap-6 text-sm text-gray-500">
@@ -348,7 +348,7 @@ export default async function Home2() {
               <Link href="/termos" className="hover:text-white transition-colors">Termos de Uso</Link>
             </div>
             <p className="text-gray-600 text-sm text-center md:text-right">
-              © {new Date().getFullYear()} {settings?.siteTitle?.split(' - ')[0] || "Detetive Buscas"}. Todos os direitos reservados.
+              © {new Date().getFullYear()} {settings?.siteTitle?.split(' - ')[0] || "ConsultasBrasil"}. Todos os direitos reservados.
             </p>
           </div>
         </div>

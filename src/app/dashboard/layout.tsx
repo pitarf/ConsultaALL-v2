@@ -53,12 +53,36 @@ export default async function DashboardLayout({
 
   const settings = await prisma.systemSetting.findFirst();
   const whatsappNumber = (settings?.supportWhatsapp || "5511999999999").replace(/\D/g, '');
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1%2C%20gostaria%20de%20suporte%20no%20DetetiveBuscas`;
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1%2C%20gostaria%20de%20suporte%20no%20ConsultasBrasil`;
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Sidebar - Inspirado na referência DeskData */}
-      <aside className="w-64 border-r border-white/10 bg-[#0f172a] hidden md:flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col bg-[#f8fafc] dark:bg-background min-w-0">
+        <header className="h-16 border-b border-slate-200 dark:border-white/5 bg-white/50 dark:bg-card/30 backdrop-blur-md flex items-center justify-between px-4 md:px-6 shadow-sm sticky top-0 z-50">
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Suspense fallback={<div className="h-8 w-32 bg-white/5 animate-pulse rounded-2xl" />}>
+              <BalanceHeader initialBalance={user.balance} />
+            </Suspense>
+          </div>
+
+          <MobileSidebar 
+            isAdmin={user.role === 'ADMIN'} 
+            isSeo={user.role === 'SEO'}
+            role={user.role}
+            whatsappLink={whatsappLink} 
+            logoUrl={settings?.logoUrl ?? undefined} 
+          />
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
+          {children}
+        </main>
+      </div>
+
+      {/* Sidebar - Posicionada à Direita */}
+      <aside className="w-64 border-l border-[#133829] bg-[#04130d] hidden md:flex flex-col shrink-0">
         <div className="h-20 flex items-center justify-center border-b border-white/5 p-4">
           <Link href="/dashboard" className="flex items-center gap-2">
             {settings?.logoUrl ? (
@@ -71,7 +95,7 @@ export default async function DashboardLayout({
               <Database className="text-primary w-6 h-6" />
             )}
             <span className="text-lg font-bold tracking-tight text-white whitespace-nowrap">
-              Detetive<span className="text-primary">Buscas</span>
+              Consultas<span className="text-primary">Brasil</span>
             </span>
           </Link>
         </div>
@@ -94,30 +118,6 @@ export default async function DashboardLayout({
           </div>
         </div>
       </aside>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col bg-[#f8fafc] dark:bg-background">
-        <header className="h-16 border-b border-slate-200 dark:border-white/5 bg-white/50 dark:bg-card/30 backdrop-blur-md flex items-center justify-between px-4 md:px-6 shadow-sm sticky top-0 z-50">
-          <MobileSidebar 
-            isAdmin={user.role === 'ADMIN'} 
-            isSeo={user.role === 'SEO'}
-            role={user.role}
-            whatsappLink={whatsappLink} 
-            logoUrl={settings?.logoUrl} 
-          />
-          
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Suspense fallback={<div className="h-8 w-32 bg-white/5 animate-pulse rounded-2xl" />}>
-              <BalanceHeader initialBalance={user.balance} />
-            </Suspense>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          {children}
-        </main>
-      </div>
     </div>
   );
 }

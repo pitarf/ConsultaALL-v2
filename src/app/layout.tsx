@@ -32,10 +32,10 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     const settings = await prisma.systemSetting.findFirst();
 
-    const title = settings?.siteTitle || "Detetive Buscas - Investigação de Dados";
+    const title = settings?.siteTitle || "ConsultasBrasil - Investigação de Dados";
     const description = settings?.siteDescription || "Plataforma profissional para consultas de CPF, CNPJ, Veículos e muito mais.";
     const keywords = settings?.siteKeywords || "consultas, cpf, cnpj, veículos, investigação";
-    const faviconUrl = settings?.faviconUrl || "/favicon.ico";
+    const faviconUrl = settings?.faviconUrl || "/favicon.png";
 
     return {
       title,
@@ -59,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch {
     // Fallback caso o banco não esteja acessível ainda
     return {
-      title: "Detetive Buscas - Investigação de Dados",
+      title: "ConsultasBrasil - Investigação de Dados",
       description: "Plataforma profissional para consultas de dados.",
     };
   }

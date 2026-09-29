@@ -76,7 +76,7 @@ export default function PromocoesPage() {
   if (fetching) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -87,7 +87,7 @@ export default function PromocoesPage() {
     <div className="max-w-2xl mx-auto">
       <div className="mb-8 border-b border-slate-200 dark:border-white/10 pb-6">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-          <Gift className="text-blue-500 w-8 h-8" />
+          <Gift className="text-emerald-500 w-8 h-8" />
           Promoções & Descontos
         </h1>
         <p className="text-slate-500 dark:text-gray-400 mt-2">
@@ -97,7 +97,7 @@ export default function PromocoesPage() {
 
       <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-lg p-6 md:p-8 relative overflow-hidden">
         {/* Efeitos de Glow */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 dark:bg-blue-500/5 blur-3xl -z-10"></div>
+        <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 dark:bg-emerald-500/5 blur-3xl -z-10"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 dark:bg-purple-500/5 blur-3xl -z-10"></div>
 
         {isAlreadyRegistered ? (
@@ -116,7 +116,7 @@ export default function PromocoesPage() {
             </p>
 
             <div className="text-xs text-slate-400 dark:text-gray-500 border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-black/10 rounded-2xl p-4 flex gap-2 items-start max-w-sm">
-              <AlertCircle className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+              <AlertCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
               <p className="text-left">Se você precisar alterar o número cadastrado, basta preencher o formulário abaixo e enviar novamente.</p>
             </div>
             
@@ -135,13 +135,13 @@ export default function PromocoesPage() {
                   value={whatsapp}
                   onChange={handlePhoneChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/30 text-sm font-semibold transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 dark:focus:ring-emerald-500/30 text-sm font-semibold transition-all"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 disabled:opacity-50 text-sm"
+                className="w-full py-3 font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-md hover:shadow-emerald-500/10 disabled:opacity-50 text-sm"
               >
                 {loading ? 'Atualizando...' : 'Atualizar WhatsApp'}
               </button>
@@ -149,7 +149,7 @@ export default function PromocoesPage() {
           </div>
         ) : (
           <div className="flex flex-col items-center py-4">
-            <div className="w-16 h-16 rounded-2xl bg-blue-500/10 dark:bg-blue-500/20 text-blue-500 flex items-center justify-center mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-500 flex items-center justify-center mb-6">
               <Gift className="w-8 h-8 animate-bounce" />
             </div>
 
@@ -172,14 +172,14 @@ export default function PromocoesPage() {
                   value={whatsapp}
                   onChange={handlePhoneChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/30 text-sm font-semibold transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 dark:focus:ring-emerald-500/30 text-sm font-semibold transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 text-sm"
+                className="w-full py-3.5 font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50 text-sm"
               >
                 {loading ? 'Cadastrando...' : 'Quero Desconto Agora!'}
               </button>

@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://detetivebuscas.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://consultasbrasil.net';
   const canonicalUrl = page.canonical || `${baseUrl}/${page.slug}`;
 
   // Processa Open Graph
@@ -94,10 +94,10 @@ export default async function DynamicCoringaPage({ params }: Props) {
   if (!page) {
     const defaultPages: Record<string, { title: string; content: string; description: string }> = {
       'sobre': {
-        title: 'Sobre o Detetive Buscas',
+        title: 'Sobre o ConsultasBrasil',
         description: 'Conheça nossa trajetória, nosso propósito corporativo e como estruturamos a maior plataforma de enriquecimento cadastral do país.',
         content: `<h2>Quem Somos</h2>
-<p>O <strong>Detetive Buscas</strong> é uma plataforma tecnológica de ponta dedicada ao enriquecimento de dados cadastrais e à facilitação de consultas institucionais. Voltada estritamente para o ambiente de negócios (B2B), a plataforma ajuda empresas na prevenção de fraudes, validação de identidades (KYC - Know Your Customer) e higienização de registros internos.</p>
+<p>O <strong>ConsultasBrasil</strong> é uma plataforma tecnológica de ponta dedicada ao enriquecimento de dados cadastrais e à facilitação de consultas institucionais. Voltada estritamente para o ambiente de negócios (B2B), a plataforma ajuda empresas na prevenção de fraudes, validação de identidades (KYC - Know Your Customer) e higienização de registros internos.</p>
 <h2>Nossa Missão</h2>
 <p>Nossa missão é democratizar o acesso à inteligência cadastral de forma transparente e flexível. Por meio do modelo pay-per-use, permitimos que negócios de qualquer porte tenham acesso a dados valiosos sem a necessidade de contratos engessados de fidelidade ou taxas fixas mensais.</p>
 <h2>Nossos Valores</h2>
@@ -113,7 +113,7 @@ export default async function DynamicCoringaPage({ params }: Props) {
         content: `<h2>Canais Oficiais</h2>
 <p>Precisa de ajuda com o seu saldo, dúvidas sobre os módulos ou deseja fechar uma parceria comercial? Entre em contato por um de nossos canais oficiais abaixo.</p>
 <h3>E-mail de Suporte</h3>
-<p>Envie sua mensagem para: <strong>suporte@detetivebuscas.com</strong></p>
+<p>Envie sua mensagem para: <strong>suporte@consultasbrasil.net</strong></p>
 <h3>Horário de Atendimento</h3>
 <p>Segunda a Sexta-feira • 09:00 às 18:00 (Horário de Brasília).</p>
 <h3>Atendimento 100% Digital</h3>
@@ -133,9 +133,9 @@ export default async function DynamicCoringaPage({ params }: Props) {
       },
       'termos': {
         title: 'Termos de Uso',
-        description: 'Estes termos de uso regem a utilização da plataforma Detetive Buscas.',
+        description: 'Estes termos de uso regem a utilização da plataforma ConsultasBrasil.',
         content: `<h2>Termos e Condições Gerais</h2>
-<p>Ao utilizar o site e os serviços do Detetive Buscas, você aceita integralmente as condições descritas nestes Termos de Uso.</p>
+<p>Ao utilizar o site e os serviços do ConsultasBrasil, você aceita integralmente as condições descritas nestes Termos de Uso.</p>
 <h3>1. Finalidade Legítima</h3>
 <p>O usuário declara utilizar as ferramentas de consultas de dados cadastrais estritamente para finalidades legítimas, como prevenção de fraudes, validação cadastral ou enriquecimento de dados em conformidade com as legislações pertinentes.</p>
 <h3>2. Responsabilidade pelas Credenciais</h3>
@@ -172,7 +172,7 @@ export default async function DynamicCoringaPage({ params }: Props) {
         title: 'Proteção de Dados (LGPD)',
         description: 'Saiba como exercemos a proteção de dados dos cidadãos e a política de opt-out.',
         content: `<h2>Conformidade com a LGPD</h2>
-<p>O Detetive Buscas preza pelo respeito integral à Lei Geral de Proteção de Dados (Lei nº 13.709/18).</p>
+<p>O ConsultasBrasil preza pelo respeito integral à Lei Geral de Proteção de Dados (Lei nº 13.709/18).</p>
 <h3>1. Direitos dos Cidadãos</h3>
 <p>Garantimos a todo cidadão brasileiro a transparência sobre a existência de dados em nossa plataforma.</p>
 <h3>2. Exclusão e Bloqueio de Dados (Opt-out)</h3>
@@ -223,7 +223,7 @@ export default async function DynamicCoringaPage({ params }: Props) {
     notFound();
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://detetivebuscas.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://consultasbrasil.net';
 
   // 3. SCHEMA.ORG AUTOMÁTICO (WebPage, Service se for comercial, e BreadcrumbList)
   const schemas: any[] = [];
@@ -267,7 +267,7 @@ export default async function DynamicCoringaPage({ params }: Props) {
       "serviceType": "Consulta Cadastral e Inteligência de Dados",
       "provider": {
         "@type": "Organization",
-        "name": settings?.siteTitle?.split(' - ')[0] || "Detetive Buscas",
+        "name": settings?.siteTitle?.split(' - ')[0] || "ConsultasBrasil",
         "url": baseUrl
       },
       "name": page.title,

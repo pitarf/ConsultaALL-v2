@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  let baseUrl = 'https://detetivebuscas.com';
+  let baseUrl = 'https://consultasbrasil.net';
 
   try {
     const settings = await prisma.systemSetting.findFirst();

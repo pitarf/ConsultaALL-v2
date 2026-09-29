@@ -1,4 +1,4 @@
-# Manual do Desenvolvedor - Detetive Buscas
+# Manual do Desenvolvedor - ConsultasBrasil
 
 ## Integração de API e Modo Híbrido (DirectData V3)
 O sistema utiliza o arquivo `src/services/direct-data.ts` como ponte de comunicação.
@@ -48,12 +48,20 @@ Para conformidade com o Google Ads e LGPD, a plataforma expõe uma rota `/protec
 - **Armazenamento sem Migrations:** O formulário consome a Server Action `registrarOptOut` (`src/app/actions/optout.ts`). Ela valida o CPF pelo motor interno e registra a solicitação diretamente na tabela `SystemLog` com o nível `WARNING`. Isso permite ao administrador realizar auditorias e dar baixa técnica em solicitações sem a necessidade de migrações complexas de esquema no PostgreSQL.
 - **Componentização SSR:** A Landing Page principal (`src/app/page.tsx`) roda em modo de servidor (Server Component) para otimização extrema de SEO e metadados dinâmicos vindos da tabela `SystemSetting`. Elementos com estado dinâmico como abas (`HomeTabs`), accordions (`FaqAccordion`) e menus (`NavbarClient`) são carregados modularmente como Client Components híbridos.
 
-## Reatividade de Temas Claro e Escuro (Clean / Dark)
+## Reatividade de Temas Claro e Escuro (Clean / Dark) e Identidade Visual (Verde Esmeralda)
 A plataforma possui suporte completo a temas dinâmicos em toda a sua área pública, painel do cliente (`/dashboard`) e área administrativa (`/admin`).
+- **Paleta de Marca (Verde Esmeralda / Green):** A identidade visual do sistema utiliza como cor primária o verde esmeralda (`#10b981` / `#059669`), com gradientes e botões `.btn-premium` baseados em `from-emerald-600 to-green-600`, conferindo sofisticação e alta conversão tanto no modo claro quanto no escuro.
 - **Prevenção de Flicadas (Anti-Flicker):** O `layout.tsx` injeta um scripthead síncrono que lê o `localStorage` no primeiro milissegundo de carregamento do DOM. Ele atribui a classe `.dark` ao elemento raiz `<html>` de forma síncrona antes que qualquer renderização ocorra, mitigando flashes brancos em visitas com modo escuro.
 - **Alternador de Temas (`ThemeToggle.tsx`):** Componente cliente reativo que alterna o estado visual adicionando/removendo a classe `.dark` da raiz HTML e gravando a preferência no `localStorage`.
 - **Estilização Adaptativa:** Utiliza as classes nativas de variantes `dark:` do Tailwind v4 (`bg-white dark:bg-card`, `text-slate-900 dark:text-white`, `border-slate-200 dark:border-white/10`) assegurando uma estética premium glassmorphism nos tons escuros e um design clean limpo e profissional nos tons claros.
 - **Área Administrativa e Login de Checkpoint:** A mesma reatividade e paleta de cores flexíveis foram estendidas para 100% das páginas administrativas, tabelas de KPI, listagem de transações Pix, modais de auditoria técnica e telas de segurança de mestre.
+
+## Padrões de Acessibilidade, Mobile-First e Interfaces Adaptativas
+- **Touch Targets Ergonômicos (W3C / Apple HIG):** Todos os botões, links de menu, inputs e abas possuem dimensão de toque mínima de 44x44px ou 48px (`min-h-[44px]` ou `min-h-[48px]`), com `touch-manipulation` para eliminar atrasos de clique de 300ms e prevenir hovers acidentais em smartphones.
+- **Tipografia Fluida:** Textos principais e títulos H1/H2 utilizam progressão proporcional (`text-2xl sm:text-4xl md:text-5xl lg:text-6xl`) para manter legibilidade sem quebras indesejadas em larguras de 320px a 414px.
+- **Bento Grid Adaptativo:** Grids modulares quebram progressivamente em 1 coluna (mobile) -> 2 colunas (tablet/phablet) -> 3 colunas (desktop médio) -> 5 colunas (desktop largo / ultrawide).
+- **Segmented Controls com Scroll e Snap:** Em telas móveis, as abas (`HomeTabs`) transformam-se em carrossel horizontal fluido com rolagem com momentum e snap (`overflow-x-auto no-scrollbar touch-pan-x snap-x snap-mandatory`), permitindo navegação rápida e sem estouro de largura.
+- **Overflow Control Rigoroso:** Remoção de larguras fixas em pixels nos elementos decorativos e glows, utilizando `min(value, 90vw)` e `overflow-hidden` nas seções para garantir zero scroll horizontal.
 
 ## Validação Manual de Recarga Pix
 Para resolver inconsistências de webhooks da PushinPay (especialmente em ambientes locais de teste ou quando a transação Pix é criada e paga mas não é registrada no banco de dados de produção por problemas do gateway):

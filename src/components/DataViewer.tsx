@@ -188,31 +188,32 @@ export function DataViewer({ data, title }: DataViewerProps) {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
         <div className="flex items-center gap-3">
-          <div className="w-2 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(79,70,229,0.5)]" />
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{title || 'Relatório de Consulta'}</h2>
+          <div className="w-2 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(79,70,229,0.5)] shrink-0" />
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight break-words">{title || 'Relatório de Consulta'}</h2>
         </div>
         <div className="flex items-center gap-3">
           <button 
+            type="button"
             onClick={() => setShowRaw(!showRaw)}
-            className="flex items-center gap-2 text-xs font-semibold px-4 py-2 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg text-slate-600 dark:text-slate-300 transition-all"
+            className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2 text-sm font-semibold px-4 py-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl text-slate-600 dark:text-slate-300 transition-all active:scale-95 select-none"
           >
-            {showRaw ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-            {showRaw ? 'Esconder JSON' : 'Ver Dados Brutos'}
+            {showRaw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            <span>{showRaw ? 'Esconder JSON' : 'Ver Dados Brutos'}</span>
           </button>
         </div>
       </div>
 
       {showRaw ? (
-        <div className="bg-slate-900 border border-white/10 rounded-xl p-6 overflow-x-auto custom-scrollbar shadow-inner">
-          <pre className="text-blue-400 text-xs font-mono">
+        <div className="bg-slate-900 border border-white/10 rounded-xl p-4 sm:p-6 overflow-x-auto custom-scrollbar shadow-inner max-w-full">
+          <pre className="text-emerald-400 text-xs sm:text-sm font-mono whitespace-pre-wrap break-all sm:whitespace-pre">
             {JSON.stringify(data, null, 2)}
           </pre>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-stretch">
           {Object.entries(data).map(([key, value]) => {
             if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
               return renderCard(key, value);
@@ -224,13 +225,13 @@ export function DataViewer({ data, title }: DataViewerProps) {
 
       {/* Caso existam dados avulsos no root que não são objetos */}
       {!showRaw && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {Object.entries(data).map(([key, value]) => {
             if (typeof value !== 'object' || Array.isArray(value)) {
               return (
-                <div key={key} className="bg-[#0f172a] border border-white/5 p-4 rounded-xl flex flex-col shadow-lg">
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">{key.replace(/_/g, ' ')}</span>
-                  {renderSimpleValue(value)}
+                <div key={key} className="bg-[#0f172a] border border-white/5 p-4 rounded-xl flex flex-col shadow-lg overflow-hidden break-words">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">{key.replace(/_/g, ' ')}</span>
+                  <div className="overflow-x-auto">{renderSimpleValue(value)}</div>
                 </div>
               );
             }

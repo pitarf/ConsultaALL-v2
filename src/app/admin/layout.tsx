@@ -59,16 +59,16 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Sidebar Admin - Mantida estaticamente em tom escuro de contraste para visual SaaS premium */}
-      <aside className="w-64 border-r border-red-500/20 bg-[#0f172a] hidden md:flex flex-col relative overflow-hidden">
-        {/* Efeito Glow vermelho sutil indicando privilégios administrativos */}
-        <div className={`absolute top-0 left-0 w-full h-32 blur-3xl -z-10 ${user.role === 'SEO' ? 'bg-blue-500/10' : 'bg-red-500/10'}`}></div>
+      {/* Sidebar Admin - Mantida em tom verde escuro profundo */}
+      <aside className="w-64 border-r border-[#133829] bg-[#04130d] hidden md:flex flex-col relative overflow-hidden">
+        {/* Efeito Glow verde sutil indicando privilégios administrativos */}
+        <div className={`absolute top-0 left-0 w-full h-32 blur-3xl -z-10 ${user.role === 'SEO' ? 'bg-emerald-500/10' : 'bg-red-500/10'}`}></div>
 
         <div className="h-16 flex items-center px-6 border-b border-white/10">
           {user.role === 'SEO' ? (
             <>
-              <Globe className="text-blue-500 w-6 h-6 mr-2" />
-              <span className="text-lg font-bold text-white">SEO<span className="text-blue-500">Panel</span></span>
+              <Globe className="text-emerald-500 w-6 h-6 mr-2" />
+              <span className="text-lg font-bold text-white">SEO<span className="text-emerald-500">Panel</span></span>
             </>
           ) : (
             <>
@@ -112,7 +112,7 @@ export default async function AdminLayout({
             </>
           )}
           
-          <div className="pt-2 pb-1 px-3 text-[11px] font-bold tracking-wider text-blue-400 uppercase flex items-center gap-1.5">
+          <div className="pt-2 pb-1 px-3 text-[11px] font-bold tracking-wider text-emerald-400 uppercase flex items-center gap-1.5">
             <Globe className="w-3.5 h-3.5" />
             Gestão de SEO
           </div>

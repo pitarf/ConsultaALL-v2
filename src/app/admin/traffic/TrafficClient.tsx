@@ -74,10 +74,10 @@ export default function TrafficClient({
   return (
     <div className="max-w-6xl mx-auto pb-20 space-y-8 text-left">
       {/* 1. Header */}
-      <div className="bg-gradient-to-r from-[#0f1e36] to-[#1e3b5b] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-[#1e3b5b]/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-gradient-to-r from-[#0a1e17] to-[#0f2e24] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-emerald-900/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
-            <Globe className="w-8 h-8 text-sky-400" />
+            <Globe className="w-8 h-8 text-emerald-400" />
             Origem dos Clientes & UTMs
           </h1>
           <p className="text-white/70 text-sm font-medium">
@@ -93,7 +93,7 @@ export default function TrafficClient({
             <span className="text-xs text-slate-400 dark:text-gray-400 font-bold uppercase tracking-wider block">Cadastros por Campanhas</span>
             <span className="text-3xl font-black text-slate-900 dark:text-white block">{initialKpis.totalCampaignUsers}</span>
           </div>
-          <div className="p-4 bg-blue-500/10 text-[#2872fa] rounded-2xl">
+          <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl">
             <Users className="w-6 h-6" />
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function TrafficClient({
               R$ {initialKpis.totalCampaignRevenue.toFixed(2).replace('.', ',')}
             </span>
           </div>
-          <div className="p-4 bg-sky-500/10 text-sky-500 rounded-2xl">
+          <div className="p-4 bg-teal-500/10 text-teal-500 rounded-2xl">
             <DollarSign className="w-6 h-6" />
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function TrafficClient({
                       row.roi > 100 
                         ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
                         : row.roi > 0 
-                        ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                         : 'bg-red-500/10 text-red-600 dark:text-red-400'
                     }`}>
                       {row.roi > 0 ? `+${row.roi}%` : `${row.roi}%`}
@@ -259,7 +259,7 @@ export default function TrafficClient({
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                       user.source === 'orgânico' 
                         ? 'bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-gray-400' 
-                        : 'bg-blue-500/10 text-[#2872fa]'
+                        : 'bg-emerald-500/10 text-emerald-500'
                     }`}>
                       {user.source}
                     </span>

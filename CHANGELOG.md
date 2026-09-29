@@ -1,6 +1,77 @@
-# Changelog - Detetive Buscas
+# Changelog - ConsultasBrasil
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
+
+## [1.1.1] - 2026-09-29
+### Otimizado
+- **Refatoração Mobile-First, Acessibilidade e Tipografia Fluida nas Páginas Públicas:**
+  - `src/components/HomeSearchBox.tsx`: Touch targets de no mínimo 44px/48px em todas as abas, botões de ação e pesquisa; padding proporcional para telas compactas (< 360px) e `touch-manipulation`.
+  - `src/components/HomeTabs.tsx`: Implementação de carrossel de segmented control fluido com rolagem horizontal suave (`touch-pan-x snap-x snap-mandatory`), touch targets mínimos de 44px e quebra sem estouro visual em viewports pequenas.
+  - `src/components/NavbarClient.tsx`: Botão hambúrguer e links de navegação mobile com área de toque mínima de 44x44px, remoção de hover acidental e abertura ergonômica com scroll vertical seguro (`max-h-[85vh]`).
+  - `src/components/Footer.tsx`: Reestruturação da grade de rodapé em layout responsivo adaptativo (1 coluna em mobile -> 2 colunas em tablet -> 3 colunas em desktop intermediário -> 6 colunas em desktop expandido), com links com altura mínima de 44px.
+  - `src/app/page.tsx`: Tipografia fluida em todos os títulos (`clamp` e classes `text-2xl sm:text-4xl md:text-5xl lg:text-6xl`), Bento Grid refinado em quebra fluida (1 -> 2 -> 3 -> 5 colunas), eliminação de larguras fixas de glows decorativos (`w-[min(500px,90vw)]`) evitando qualquer estouro ou scroll horizontal em telas estreitas (320px a 414px).
+
+## [1.1.1] - 2026-09-29
+### Adicionado & Otimizado
+- **Acessibilidade e Ergonomia Mobile na Área Logada (Dashboard):**
+  - **Mobile-First & Touch Targets (44x44px):** Todos os botões interativos, links de navegação (`SidebarNav`), seletores de valores pré-definidos (`FaturasClient`), botões de ação e paginação (`Processos` e `Dashboard`) atualizados para respeitar a área de toque mínima recomendada pelo W3C/Apple (`min-h-[44px]` e `min-h-[48px]`).
+  - **Sidebar Direita Responsiva (`MobileSidebar`):** Otimização da gaveta deslizante da direita via React Portal com `max-w-[85vw]` e largura fixa ergonômica em smartphones, garantindo que o menu nunca ultrapasse o limite de tela em dispositivos compactos.
+  - **Eliminação de Auto-Zoom no iOS Safari:** Ajuste das fontes de inputs e selects (`text-base` / mínimo 16px no mobile) nas telas de busca de processos, busca geral e recargas de saldo via Pix.
+  - **Controle Rigoroso de Overflow:** Sanitização de quebra de texto (`break-words` / `break-all`) e adição de containers de rolagem horizontal controlada (`overflow-x-auto`) nas tabelas, cards de dados brutos do `DataViewer` e grids de candidatos homônimos.
+  - **Modais e Diálogos com Safe Padding:** Adaptação ergonômica do `PromoModal` com padding responsivo e botões de toque com tamanho mínimo garantido.
+
+## [1.1.0] - 2026-09-29
+### Adicionado & Otimizado
+- **Refatoração Visual Padrão Awwwards / Apple Design (Dark Green & Glassmorphism):**
+  - **Color Theory & Profundidade:** Paleta de contraste calibrada com fundo verde escuro profundo (`#04130d`), cards em `#081c14`, bordas sutis em `#133829` e acentos em esmeralda vibrante (`#10b981` / `#059669`).
+  - **Glassmorphism & Soft Shadows:** Implementação de `.glass-card`, `.glass-card-hover`, backdrop blur de 20px, sombras suaves calculadas e iluminação perimetral luminosa nos badges (`.badge-glow`).
+  - **Bento Grid System:** Reestruturação da seção de Escolha de Consultas em um Bento Grid moderno de 5 colunas com microinterações em escala fluída no hover.
+  - **Hero Section Elevada:** Mesh gradient atmosférico, grid técnico translúcido (`.bg-grid-pattern`), tipografia com gradientes e novo card de relatório simulado com visual de alta tecnologia.
+  - **Design System Utilitário:** Criação de classes utilitárias para botões com gradientes e sombras dinâmicas (`.btn-premium`), compatibilidade fluída entre tema claro e escuro.
+  - **Whitelabel e Segurança Institucional:** Remoção de menções públicas a provedores de dados brutos ("Fonte: API DirectData" no mockup da Home) substituída por identificação institucional de base cadastral unificada.
+  - **Reativação da Consulta de Processos Judiciais:** Desbloqueio e reativação completa da rota `/dashboard/processos` com chave de busca multi-parâmetro (CPF, CNPJ e Nome com homônimos), suporte a modo DEMO e link direto no menu lateral (`SidebarNav`).
+  - **Todas as Seções Refatoradas:** Atualização completa do `HomeTabs`, `HomeSearchBox`, `Como Funciona`, `Tabela de Preços`, `Aplicações B2B`, `FAQ Accordion` e `Últimas do Blog`.
+
+## [1.0.0] - 2026-09-29
+### Modificado
+- **Atualização Global de Marca e Domínio para ConsultasBrasil (`consultasbrasil.net`):**
+  - **Identidade da Marca:** Substituição completa de todas as ocorrências de 'Detetive Buscas', 'DetetiveBuscas' e 'Detetive' por 'ConsultasBrasil' e 'Consultas Brasil'.
+  - **Novo Domínio Oficial:** Atualização de `https://detetivebuscas.com` para `https://consultasbrasil.net` em metadados, canonicals, Open Graph, Twitter Cards, schemas estruturados JSON-LD (`Organization`, `WebSite`, `Service`, `BlogPosting`), `robots.ts`, `sitemap.ts` e Server Actions de CMS (`actions/cms.ts`).
+  - **Identidade Visual e Assets:** Apontamento oficial dos assets para `/logo.png` e `/favicon.png` em substituição aos formatos legados.
+  - **Interface e Telas Públicas:** Atualização de textos, tooltips, modais de FAQ e layouts de autenticação (`login`, `cadastro`, `admin-login`, `navbar`, `footer`, `sidebar` e landing pages `/` e `/home2`).
+  - **Comunicações e Notificações:** Alinhamento dos remetentes de recuperação de senha (`auth.ts`), e-mails padrão e VAPID subject de Push Notifications.
+
+## [0.9.9] - 2026-09-29
+### Modificado
+- **Reposicionamento da Barra Lateral (Sidebar) para o Lado Direito:**
+  - `src/app/dashboard/layout.tsx`: Layout reestruturado para posicionar o container principal (`main`) à esquerda e a barra de navegação (`aside`) fixada à direita da tela (`border-l border-[#133829]`), com inversão simétrica dos controles no header (ThemeToggle e saldo à esquerda, menu mobile à direita).
+  - `src/components/MobileSidebar.tsx`: Gaveta lateral responsiva (drawer) ajustada para deslizar e ancorar suavemente a partir do lado direito (`justify-end`, `slide-in-from-right` e `border-l border-[#133829]`).
+
+- **Calibração de Fundo Dark Mode e Sidebars para Verde Escuro Profundo:**
+  - `src/app/globals.css`: Variáveis `--background` e `--card` no Dark Mode migradas de preto/marinho para verde escuro profundo (`#04130d` e `#081c14`), com bordas adaptadas para `#133829` e gradientes de fundo esmeralda sutil.
+  - `src/app/dashboard/layout.tsx` e `MobileSidebar.tsx`: Fundo da sidebar migrado de `#0f172a` para `#04130d` com borda divisória `#133829`.
+  - `src/components/SidebarNav.tsx`: Item ativo atualizado para destaque com fundo translúcido em tom verde esmeralda floresta (`bg-emerald-950/60`), texto `text-emerald-400` e borda `border-emerald-500/20`.
+  - `src/app/admin/layout.tsx` e `AdminMobileMenu.tsx`: Sidebar e drawer do painel administrativo alinhados com o tom `#04130d`.
+
+- **Migração Completa da Identidade Visual do Painel Administrativo para Verde (Emerald/Green):**
+  - `src/app/admin/layout.tsx`: Atualização de badges, ícones e efeitos glow da sidebar (seção de Gestão de SEO e painel) para verde esmeralda.
+  - `src/app/admin/page.tsx` & `DashboardClient.tsx`: Novo header em tom escuro elegante SaaS (`#0a1e17` a `#0f2e24`), indicadores de ROI, botões de filtro de datas e banner de fluxo de caixa migrados para tons esmeralda.
+  - `src/components/admin/PerformanceChart.tsx`: Conversão das métricas e áreas do gráfico de novos cadastros e indicadores para `#10b981`.
+  - `src/app/admin/custos/CustosClient.tsx`: Abas ativas, métricas de resultado financeiro estimado e badges de canais atualizados para verde esmeralda e teal.
+  - `src/app/admin/traffic/TrafficClient.tsx`: Gradiente de header, cards de KPIs de campanhas, tabela de origens e lista detalhada alinhados ao padrão esmeralda.
+  - `src/app/admin/usuarios/UserTableClient.tsx` & `usuarios/page.tsx`: Ícones de título, botões de exportação CSV, badges de SEO e ações de saldo alinhados com o tom verde.
+  - `src/app/admin/blog/GerenciadorBlog.tsx` & `paginas/GerenciadorPaginas.tsx`: Botões de criar post/página, abas ativas, links de edição e inputs com foco adaptados para esmeralda.
+  - `src/components/AdminMobileMenu.tsx`: Drawer mobile do admin com glow, badges e links de SEO padronizados para verde esmeralda.
+
+## [0.9.8] - 2026-09-29
+### Modificado
+- **Unificação da Identidade Visual da Área Interna (Dashboard):**
+  - Migração de todos os elementos residuais na cor azul para verde (`emerald`/`green`).
+  - Atualização dos ícones e textos da seção de Gestão de SEO no menu lateral (`SidebarNav.tsx`).
+  - Ajuste do glow do botão de confirmação de candidato para esmeralda (`dashboard/page.tsx`).
+  - Padronização dos alertas informativos e ícones de histórico de recargas em tons esmeralda (`faturas/FaturasClient.tsx`).
+  - Migração completa de spinners, badges, inputs e botões de chamada da página de promoções (`promocoes/page.tsx`).
+  - Conversão dos ícones temáticos de pessoas indicadas (`indicacoes/page.tsx`) e dados da conta (`perfil/page.tsx`) para verde esmeralda.
 
 ## [0.9.7] - 2026-09-26
 ### Otimizado

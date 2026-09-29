@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://detetivebuscas.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://consultasbrasil.net';
   const canonicalUrl = article.canonical || `${baseUrl}/blog/${article.slug}`;
 
   let extraOg = {};
@@ -133,8 +133,8 @@ export default async function BlogArticleDetailPage({ params }: Props) {
     include: { category: true }
   });
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://detetivebuscas.com';
-  const logoUrl = settings?.logoUrl || `${baseUrl}/logo.webp`;
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://consultasbrasil.net';
+  const logoUrl = settings?.logoUrl || `${baseUrl}/logo.png`;
 
   // Schemas Automáticos (BlogPosting e BreadcrumbList)
   const schemas: any[] = [];
@@ -182,7 +182,7 @@ export default async function BlogArticleDetailPage({ params }: Props) {
     },
     "publisher": {
       "@type": "Organization",
-      "name": settings?.siteTitle?.split(' - ')[0] || "Detetive Buscas",
+      "name": settings?.siteTitle?.split(' - ')[0] || "ConsultasBrasil",
       "logo": {
         "@type": "ImageObject",
         "url": logoUrl

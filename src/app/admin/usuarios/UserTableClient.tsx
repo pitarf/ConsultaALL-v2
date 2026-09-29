@@ -256,7 +256,7 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
         {/* Botão de Exportar */}
         <button
           onClick={handleExportCSV}
-          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 active:scale-95 cursor-pointer"
+          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-md hover:shadow-emerald-500/10 active:scale-95 cursor-pointer"
         >
           <Download className="w-4 h-4" />
           Exportar Leads (CSV)
@@ -290,16 +290,16 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
                           </span>
                         )}
                         {user.role === 'SEO' && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20">
-                            <Globe className="w-3 h-3 text-blue-500" />
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                            <Globe className="w-3 h-3 text-emerald-500" />
                             SEO
                           </span>
                         )}
                       </span>
                       <span className="text-xs text-slate-400 dark:text-gray-500">{user.email}</span>
                       {user.whatsapp && (
-                        <span className="text-xs text-blue-500 dark:text-blue-400 font-mono mt-0.5 flex items-center gap-1">
-                          <Phone className="w-3 h-3 text-blue-400" />
+                        <span className="text-xs text-emerald-500 dark:text-emerald-400 font-mono mt-0.5 flex items-center gap-1">
+                          <Phone className="w-3 h-3 text-emerald-400" />
                           {formatWhatsapp(user.whatsapp)}
                         </span>
                       )}
@@ -343,7 +343,7 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
                         user.role === 'ADMIN' 
                           ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 hover:bg-amber-500 hover:text-white' 
                           : user.role === 'SEO'
-                          ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white'
+                          ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white'
                           : 'bg-slate-200/50 dark:bg-white/5 text-slate-500 dark:text-gray-400 hover:bg-amber-500 hover:text-white'
                       }`}
                       title={`Cargo atual: ${user.role || 'USER'}. Clique para alterar.`}
@@ -369,7 +369,7 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
                     <button 
                       onClick={() => handleOpenBalanceModal(user)}
                       disabled={loading}
-                      className="p-2 bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded transition-colors inline-flex"
+                      className="p-2 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white rounded transition-colors inline-flex"
                       title="Adicionar Saldo"
                     >
                       <Wallet className="w-4 h-4" />

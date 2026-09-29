@@ -86,7 +86,7 @@ export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalPro
         onClick={(e) => e.stopPropagation()}
       >
         {/* Efeito Glow no fundo */}
-        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-2xl -z-10"></div>
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-emerald-500/20 to-green-500/20 blur-2xl -z-10"></div>
         
         {/* Botão fechar */}
         <button 
@@ -98,7 +98,7 @@ export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalPro
 
         <div className="flex flex-col items-center text-center">
           {/* Ícone */}
-          <div className="w-16 h-16 rounded-2xl bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center text-blue-500 mb-6">
+          <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center text-emerald-500 mb-6">
             <Gift className="w-8 h-8 animate-bounce" />
           </div>
 
@@ -116,31 +116,32 @@ export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalPro
           {/* Formulário */}
           <form onSubmit={handleSubmit} className="w-full space-y-4">
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
                 <Phone className="w-4 h-4" />
               </span>
               <input
-                type="text"
+                type="tel"
+                inputMode="numeric"
                 placeholder="(00) 00000-0000"
                 value={whatsapp}
                 onChange={handlePhoneChange}
                 required
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/30 text-sm font-semibold transition-all"
+                className="w-full min-h-[48px] pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 dark:focus:ring-emerald-500/30 text-base sm:text-sm font-semibold transition-all"
               />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
                 onClick={handleClose}
-                className="flex-1 py-3 text-xs md:text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
+                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center justify-center active:scale-95"
               >
                 Agora Não
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 py-3 text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-lg hover:shadow-blue-500/20 disabled:opacity-50"
+                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50 flex items-center justify-center active:scale-95"
               >
                 {loading ? 'Cadastrando...' : 'Quero Desconto!'}
               </button>

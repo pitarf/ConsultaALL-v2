@@ -17,7 +17,7 @@ export default function FaqAccordion() {
       answer: 'A plataforma possui páginas e módulos relacionados à consulta de CPF, telefone, CNPJ, nome e placa de veículo. A disponibilidade de informações pode variar conforme o tipo de pesquisa e o módulo selecionado.'
     },
     {
-      question: 'Preciso pagar mensalidade para usar o Detetive Buscas?',
+      question: 'Preciso pagar mensalidade para usar o ConsultasBrasil?',
       answer: 'Não há mensalidade obrigatória. O usuário pode adicionar saldo ao painel e pagar somente pelas consultas e módulos utilizados.'
     },
     {
@@ -58,11 +58,11 @@ export default function FaqAccordion() {
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="w-full px-6 py-5 flex items-center justify-between text-left font-semibold text-[#243b56] hover:text-[#2872fa] transition-colors focus:outline-none"
+              className="w-full px-6 py-5 flex items-center justify-between text-left font-semibold text-[#243b56] hover:text-[#10b981] transition-colors focus:outline-none"
             >
               <span className="pr-4 text-sm md:text-base">{faq.question}</span>
               {isOpen ? (
-                <ChevronUp className="w-5 h-5 text-[#2872fa] flex-shrink-0" />
+                <ChevronUp className="w-5 h-5 text-[#10b981] flex-shrink-0" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
               )}

@@ -43,11 +43,11 @@ function LoginContent() {
         <div className="flex flex-col items-center mb-8">
           <Link href="/" className="flex items-center gap-2 mb-6">
             <img 
-              src="/logo.webp" 
-              alt="Logo Detetive Buscas" 
+              src="/logo.png" 
+              alt="Logo ConsultasBrasil" 
               className="h-8 w-auto object-contain"
             />
-            <span className="text-2xl font-bold text-slate-900 dark:text-white">Detetive<span className="text-primary">Buscas</span></span>
+            <span className="text-2xl font-bold text-slate-900 dark:text-white">Consultas<span className="text-primary">Brasil</span></span>
           </Link>
           <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Bem-vindo de volta</h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-2">Acesse sua conta para realizar consultas.</p>

@@ -40,13 +40,13 @@ export default async function AdminDashboardPage({
   return (
     <div className="max-w-6xl mx-auto pb-20 space-y-8">
       {/* 1. Header Banner */}
-      <div className="bg-gradient-to-r from-[#0f1e36] to-[#1e3b5b] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-[#1e3b5b]/30 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden min-w-0">
+      <div className="bg-gradient-to-r from-[#0a1e17] to-[#0f2e24] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-emerald-900/30 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden min-w-0">
         <div className="space-y-1 min-w-0">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
             Dashboard Administrativo
           </h1>
           <p className="text-white/70 text-sm font-medium">
-            Visão panorâmica consolidada para o período: <span className="font-bold text-sky-400">{getPeriodLabel(currentPeriod)}</span>.
+            Visão panorâmica consolidada para o período: <span className="font-bold text-emerald-400">{getPeriodLabel(currentPeriod)}</span>.
           </p>
         </div>
         <div className="shrink-0 w-full md:w-auto overflow-hidden min-w-0">
@@ -59,7 +59,7 @@ export default async function AdminDashboardPage({
         {/* MÉTRICAS DE HOJE */}
         <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-6 text-left space-y-6">
           <h2 className="text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Métricas de Hoje
           </h2>
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3">
@@ -69,7 +69,7 @@ export default async function AdminDashboardPage({
                 R$ {metrics.todayRevenue.toFixed(2).replace('.', ',')}
               </p>
               {metrics.changePercentage > 0 ? (
-                <span className="text-blue-500 text-[10px] font-bold block mt-1">
+                <span className="text-emerald-500 text-[10px] font-bold block mt-1">
                   +{metrics.changePercentage.toFixed(0)}% vs ontem
                 </span>
               ) : metrics.changePercentage < 0 ? (
@@ -89,7 +89,7 @@ export default async function AdminDashboardPage({
             </div>
             <div className="bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl p-4 text-left">
               <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">ROI de Hoje</p>
-              <p className={`text-base sm:text-lg font-bold mt-1 ${metrics.todayRoi >= 0 ? 'text-blue-500' : 'text-red-500'}`}>
+              <p className={`text-base sm:text-lg font-bold mt-1 ${metrics.todayRoi >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
                 {metrics.todayRoi >= 0 ? '+' : ''}{metrics.todayRoi.toFixed(0)}%
               </p>
               <span className="text-slate-400 dark:text-gray-500 text-[10px] font-semibold block mt-1">Retorno diário</span>
@@ -100,7 +100,7 @@ export default async function AdminDashboardPage({
         {/* MÉTRICAS DO PERÍODO */}
         <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-6 text-left space-y-6">
           <h2 className="text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
             Métricas do Período
           </h2>
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3">
@@ -120,7 +120,7 @@ export default async function AdminDashboardPage({
             </div>
             <div className="bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl p-4 text-left">
               <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">ROI do Período</p>
-              <p className={`text-base sm:text-lg font-bold mt-1 ${advanced.monthlyRoi >= 0 ? 'text-blue-500' : 'text-red-500'}`}>
+              <p className={`text-base sm:text-lg font-bold mt-1 ${advanced.monthlyRoi >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
                 {advanced.monthlyRoi >= 0 ? '+' : ''}{advanced.monthlyRoi.toFixed(0)}%
               </p>
               <span className="text-slate-400 dark:text-gray-500 text-[10px] font-semibold block mt-1">Retorno de invest.</span>
@@ -130,10 +130,10 @@ export default async function AdminDashboardPage({
       </div>
 
       {/* 4. Banner de Fluxo de Caixa Geral */}
-      <div className="bg-[#0d1e32] dark:bg-[#071322] text-white p-6 md:p-8 rounded-3xl border border-[#1e3a5f]/30 shadow-lg text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-[#0a1e17] dark:bg-[#061510] text-white p-6 md:p-8 rounded-3xl border border-emerald-900/30 shadow-lg text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1">
-          <h3 className="text-sm font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-            <span className="text-sky-500">$</span>
+          <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+            <span className="text-emerald-500">$</span>
             Fluxo de Caixa Geral (Pix + Operação)
           </h3>
           <p className="text-xs text-white/60 leading-relaxed max-w-xl">
@@ -154,8 +154,8 @@ export default async function AdminDashboardPage({
             </p>
           </div>
           <div className="col-span-2 sm:col-span-1 min-w-0">
-            <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest text-sky-300">Lucro Real Operacional</p>
-            <p className="text-lg md:text-xl font-bold mt-1 text-sky-400">
+            <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest text-emerald-300">Lucro Real Operacional</p>
+            <p className="text-lg md:text-xl font-bold mt-1 text-emerald-400">
               R$ {advanced.monthlyProfit.toFixed(2).replace('.', ',')}
             </p>
           </div>
@@ -165,8 +165,8 @@ export default async function AdminDashboardPage({
       {/* 5. 5 Cards do Período */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {/* Card 1: Faturamento */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-primary/25 transition-all">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-[#2872fa] flex items-center justify-center mb-4">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <DollarSign className="w-4 h-4" />
           </div>
           <div>
@@ -193,8 +193,8 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 3: Lucro Real */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-blue-500/25 transition-all">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <TrendingUp className="w-4 h-4" />
           </div>
           <div>
@@ -221,8 +221,8 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 5: Novos Cadastros */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-blue-500/25 transition-all col-span-2 md:col-span-1">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all col-span-2 md:col-span-1">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <Users className="w-4 h-4" />
           </div>
           <div>
@@ -399,10 +399,8 @@ export default async function AdminDashboardPage({
                   </td>
                   <td className="px-6 py-4 text-center">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${
-                      row.roi > 100 
+                      row.roi > 0 
                         ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
-                        : row.roi > 0 
-                        ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
                         : 'bg-red-500/10 text-red-600 dark:text-red-400'
                     }`}>
                       {row.roi > 0 ? `+${row.roi}%` : `${row.roi}%`}

@@ -100,7 +100,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
         <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Lucro Líquido Estimado</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className={`text-2xl font-bold ${totalProfit >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-rose-600'}`}>
+            <span className={`text-2xl font-bold ${totalProfit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}`}>
               R$ {totalProfit.toFixed(2).replace('.', ',')}
             </span>
             <span className="text-xs text-slate-500 font-medium">Margem bruta</span>
@@ -114,7 +114,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
           onClick={() => setActiveTab('daily')}
           className={`flex items-center gap-2 px-6 py-3 font-bold text-sm border-b-2 transition-all ${
             activeTab === 'daily'
-              ? 'border-red-500 text-red-500 bg-red-500/5'
+              ? 'border-emerald-500 text-emerald-500 bg-emerald-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200 dark:hover:text-slate-100'
           }`}
         >
@@ -125,7 +125,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
           onClick={() => setActiveTab('detailed')}
           className={`flex items-center gap-2 px-6 py-3 font-bold text-sm border-b-2 transition-all ${
             activeTab === 'detailed'
-              ? 'border-red-500 text-red-500 bg-red-500/5'
+              ? 'border-emerald-500 text-emerald-500 bg-emerald-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200 dark:hover:text-slate-100'
           }`}
         >
@@ -170,7 +170,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
                         R$ {day.userCharged.toFixed(2).replace('.', ',')}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <span className={`inline-flex items-center gap-1 font-bold ${profit >= 0 ? 'text-blue-500' : 'text-rose-500'}`}>
+                        <span className={`inline-flex items-center gap-1 font-bold ${profit >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                           {profit >= 0 ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                           R$ {profit.toFixed(2).replace('.', ',')}
                         </span>
@@ -274,7 +274,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
                             : query.target.includes('cpf')
                             ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                             : query.target.includes('cnpj')
-                            ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
+                            ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400'
                             : 'bg-slate-500/10 text-slate-600 dark:text-slate-400'
                         }`}>
                           {targetLabel}

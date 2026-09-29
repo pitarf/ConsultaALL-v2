@@ -278,7 +278,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
 
         <button
           onClick={openCreateModal}
-          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 active:scale-95 cursor-pointer"
+          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-all shadow-md hover:shadow-emerald-500/10 active:scale-95 cursor-pointer"
         >
           <Plus className="w-4.5 h-4.5" />
           Nova Página SEO
@@ -321,7 +321,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-mono text-xs text-blue-600 dark:text-blue-400">
+                    <td className="px-6 py-4 font-mono text-xs text-emerald-600 dark:text-emerald-400">
                       /{page.slug}
                     </td>
                     <td className="px-6 py-4">
@@ -410,7 +410,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
             {/* Header */}
             <div className="p-6 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
               <h2 className="text-xl font-black text-[#243b56] dark:text-white flex items-center gap-2">
-                <Globe className="text-blue-500 w-5 h-5" />
+                <Globe className="text-emerald-500 w-5 h-5" />
                 {editingPage ? 'Editar Página SEO' : 'Criar Nova Página SEO'}
               </h2>
               <button 
@@ -435,7 +435,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                     onBlur={handleSlugBlur}
                     required
                     placeholder="Ex: Consultar CPF Online - Rápido e Seguro"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                   />
                 </div>
 
@@ -456,7 +456,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                       onChange={(e) => setSlug(e.target.value)}
                       required
                       placeholder="consulta-cpf"
-                      className="w-full px-4 py-3 rounded-r-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                      className="w-full px-4 py-3 rounded-r-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                     />
                   </div>
                 </div>
@@ -475,7 +475,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   value={h1}
                   onChange={(e) => setH1(e.target.value)}
                   placeholder="Ex: Consulta Completa de CPF na Receita Federal"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                 />
               </div>
 
@@ -487,7 +487,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   onChange={(e) => setExcerpt(e.target.value)}
                   rows={2}
                   placeholder="Um breve resumo que será exibido abaixo do título principal..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all resize-none"
                 />
               </div>
 
@@ -500,7 +500,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   rows={2}
                   maxLength={160}
                   placeholder="Escreva uma descrição chamativa de até 160 caracteres..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all resize-none"
                 />
                 <span className="text-[10px] text-slate-400 dark:text-gray-500 flex justify-end font-mono mt-1">
                   {metaDescription.length}/160 caracteres
@@ -521,16 +521,16 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   rows={8}
                   required
                   placeholder="<h2>Subtítulo</h2><p>Parágrafo explicativo...</p>"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-y"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all resize-y"
                 />
                 
                 {/* Upload Direto de Arquivo HTML */}
                 <div className="mt-2.5 flex items-center justify-between gap-3 p-3 bg-slate-50 dark:bg-black/10 rounded-xl border border-dashed border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-gray-400">
-                    <Upload className="w-4 h-4 text-blue-500" />
+                    <Upload className="w-4 h-4 text-emerald-500" />
                     <span>Importar arquivo HTML completo (.html, .txt)?</span>
                   </div>
-                  <label className="cursor-pointer bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1">
+                  <label className="cursor-pointer bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1">
                     <span>Escolher Arquivo</span>
                     <input 
                       type="file" 
@@ -565,7 +565,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                       value={image}
                       onChange={(e) => setImage(e.target.value)}
                       placeholder="Ex: /uploads/nome-imagem.webp ou URL externa"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                     />
                     
                     <div className="flex items-center gap-2">
@@ -591,7 +591,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                     value={imageAlt}
                     onChange={(e) => setImageAlt(e.target.value)}
                     placeholder="Ex: Ilustração de uma pessoa analisando dados cadastrais"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                   />
                 </div>
               </div>
@@ -617,7 +617,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                       value={canonical}
                       onChange={(e) => setCanonical(e.target.value)}
                       placeholder="Autopreenchido com a própria URL"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                     />
                   </div>
 
@@ -637,7 +637,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                         type="datetime-local"
                         value={publishedAt}
                         onChange={(e) => setPublishedAt(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm font-semibold transition-all"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm font-semibold transition-all"
                       />
                     </div>
                   </div>
@@ -727,14 +727,14 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                       onChange={(e) => setJsonLd(e.target.value)}
                       rows={4}
                       placeholder="Script de Schema JSON-LD adicional..."
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all resize-none"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-400 dark:text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                       Open Graph Customizado Extra (JSON)
-                      <Tooltip text="Customizações adicionais das meta tags em formato JSON. Ex: { 'og:site_name': 'Detetive Buscas' }">
+                      <Tooltip text="Customizações adicionais das meta tags em formato JSON. Ex: { 'og:site_name': 'ConsultasBrasil' }">
                         <HelpCircle className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-help inline-block ml-1" />
                       </Tooltip>
                     </label>
@@ -743,7 +743,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                       onChange={(e) => setOpenGraph(e.target.value)}
                       rows={4}
                       placeholder="{ 'og:type': 'article' }"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 text-slate-900 dark:text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all resize-none"
                     />
                   </div>
                 </div>
@@ -780,7 +780,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   type="button"
                   onClick={handleSubmit}
                   disabled={loading || uploadingImage}
-                  className="px-6 py-3 text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 disabled:opacity-50 inline-flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 text-xs md:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-md hover:shadow-emerald-500/10 disabled:opacity-50 inline-flex items-center gap-2 cursor-pointer"
                 >
                   {loading ? <Loader2 className="w-4.5 h-4.5 animate-spin" /> : <Save className="w-4.5 h-4.5" />}
                   {editingPage ? 'Salvar Alterações' : 'Criar Página'}

@@ -1,4 +1,4 @@
-# Manual do Usuário - Detetive Buscas
+# Manual do Usuário - ConsultasBrasil
 
 ## Consultas de Alta Performance
 - **Velocidade e Precisão:** Utilize diferentes chaves (CPF, Nome, Telefone, E-mail). Graças ao nosso sistema de cache inteligente, se você buscar os mesmos dados nas últimas 48 horas, o resultado é instantâneo.

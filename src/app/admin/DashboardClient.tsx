@@ -47,7 +47,7 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
               }}
               className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
                 active
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-emerald-600 text-white shadow-md'
                   : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -60,7 +60,7 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
           onClick={() => setShowDatePicker(!showDatePicker)}
           className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${
             currentPeriod === 'custom'
-              ? 'bg-blue-600 text-white shadow-md'
+              ? 'bg-emerald-600 text-white shadow-md'
               : 'text-white/70 hover:text-white hover:bg-white/5'
           }`}
         >
@@ -79,7 +79,7 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500"
+              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-emerald-500"
             />
           </div>
           <div className="flex items-center gap-1">
@@ -89,12 +89,12 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500"
+              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-emerald-500"
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1 rounded-lg text-xs shadow-md transition-all active:scale-95"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-lg text-xs shadow-md transition-all active:scale-95"
           >
             OK
           </button>
