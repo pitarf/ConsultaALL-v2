@@ -148,6 +148,15 @@
 - [x] **Modais e Diálogos com Safe Padding:** Adaptação ergonômica do `PromoModal` com padding responsivo e botões de toque com tamanho mínimo garantido.
 - [x] **Compilação e Verificação de Build:** Execução de `next build` com 100% de sucesso e zero erros de compilação.
 
+## SPLIT 10: Deploy de Produção na VPS Hostinger (✅ CONCLUÍDO)
+*Este split foca no provisionamento e deploy em ambiente de produção oficial na VPS com Docker, Nginx e SSL.*
+- [x] **Atualização do Repositório Git:** Sincronização de todos os commits e assets para o repositório remoto `origin main`.
+- [x] **Clonagem e Estrutura na VPS (`179.236.224.178`):** Provisionamento do repositório em `/root/consultaall-v2` e cópia segura das credenciais de ambiente (`.env`).
+- [x] **Build dos Containers Docker:** Execução de build do `Dockerfile` multi-stage em modo `standalone` e deploy do container `consultaall-app` na porta 3000.
+- [x] **Configuração do Nginx:** Instalação e configuração de Proxy Reverso de alta performance para `consultasbrasil.net` e `www.consultasbrasil.net`.
+- [x] **Certificado SSL Let's Encrypt:** Certificados gerados com sucesso via Certbot com renovação automática e redirecionamento HTTPS permanente (301).
+- [x] **Testes de Conectividade:** Verificação de resposta HTTP 200 via `curl` e `Invoke-WebRequest` na Home, telas de Login, API e assets de Branding (`/logo.png` e `/favicon.png`).
+
 
 
 

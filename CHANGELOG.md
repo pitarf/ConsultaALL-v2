@@ -2,6 +2,16 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.0] - 2026-09-29
+### Adicionado & Implantado em Produção
+- **Deploy Oficial em Produção na VPS Hostinger (`consultasbrasil.net`):**
+  - **Repositório Sincronizado:** Push oficial de todas as branches e histórico atualizado em `origin main`.
+  - **Provisionamento na VPS (`179.236.224.178`):** Clone do projeto, injeção de credenciais de produção no `.env`, build otimizado da imagem Docker em modo Next.js `standalone`.
+  - **Containerização:** Containers `consultaall-app` (Next.js 16) e `consultaall-db` rodando em background com reinício automático (`restart: always`).
+  - **Nginx Proxy Reverso:** Configuração e ativação com `client_max_body_size 50M`, headers de proxy reverso (`X-Forwarded-Proto`, `Upgrade`, `Connection`).
+  - **Certificado SSL Let's Encrypt:** Certificados emitidos e instalados para `consultasbrasil.net` e `www.consultasbrasil.net` com redirecionamento forçado para HTTPS (301) e renovação automática.
+  - **Verificação de Integridade:** Testes de requisição HTTP 200 confirmados na Home, Login, Cadastro, rotas de consulta e arquivos de imagem `/logo.png` e `/favicon.png`.
+
 ## [1.1.1] - 2026-09-29
 ### Otimizado
 - **Refatoração Mobile-First, Acessibilidade e Tipografia Fluida nas Páginas Públicas:**
