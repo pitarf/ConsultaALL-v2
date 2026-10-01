@@ -622,7 +622,7 @@ export default async function Home() {
 
           {/* 3 Blocos de Fontes */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
-            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
               <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
                 <Database className="w-6 h-6" />
               </div>
@@ -634,7 +634,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
               <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
                 <ShieldCheck className="w-6 h-6" />
               </div>
@@ -646,7 +646,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
               <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
                 <Layers className="w-6 h-6" />
               </div>
@@ -767,7 +767,7 @@ export default async function Home() {
               return (
                 <div 
                   key={index} 
-                  className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
+                  className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 text-left bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
                 >
                   <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
                     <Icon className="w-6 h-6" />
@@ -858,7 +858,7 @@ export default async function Home() {
               {latestArticles.map((article) => (
                 <div 
                   key={article.id} 
-                  className="glass-card glass-card-hover rounded-3xl p-5 sm:p-6 flex flex-col justify-between bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
+                  className="glass-card glass-card-hover rounded-3xl p-5 sm:p-6 flex flex-col justify-between bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
                 >
                   <div className="space-y-3">
                     <span className="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest block">
