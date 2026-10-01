@@ -203,7 +203,7 @@ export default async function Home() {
               </div>
 
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.12] sm:leading-[1.08]">
-                Consulta CPF, CNPJ, Telefone e Placa Online
+                Consulta CPF, CNPJ, Telefone, Placa e Nome Online
               </h1>
               
               {/* Box de Pesquisa Interativo */}
@@ -231,7 +231,7 @@ export default async function Home() {
               {/* Descrições auxiliares da plataforma */}
               <div className="space-y-3 pt-2">
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
-                  Faça consultas online por CPF, CNPJ, telefone, placa ou nome em uma única plataforma. Escolha o tipo de pesquisa, informe o dado disponível e consulte os módulos correspondentes.
+                  Faça consultas online por CPF, CNPJ, telefone, placa ou nome em uma única plataforma. Escolha a modalidade, consulte os módulos disponíveis e utilize apenas as informações necessárias para sua pesquisa.
                 </p>
                 <p className="text-sm text-slate-400 dark:text-slate-400 max-w-2xl leading-relaxed">
                   Sem mensalidades ou assinaturas obrigatórias. Recarga automática via Pix com liberação imediata.
@@ -323,7 +323,7 @@ export default async function Home() {
               Escolha o tipo de consulta online
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto font-normal">
-              Selecione a informação que você possui para iniciar uma pesquisa. O Consultas Brasil reúne diferentes modalidades de consulta em um único painel, incluindo CPF, CNPJ, telefone, placa e nome.
+              Selecione a informação que você possui para iniciar uma pesquisa. O Consultas Brasil reúne consultas por CPF, CNPJ, telefone, placa e nome em um único painel.
             </p>
           </div>
 
@@ -334,14 +334,14 @@ export default async function Home() {
                 title: "Consulta CPF",
                 icon: UserCheck,
                 href: "/cadastro?type=cpf",
-                desc: "Consulte informações cadastrais e outros dados disponíveis relacionados ao CPF informado.",
+                desc: "Consulte informações cadastrais e outras categorias de dados disponíveis relacionadas ao CPF informado.",
                 cta: "Consultar CPF"
               },
               {
                 title: "Consulta CNPJ",
                 icon: Building2,
                 href: "/cadastro?type=cnpj",
-                desc: "Pesquise informações cadastrais e empresariais disponíveis a partir de um CNPJ.",
+                desc: "Pesquise informações cadastrais e empresariais disponíveis utilizando o CNPJ.",
                 cta: "Consultar CNPJ"
               },
               {
@@ -355,14 +355,14 @@ export default async function Home() {
                 title: "Consulta Placa",
                 icon: Car,
                 href: "/cadastro?type=placa",
-                desc: "Pesquise informações disponíveis de carros e motos utilizando a placa do veículo.",
+                desc: "Pesquise informações disponíveis sobre carros e motos utilizando a placa do veículo.",
                 cta: "Consultar placa"
               },
               {
                 title: "Consulta por Nome",
                 icon: Users,
                 href: "/cadastro?type=nome",
-                desc: "Pesquise possíveis registros disponíveis utilizando nome e sobrenome.",
+                desc: "Pesquise possíveis registros utilizando nome e sobrenome.",
                 cta: "Consultar nome"
               },
             ].map((item, idx) => {
@@ -455,17 +455,17 @@ export default async function Home() {
               { 
                 step: "01", 
                 title: "Informe o dado", 
-                desc: "Escolha CPF, CNPJ, telefone, placa ou nome e informe corretamente os dados para iniciar a pesquisa." 
+                desc: "Escolha CPF, CNPJ, telefone, placa ou nome e informe os dados solicitados." 
               },
               { 
                 step: "02", 
-                title: "Selecione os módulos", 
-                desc: "Confira as categorias de informação disponíveis e escolha apenas os módulos que deseja utilizar." 
+                title: "Escolha os módulos", 
+                desc: "Confira as categorias de informação e os valores disponíveis para a modalidade escolhida." 
               },
               { 
                 step: "03", 
                 title: "Consulte o resultado", 
-                desc: "Após a confirmação, as informações encontradas são organizadas e apresentadas dentro da plataforma." 
+                desc: "Após a confirmação, os registros encontrados são organizados e apresentados dentro da plataforma." 
               },
             ].map((item, index) => (
               <div 
@@ -489,13 +489,13 @@ export default async function Home() {
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="badge-glow text-emerald-600 dark:text-emerald-400">
               <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-              Preços Transparentes & Pay-As-You-Go
+              Pague apenas pelo que consultar
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               Preços das consultas online
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto font-normal">
-              No Consultas Brasil, você não precisa contratar uma mensalidade obrigatória. Adicione saldo ao painel e utilize apenas as consultas e módulos necessários. Os valores variam conforme o tipo de pesquisa e as categorias de informações selecionadas.
+              Utilize o Consultas Brasil sem mensalidade obrigatória. Adicione saldo ao painel e pague somente pelos módulos escolhidos. Os valores variam conforme a modalidade e as informações selecionadas.
             </p>
           </div>
 
@@ -613,7 +613,7 @@ export default async function Home() {
               Como funcionam as fontes das consultas?
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal leading-relaxed">
-              As consultas podem utilizar diferentes fontes e provedores conforme a modalidade e o módulo escolhido. A quantidade, disponibilidade e atualização das informações pode variar de acordo com o dado pesquisado.
+              As consultas podem utilizar diferentes fontes e provedores conforme a modalidade e o módulo escolhido. A disponibilidade, quantidade e atualização das informações pode variar de acordo com o dado pesquisado.
             </p>
           </div>
 
@@ -627,7 +627,7 @@ export default async function Home() {
                 Fontes públicas
               </h3>
               <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                Informações disponibilizadas publicamente quando aplicável ao tipo de consulta.
+                Informações públicas utilizadas quando aplicáveis à modalidade selecionada.
               </p>
             </div>
 
@@ -639,7 +639,7 @@ export default async function Home() {
                 Provedores integrados
               </h3>
               <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                Bases e provedores utilizados conforme a modalidade contratada.
+                Informações fornecidas pelos provedores utilizados nos diferentes módulos.
               </p>
             </div>
 
@@ -651,7 +651,7 @@ export default async function Home() {
                 Organização dos resultados
               </h3>
               <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                As informações encontradas são reunidas e apresentadas de forma estruturada dentro do painel.
+                Os registros encontrados são organizados e apresentados dentro do painel.
               </p>
             </div>
           </div>
@@ -807,7 +807,7 @@ export default async function Home() {
             Faça sua consulta online no Consultas Brasil
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal">
-            Escolha a modalidade de pesquisa, confira os módulos disponíveis e acesse as informações diretamente no painel.
+            Escolha o tipo de pesquisa, confira os módulos disponíveis e utilize somente as categorias de informação necessárias.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
             <Link
@@ -946,66 +946,66 @@ export default async function Home() {
             "mainEntity": [
               {
                 "@type": "Question",
+                "name": "O que é o Consultas Brasil?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "O Consultas Brasil é uma plataforma de consultas online criada para reunir diferentes modalidades de pesquisa cadastral em um único ambiente. O usuário pode iniciar pesquisas utilizando CPF, CNPJ, telefone, placa ou nome conforme a informação disponível."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "Quais tipos de consulta estão disponíveis?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "A plataforma possui páginas e módulos relacionados à consulta de CPF, telefone, CNPJ, nome e placa de veículo. A disponibilidade de informações pode variar conforme o tipo de pesquisa e o módulo selecionado."
+                  "text": "Estão disponíveis consultas por CPF, CNPJ, telefone, placa de veículos e pesquisa por nome. Cada modalidade conta com módulos organizados por categorias, permitindo selecionar somente os dados que você precisa verificar."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Preciso pagar mensalidade para usar o ConsultasBrasil?",
+                "name": "Como funciona uma consulta online?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Não há mensalidade obrigatória. O usuário pode adicionar saldo ao painel e pagar somente pelas consultas e módulos utilizados."
+                  "text": "Você escolhe o tipo de pesquisa, digita o dado disponível e seleciona os módulos desejados. O sistema processa os parâmetros em tempo real, integrando bases oficiais e provedores parceiros para estruturar o relatório no painel."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Como o pagamento é realizado?",
+                "name": "Preciso pagar mensalidade?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "O saldo pode ser adicionado por meio de Pix. Após a confirmação do pagamento, o valor é disponibilizado no painel conforme as regras da plataforma."
+                  "text": "Não. O Consultas Brasil opera no modelo pay-per-use, sem mensalidade obrigatória ou planos de fidelidade. Você adiciona saldo via Pix e utiliza estritamente nas consultas e módulos que escolher."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Os resultados são sempre completos?",
+                "name": "Todas as consultas sempre encontram informações?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Não. A quantidade e a precisão das informações podem variar conforme os dados informados, a disponibilidade das fontes e a atualização dos registros."
+                  "text": "Não. A quantidade de dados encontrados depende da existência de registros nos provedores e da informação pesquisada. Se nenhum dado for localizado na base, o saldo não é consumido indevidamente."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Posso consultar qualquer pessoa?",
+                "name": "Os dados estão sempre atualizados?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "As consultas devem ser realizadas somente para finalidades legítimas e de acordo com a legislação aplicável. O usuário é responsável pela pesquisa realizada e pelo uso das informações obtidas."
+                  "text": "A atualização e a disponibilidade variam de acordo com a fonte pública ou o provedor consultado. Trabalhamos com integrações diretas para buscar sempre a versão cadastral mais recente disponível."
                 }
               },
               {
                 "@type": "Question",
-                "name": "É necessário informar a senha da pessoa pesquisada?",
+                "name": "O Consultas Brasil é um serviço do governo?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Não. A plataforma não solicita senhas de redes sociais, contas bancárias, e-mails ou outros serviços pertencentes à pessoa pesquisada."
+                  "text": "Não. O Consultas Brasil é uma plataforma privada e independente. Não representamos nem temos vínculo oficial com a Receita Federal, Detran, Senatran ou qualquer órgão público."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Como escolho a consulta correta?",
+                "name": "Como devo utilizar as informações encontradas?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Acesse as páginas de consulta de CPF, telefone, CNPJ, nome ou placa e confira a explicação sobre os dados e módulos disponíveis em cada categoria."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Como entro em contato com o suporte?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "O atendimento deve ser solicitado pelos canais oficiais apresentados na página de contato ou dentro do painel do usuário."
+                  "text": "As informações obtidas devem ser utilizadas de maneira ética, responsável e estritamente em conformidade com a legislação aplicável, incluindo as diretrizes da Lei Geral de Proteção de Dados (LGPD)."
                 }
               }
             ]
