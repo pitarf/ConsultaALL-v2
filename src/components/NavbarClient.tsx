@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Search } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarClientProps {
   logoUrl?: string | null;
@@ -97,6 +98,7 @@ export default function NavbarClient({ logoUrl, siteTitle, menuPages = [] }: Nav
 
         {/* Ações desktop */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link 
             href="/login" 
             className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-gray-300 hover:text-emerald-500 dark:hover:text-emerald-400 px-4 py-2.5 rounded-xl transition-all hover:bg-slate-100/60 dark:hover:bg-white/5"

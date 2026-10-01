@@ -473,9 +473,9 @@ export default async function Home() {
             ].map((item, index) => (
               <div 
                 key={index} 
-                className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 sm:space-y-5 text-center bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
+                className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 sm:space-y-5 text-center bg-white dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
               >
-                <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white dark:bg-[#0d281e] border border-slate-200 dark:border-emerald-500/30 flex items-center justify-center mx-auto text-lg sm:text-xl font-black text-emerald-500 shadow-md">
+                <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-slate-50 dark:bg-[#0d281e] border border-slate-200 dark:border-emerald-500/30 flex items-center justify-center mx-auto text-lg sm:text-xl font-black text-emerald-500 shadow-sm">
                   {item.step}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{item.title}</h3>
