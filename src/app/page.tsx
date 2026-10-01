@@ -23,7 +23,10 @@ import {
   Car,
   UserCheck,
   CreditCard,
-  Users
+  Users,
+  Database,
+  Layers,
+  Phone
 } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
