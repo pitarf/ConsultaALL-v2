@@ -5,6 +5,7 @@
 - [x] Arquitetura Next.js 16 + Prisma + PostgreSQL.
 - [x] **UI/UX Premium:** Interface Glassmorphism com suporte a Dark/Light Mode.
 - [x] **Mobile-First Real & Acessibilidade:** Refatoração de componentes públicos (`page.tsx`, `HomeSearchBox`, `HomeTabs`, `NavbarClient`, `Footer`) com touch targets de 44px+, ausência de scroll horizontal em viewports estreitas (320px-414px) e tipografia fluida.
+- [x] **Otimização Estratégica & SEO da Home Page:** Concluída landing page definitiva com H1 único, 5 modalidades de busca no hero, seção editorial, fontes, casos de uso, FAQ ampliado e Schemas semânticos JSON-LD.
 - [x] **Sistema de Autenticação:** Login seguro via JWT e Gestão de Perfil.
 - [x] **SEO Gerenciável:** Painel para controle de Metadados e Branding.
 - [x] **Estrutura de Dashboard:** Menu lateral funcional e navegação responsiva.
@@ -14,9 +15,11 @@
 - [x] **Wallet System:** Carteira digital em Reais (R$) com histórico de transações.
 - [x] **Integração PushinPay:** Automação total de depósitos via Pix (Webhook).
 - [x] **Painel Administrativo Analítico:** Visão de faturamento, lucros e logs técnicos.
+- [x] **Tabela de Preços e Gestão de Módulos:** Controle administrativo de valores por módulo (`ModulePricing`).
+- [x] **Consulta de Processos Judiciais:** Página ativa com tabela de preços oficial, detalhamento do que pode ser pesquisado (CNJ, Varas, Fases, Partes, Tribunais) e busca por CPF, CNPJ e Nome.
 - [x] **Auditoria e Segurança:** Rastreamento de IDs externos e central de logs proativa.
 - [x] **Sistema de Cache Inteligente (48h):** Redução de custos operacionais e prevenção de gastos duplicados.
-- [x] **Integração Real (CPF):** Conexão oficial com o provedor de consultas e Modo Demo para Admin.
+- [x] **Integração Real (CPF/CNPJ/Veículos/Processos):** Conexão oficial com o provedor de consultas e Modo Demo para Admin.
 - [x] **Migração Cloud:** Banco de dados migrado para Neon PostgreSQL e pronto para Vercel.
 
 ## SPLIT 3: Deploy Docker, Segurança Admin e API V3 (✅ 100% CONCLUÍDO)

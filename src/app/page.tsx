@@ -27,8 +27,8 @@ import {
 } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Consulta CPF, Telefone, CNPJ e Placa | ConsultasBrasil";
-  const description = "Consulte CPF, telefone, CNPJ, nome e placa em uma plataforma online com módulos avulsos, preços transparentes e pagamento via Pix. Acesse o ConsultasBrasil.";
+  const title = "Consulta CPF, CNPJ, Telefone e Placa Online | Consultas Brasil";
+  const description = "Faça consultas online por CPF, CNPJ, telefone, placa e nome. Escolha o tipo de pesquisa, confira os módulos disponíveis e pague somente pelas consultas utilizadas.";
 
   return {
     title,
@@ -41,13 +41,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: "https://consultasbrasil.net/",
-      siteName: "ConsultasBrasil",
+      siteName: "Consultas Brasil",
       images: [
         {
           url: "https://consultasbrasil.net/logo.png",
           width: 1200,
           height: 630,
-          alt: "ConsultasBrasil - Plataforma de consultas online"
+          alt: "Consultas Brasil - Consulta CPF, CNPJ, Telefone e Placa Online"
         }
       ],
       type: "website",
@@ -183,6 +183,8 @@ export default async function Home() {
       {/* ===================== NAVBAR ===================== */}
       <NavbarClient logoUrl={settings?.logoUrl} siteTitle={settings?.siteTitle} menuPages={menuPages} />
 
+      {/* Conteúdo Principal Semântico */}
+      <main>
       {/* ===================== HERO SECTION ===================== */}
       <section className="relative pt-10 pb-16 sm:pt-14 sm:pb-20 md:py-32 overflow-hidden border-b border-slate-200 dark:border-[#133829] bg-white dark:bg-[#04130d] transition-colors duration-500">
         {/* Glows de ambientação e Grid Tecnológico */}
@@ -201,8 +203,7 @@ export default async function Home() {
               </div>
 
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.12] sm:leading-[1.08]">
-                Consulte CPF, Telefone, CNPJ e Placa Online <br className="hidden md:block" />
-                <span className="bg-gradient-to-r from-emerald-500 via-teal-400 to-green-400 bg-clip-text text-transparent">em uma única plataforma</span>
+                Consulta CPF, CNPJ, Telefone e Placa Online
               </h1>
               
               {/* Box de Pesquisa Interativo */}
@@ -216,21 +217,21 @@ export default async function Home() {
                   href="/cadastro"
                   className="btn-premium min-h-[48px] text-white py-3.5 sm:py-4 px-6 sm:px-8 text-sm sm:text-base group touch-manipulation active:scale-[0.98]"
                 >
-                  <span>Consultar Agora 🔎</span>
+                  <span>Fazer uma consulta 🔎</span>
                   <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:translate-x-1.5 transition-transform" />
                 </Link>
                 <Link
                   href="/login"
                   className="min-h-[48px] bg-white/80 dark:bg-[#081c14]/80 hover:bg-slate-100 dark:hover:bg-[#0d281e] border border-slate-200 dark:border-[#133829] text-slate-700 dark:text-emerald-300 font-bold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl flex items-center justify-center gap-2 transition-all text-sm sm:text-base backdrop-blur-md hover:shadow-md touch-manipulation active:scale-[0.98]"
                 >
-                  Entrar no Painel
+                  Acessar painel
                 </Link>
               </div>
 
               {/* Descrições auxiliares da plataforma */}
               <div className="space-y-3 pt-2">
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
-                  Acesse módulos de dados cadastrais consolidados com máxima agilidade. Consulte CPF, telefone, CNPJ, nome e veículos de forma transparente, pagando estritamente pelos módulos consultados.
+                  Faça consultas online por CPF, CNPJ, telefone, placa ou nome em uma única plataforma. Escolha o tipo de pesquisa, informe o dado disponível e consulte os módulos correspondentes.
                 </p>
                 <p className="text-sm text-slate-400 dark:text-slate-400 max-w-2xl leading-relaxed">
                   Sem mensalidades ou assinaturas obrigatórias. Recarga automática via Pix com liberação imediata.
@@ -316,13 +317,13 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="badge-glow text-emerald-600 dark:text-emerald-400">
-              Módulos Específicos
+              Modalidades Disponíveis
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Escolha o tipo de consulta
+              Escolha o tipo de consulta online
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto font-normal">
-              Acesse a página correspondente ao tipo de informação que deseja verificar. Cada consulta possui módulos específicos, valores individuais e transparência total de retornos.
+              Selecione a informação que você possui para iniciar uma pesquisa. O Consultas Brasil reúne diferentes modalidades de consulta em um único painel, incluindo CPF, CNPJ, telefone, placa e nome.
             </p>
           </div>
 
@@ -330,39 +331,39 @@ export default async function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
             {[
               {
-                title: "Consulta de CPF",
+                title: "Consulta CPF",
                 icon: UserCheck,
-                href: "/consulta-cpf",
-                desc: "Informações cadastrais consolidadas: dados básicos, endereços, telefones e módulos auxiliares.",
-                tag: "Mais Usado"
+                href: "/cadastro?type=cpf",
+                desc: "Consulte informações cadastrais e outros dados disponíveis relacionados ao CPF informado.",
+                cta: "Consultar CPF"
               },
               {
-                title: "Consulta de Telefone",
-                icon: Users,
-                href: "/consulta-telefone",
-                desc: "Pesquise números nacionais ativos, operadora e identifique vínculos cadastrais de titulares.",
-                tag: "Rápido"
-              },
-              {
-                title: "Consulta de Placa",
-                icon: Car,
-                href: "/consulta-placa",
-                desc: "Verificação veicular por placa mercosul: marca, modelo, ano, restrições e dados técnicos.",
-                tag: "Auto"
-              },
-              {
-                title: "Consulta de CNPJ",
+                title: "Consulta CNPJ",
                 icon: Building2,
-                href: "/consulta-cnpj",
-                desc: "Raio-X de pessoas jurídicas: quadro de sócios (QSA), capital social, porte e situação cadastral.",
-                tag: "B2B"
+                href: "/cadastro?type=cnpj",
+                desc: "Pesquise informações cadastrais e empresariais disponíveis a partir de um CNPJ.",
+                cta: "Consultar CNPJ"
+              },
+              {
+                title: "Consulta Telefone",
+                icon: Users,
+                href: "/cadastro?type=telefone",
+                desc: "Consulte informações disponíveis relacionadas a um número de telefone nacional.",
+                cta: "Consultar telefone"
+              },
+              {
+                title: "Consulta Placa",
+                icon: Car,
+                href: "/cadastro?type=placa",
+                desc: "Pesquise informações disponíveis de carros e motos utilizando a placa do veículo.",
+                cta: "Consultar placa"
               },
               {
                 title: "Consulta por Nome",
                 icon: Users,
-                href: "/consulta-nome",
-                desc: "Localize pessoas por nome e sobrenome com filtros de precisão por estado e faixa etária.",
-                tag: "Busca"
+                href: "/cadastro?type=nome",
+                desc: "Pesquise possíveis registros disponíveis utilizando nome e sobrenome.",
+                cta: "Consultar nome"
               },
             ].map((item, idx) => {
               const Icon = item.icon;
@@ -376,9 +377,6 @@ export default async function Home() {
                       <div className="w-11 sm:w-12 h-11 sm:h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                         <Icon className="w-5 sm:w-6 h-5 sm:h-6" />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                        {item.tag}
-                      </span>
                     </div>
 
                     <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">
@@ -394,7 +392,7 @@ export default async function Home() {
                       href={item.href}
                       className="w-full min-h-[44px] bg-slate-100 dark:bg-[#0d281e] hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 text-slate-800 dark:text-emerald-300 font-bold py-2.5 sm:py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm group-hover:border-emerald-500 touch-manipulation active:scale-[0.98]"
                     >
-                      Acessar Consulta
+                      {item.cta}
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -405,21 +403,35 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ===================== METRICS STRIP ===================== */}
+      {/* ===================== FAIXA DE BENEFÍCIOS ===================== */}
       <section className="py-10 sm:py-14 bg-white dark:bg-[#081c14] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-[#133829]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-[#133829]">
             {[
-              { value: "24/7", label: "Disponibilidade Online Contínua" },
-              { value: "Pix Instantâneo", label: "Liberação Automática de Saldo" },
-              { value: "Zero Mensalidade", label: "Pague Estritamente por Consulta" },
-              { value: "+15 Módulos", label: "Resultados Categorizados e Claros" },
-            ].map((metric) => (
-              <div key={metric.label} className="space-y-1 sm:space-y-1.5 pt-4 md:pt-0">
-                <p className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
-                  {metric.value}
+              { 
+                title: "Disponível 24 horas", 
+                desc: "Plataforma online disponível para consultas quando necessário." 
+              },
+              { 
+                title: "Pagamento via Pix", 
+                desc: "Adicione saldo e utilize nos módulos escolhidos." 
+              },
+              { 
+                title: "Sem mensalidade obrigatória", 
+                desc: "Pague somente pelas consultas e módulos utilizados." 
+              },
+              { 
+                title: "Diversas modalidades", 
+                desc: "CPF, CNPJ, telefone, placa, nome e outras categorias disponíveis." 
+              },
+            ].map((beneficio, bIdx) => (
+              <div key={bIdx} className="space-y-1 sm:space-y-2 pt-4 sm:pt-0 px-2">
+                <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
+                  {beneficio.title}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-normal leading-relaxed">
+                  {beneficio.desc}
                 </p>
-                <p className="text-slate-500 dark:text-slate-400 text-[11px] sm:text-xs font-semibold uppercase tracking-wider">{metric.label}</p>
               </div>
             ))}
           </div>
@@ -434,29 +446,26 @@ export default async function Home() {
               Fluxo Eficiente
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Como funcionam as consultas?
+              Como fazer uma consulta online?
             </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal">
-              Desenvolvemos uma jornada minimalista em 3 etapas para você pesquisar, selecionar os blocos de dados necessários e acessar os resultados instantaneamente.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 relative">
             {[
               { 
                 step: "01", 
-                title: "Informe o Dado Base", 
-                desc: "Selecione CPF, telefone, CNPJ, nome ou placa no painel unificado e insira o parâmetro desejado." 
+                title: "Informe o dado", 
+                desc: "Escolha CPF, CNPJ, telefone, placa ou nome e informe corretamente os dados para iniciar a pesquisa." 
               },
               { 
                 step: "02", 
-                title: "Personalize os Módulos", 
-                desc: "Visualize os dados disponíveis antecipadamente e selecione somente os módulos que agregam valor à sua análise." 
+                title: "Selecione os módulos", 
+                desc: "Confira as categorias de informação disponíveis e escolha apenas os módulos que deseja utilizar." 
               },
               { 
                 step: "03", 
-                title: "Acesse o Relatório", 
-                desc: "Em milissegundos o motor valida e consolida o relatório detalhado pronto para visualização ou exportação." 
+                title: "Consulte o resultado", 
+                desc: "Após a confirmação, as informações encontradas são organizadas e apresentadas dentro da plataforma." 
               },
             ].map((item, index) => (
               <div 
@@ -483,10 +492,10 @@ export default async function Home() {
               Preços Transparentes & Pay-As-You-Go
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Pague apenas pelo que consultar
+              Preços das consultas online
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto font-normal">
-              Sem mensalidades forçadas, contratos de fidelidade ou taxas de cancelamento. Adicione saldo via Pix e pague frações a partir de R$ 0,50 por bloco.
+              No Consultas Brasil, você não precisa contratar uma mensalidade obrigatória. Adicione saldo ao painel e utilize apenas as consultas e módulos necessários. Os valores variam conforme o tipo de pesquisa e as categorias de informações selecionadas.
             </p>
           </div>
 
@@ -571,7 +580,14 @@ export default async function Home() {
             ))}
           </div>
 
-          <div className="mt-10 sm:mt-14 text-center glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-emerald-950/40 border border-emerald-500/30 shadow-2xl">
+          {/* Aviso sobre os valores após a tabela de preços */}
+          <div className="mt-8 text-center max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+              Confira os valores disponíveis antes de confirmar cada consulta. O saldo somente é utilizado nos módulos escolhidos pelo usuário.
+            </p>
+          </div>
+
+          <div className="mt-8 sm:mt-12 text-center glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-emerald-950/40 border border-emerald-500/30 shadow-2xl">
             <div className="text-center sm:text-left space-y-1">
               <h4 className="font-black text-base sm:text-lg text-slate-900 dark:text-white">Deseja experimentar a plataforma agora mesmo?</h4>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal">Crie sua conta em 30 segundos e comece a consultar com total autonomia.</p>
@@ -586,111 +602,169 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ===================== CONSULTAS DISPONÍVEIS (RECURSOS) ===================== */}
-      <section id="recursos" className="py-16 sm:py-24 bg-white dark:bg-[#04130d] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
+      {/* ===================== FONTES DAS CONSULTAS ===================== */}
+      <section id="fontes" className="py-16 sm:py-24 bg-white dark:bg-[#04130d] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="badge-glow text-emerald-600 dark:text-emerald-400">
-              Inteligência de Dados
+              Origem e Tratamento de Dados
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Fontes de consultas disponíveis
+              Como funcionam as fontes das consultas?
             </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal">
-              Explore o comportamento dinâmico e o formato técnico dos dados consolidados pelo motor ConsultasBrasil.
+            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal leading-relaxed">
+              As consultas podem utilizar diferentes fontes e provedores conforme a modalidade e o módulo escolhido. A quantidade, disponibilidade e atualização das informações pode variar de acordo com o dado pesquisado.
             </p>
+          </div>
+
+          {/* 3 Blocos de Fontes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+              <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
+                <Database className="w-6 h-6" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                Fontes públicas
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+                Informações disponibilizadas publicamente quando aplicável ao tipo de consulta.
+              </p>
+            </div>
+
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+              <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                Provedores integrados
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+                Bases e provedores utilizados conforme a modalidade contratada.
+              </p>
+            </div>
+
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-3 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]">
+              <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
+                <Layers className="w-6 h-6" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                Organização dos resultados
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+                As informações encontradas são reunidas e apresentadas de forma estruturada dentro do painel.
+              </p>
+            </div>
           </div>
 
           {/* Abas e Mockups Interativos Client */}
           <HomeTabs />
 
-          {/* Disclaimer de Mockups Fictícios para o Google Ads */}
-          <p className="mt-8 text-slate-400 dark:text-slate-500 text-xs leading-relaxed max-w-2xl mx-auto font-medium">
-            * Os dados exibidos nas abas de demonstração são conceituais e estruturados para ilustrar a arquitetura técnica da resposta. Consultas em tempo real requerem login no painel.
-          </p>
-
-          {/* Bloco de Links Fortes de SEO */}
-          <div className="mt-10 sm:mt-12 text-center">
-            <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed max-w-4xl mx-auto font-medium">
-              Acesse páginas dedicadas: {' '}
-              <Link href="/consulta-cpf" className="text-emerald-500 hover:text-emerald-400 underline font-bold transition-colors inline-flex items-center min-h-[36px] py-1">
-                consulta cpf
-              </Link>
-              ,{' '}
-              <Link href="/consulta-telefone" className="text-emerald-500 hover:text-emerald-400 underline font-bold transition-colors inline-flex items-center min-h-[36px] py-1">
-                consulta telefone
-              </Link>
-              ,{' '}
-              <Link href="/consulta-placa" className="text-emerald-500 hover:text-emerald-400 underline font-bold transition-colors inline-flex items-center min-h-[36px] py-1">
-                consulta placa
-              </Link>
-              ,{' '}
-              <Link href="/consulta-nome" className="text-emerald-500 hover:text-emerald-400 underline font-bold transition-colors inline-flex items-center min-h-[36px] py-1">
-                consulta nome
-              </Link>
-              {' e '}
-              <Link href="/consulta-cnpj" className="text-emerald-500 hover:text-emerald-400 underline font-bold transition-colors inline-flex items-center min-h-[36px] py-1">
-                consulta cnpj
-              </Link>
-              .
+          {/* Disclaimer de Mockups e Isenção de Órgão Público */}
+          <div className="mt-8 space-y-2 max-w-3xl mx-auto">
+            <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-semibold">
+              O Consultas Brasil é uma plataforma independente e não representa a Receita Federal, Detran, Senatran ou qualquer outro órgão público.
+            </p>
+            <p className="text-slate-400 dark:text-slate-500 text-[11px] sm:text-xs leading-relaxed font-medium">
+              * Os dados exibidos nas abas de demonstração são conceituais e estruturados para ilustrar a arquitetura técnica da resposta. Consultas em tempo real requerem login no painel.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ===================== APLICAÇÕES B2B ===================== */}
-      <section id="aplicacoes" className="py-16 sm:py-24 bg-slate-50/50 dark:bg-[#081c14] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
+      {/* ===================== NOVA SEÇÃO EDITORIAL (SEO CORRIDO) ===================== */}
+      <section className="py-16 sm:py-24 bg-slate-50/60 dark:bg-[#061810] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-12 space-y-3">
+            <span className="badge-glow text-emerald-600 dark:text-emerald-400">
+              Guia de Informações
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+              Consultas online no Consultas Brasil
+            </h2>
+          </div>
+
+          <div className="space-y-6 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+            <p>
+              O Consultas Brasil é uma plataforma voltada para a realização de consultas online a partir de diferentes dados de entrada. Em um único ambiente, o usuário pode pesquisar informações cadastrais, empresariais, veiculares e de contato de acordo com a disponibilidade de cada modalidade.
+            </p>
+            <p>
+              A consulta por CPF é uma das opções mais utilizadas para verificação de dados cadastrais e conferência de registros associados ao documento pesquisado. Já a consulta por CNPJ permite analisar informações de empresas, dados societários e detalhes de registro empresarial.
+            </p>
+            <p>
+              Para pesquisas de comunicação, a consulta de telefone auxilia na localização e confirmação de números válidos, enquanto a consulta por nome pode ser utilizada quando não se dispõe de outros identificadores no início da busca.
+            </p>
+            <p>
+              No segmento veicular, a consulta por placa apresenta dados relacionados a automóveis, motocicletas e outros veículos registrados, ajudando na checagem de características e histórico disponível.
+            </p>
+            <p>
+              Com a separação em módulos, o usuário tem a flexibilidade de pagar apenas pelo que realmente precisa consultar, sem a obrigação de planos caros ou mensalidades fixas.
+            </p>
+            <p>
+              O sistema funciona totalmente online, permitindo que a pesquisa seja realizada pelo celular, tablet ou computador a qualquer momento.
+            </p>
+            <p>
+              A segurança e a praticidade são prioridades: o acesso ao painel é protegido e as recargas de saldo ocorrem via Pix com compensação imediata.
+            </p>
+            <p>
+              Dessa forma, o Consultas Brasil se posiciona como uma solução completa, acessível e transparente para quem busca consultar dados online de forma rápida e confiável.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===================== CASOS DE USO ===================== */}
+      <section id="casos-de-uso" className="py-16 sm:py-24 bg-white dark:bg-[#04130d] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="badge-glow text-emerald-600 dark:text-emerald-400">
               Aplicações Práticas
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Casos de uso corporativo
+              Quando uma consulta online pode ser útil?
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal">
-              Descubra como o ecossistema ConsultasBrasil auxilia empresas a mitigar riscos e otimizar processos de validação cadastral.
+              Confira situações em que a checagem rápida de informações auxilia profissionais, empresas e indivíduos no dia a dia.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                icon: Fingerprint,
-                title: "Prevenção a Fraudes e Identidade",
-                desc: "Valide dados cadastrais em tempo real e certifique-se da regularidade perante os órgãos oficiais com detecção de incongruências."
+                icon: ShieldCheck,
+                title: "Conferência cadastral",
+                desc: "Verificação de dados antes de negociações ou cadastros."
+              },
+              {
+                icon: Building2,
+                title: "Verificação de empresas",
+                desc: "Checagem de informações de CNPJ para relações comerciais."
+              },
+              {
+                icon: Phone,
+                title: "Pesquisa de telefone",
+                desc: "Confirmação de contato para atendimento ou cobrança amigável."
+              },
+              {
+                icon: Car,
+                title: "Consulta veicular",
+                desc: "Pesquisa de dados pela placa antes da compra de veículos."
               },
               {
                 icon: RefreshCw,
-                title: "Higienização e Enriquecimento",
-                desc: "Atualize carteiras corporativas obsoletas resgatando novos canais de contato, e-mails e histórico de endereços atualizados."
+                title: "Atualização de cadastros",
+                desc: "Correção de dados desatualizados em bancos de registros."
               },
               {
-                icon: Scale,
-                title: "Compliance e Risco (KYC)",
-                desc: "Estruture checagens ágeis de fornecedores e parceiros verificando situação cadastral do CNPJ e quadro de sócios (QSA) em segundos."
-              },
-              {
-                icon: Users2,
-                title: "Localização de Clientes",
-                desc: "Mapeie dados de contato e localização de clientes para operações de renegociação amigável e confirmação de cadastro."
-              },
-              {
-                icon: ShieldCheck,
-                title: "Validação Cadastral Integrada",
-                desc: "Consolide em uma chamada dados que demandariam dezenas de pesquisas manuais morosas em múltiplas fontes públicas."
-              },
-              {
-                icon: TrendingUp,
-                title: "Análise de Renda e Faixa Salarial",
-                desc: "Conheça o perfil socioeconômico aproximado com estimativas de poder aquisitivo e faixas salariais padronizadas."
+                icon: Search,
+                title: "Pesquisa complementar",
+                desc: "Busca por nome quando faltam outros identificadores."
               }
             ].map((app, index) => {
               const Icon = app.icon;
               return (
                 <div 
                   key={index} 
-                  className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 text-left bg-white dark:bg-[#04130d] border border-slate-200 dark:border-[#133829]"
+                  className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 space-y-4 text-left bg-slate-50 dark:bg-[#081c14] border border-slate-200 dark:border-[#133829]"
                 >
                   <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
                     <Icon className="w-6 h-6" />
@@ -705,17 +779,17 @@ export default async function Home() {
       </section>
 
       {/* ===================== FAQ SECTION ===================== */}
-      <section id="faq" className="py-16 sm:py-24 bg-white dark:bg-[#04130d] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
+      <section id="faq" className="py-16 sm:py-24 bg-slate-50/50 dark:bg-[#061810] border-b border-slate-200 dark:border-[#133829] transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="badge-glow text-emerald-600 dark:text-emerald-400">
               Dúvidas Frequentes
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Perguntas e respostas institucionais
+              Perguntas frequentes sobre consultas online
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base font-normal">
-              Tire dúvidas essenciais sobre uso ético, conformidade com a LGPD e tarifação por módulo.
+              Esclareça as dúvidas mais comuns sobre modalidades, saldos, fontes e funcionamento do sistema.
             </p>
           </div>
 
@@ -724,29 +798,29 @@ export default async function Home() {
       </section>
 
       {/* ===================== CTA FINAL ===================== */}
-      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-[#081c14] relative overflow-hidden transition-colors duration-500 border-b border-slate-200 dark:border-[#133829]">
+      <section className="py-20 sm:py-28 bg-white dark:bg-[#04130d] relative overflow-hidden transition-colors duration-500 border-b border-slate-200 dark:border-[#133829]">
         <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none -z-10" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,95vw)] h-[min(600px,95vw)] bg-emerald-500/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none -z-10" />
         
         <div className="max-w-5xl mx-auto px-4 text-center space-y-6 sm:space-y-8">
           <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15] sm:leading-[1.1]">
-            Comece a realizar suas consultas <br className="hidden md:block"/> de forma profissional
+            Faça sua consulta online no Consultas Brasil
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal">
-            Consultas imediatas, sem bitributação de buscas repetidas e com conformidade total às diretrizes de privacidade de dados.
+            Escolha a modalidade de pesquisa, confira os módulos disponíveis e acesse as informações diretamente no painel.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
             <Link
               href="/cadastro"
               className="btn-premium min-h-[48px] text-white py-3.5 sm:py-4 px-8 sm:px-10 rounded-2xl text-base sm:text-lg font-bold shadow-xl active:scale-95 touch-manipulation w-full sm:w-auto"
             >
-              Criar Conta Gratuita 🚀
+              Fazer consulta 🚀
             </Link>
             <Link
-              href="#faq"
-              className="min-h-[48px] bg-white/80 dark:bg-[#04130d]/80 hover:bg-slate-100 dark:hover:bg-[#0d281e] border border-slate-200 dark:border-[#133829] text-slate-800 dark:text-emerald-300 font-bold py-3.5 sm:py-4 px-8 sm:px-10 rounded-2xl transition-all text-base sm:text-lg backdrop-blur-md touch-manipulation flex items-center justify-center w-full sm:w-auto"
+              href="/login"
+              className="min-h-[48px] bg-white/80 dark:bg-[#081c14]/80 hover:bg-slate-100 dark:hover:bg-[#0d281e] border border-slate-200 dark:border-[#133829] text-slate-800 dark:text-emerald-300 font-bold py-3.5 sm:py-4 px-8 sm:px-10 rounded-2xl transition-all text-base sm:text-lg backdrop-blur-md touch-manipulation flex items-center justify-center w-full sm:w-auto"
             >
-              Tirar Dúvidas
+              Acessar painel
             </Link>
           </div>
           <p className="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs font-semibold tracking-wider">
@@ -832,6 +906,7 @@ export default async function Home() {
           </div>
         </section>
       )}
+      </main>
 
       {/* ===================== SCHEMAS JSON-LD ===================== */}
       <script

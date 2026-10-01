@@ -13,36 +13,36 @@ export default function FaqAccordion() {
 
   const faqs: FaqItem[] = [
     {
+      question: 'O que é o Consultas Brasil?',
+      answer: 'O Consultas Brasil é uma plataforma de consultas online criada para reunir diferentes modalidades de pesquisa cadastral em um único ambiente. O usuário pode iniciar pesquisas utilizando CPF, CNPJ, telefone, placa ou nome conforme a informação disponível.'
+    },
+    {
       question: 'Quais tipos de consulta estão disponíveis?',
-      answer: 'A plataforma possui páginas e módulos relacionados à consulta de CPF, telefone, CNPJ, nome e placa de veículo. A disponibilidade de informações pode variar conforme o tipo de pesquisa e o módulo selecionado.'
+      answer: 'Estão disponíveis consultas por CPF, CNPJ, telefone, placa de veículos e pesquisa por nome. Cada modalidade conta com módulos organizados por categorias, permitindo selecionar somente os dados que você precisa verificar.'
     },
     {
-      question: 'Preciso pagar mensalidade para usar o ConsultasBrasil?',
-      answer: 'Não há mensalidade obrigatória. O usuário pode adicionar saldo ao painel e pagar somente pelas consultas e módulos utilizados.'
+      question: 'Preciso pagar mensalidade?',
+      answer: 'Não. O Consultas Brasil opera no modelo pay-per-use, sem mensalidade obrigatória ou planos de fidelidade. Você adiciona saldo via Pix e utiliza estritamente nas consultas e módulos que escolher.'
     },
     {
-      question: 'Como o pagamento é realizado?',
-      answer: 'O saldo pode ser adicionado por meio de Pix. Após a confirmação do pagamento, o valor é disponibilizado no painel conforme as regras da plataforma.'
+      question: 'Como funciona uma consulta online?',
+      answer: 'Você escolhe o tipo de pesquisa, digita o dado disponível e seleciona os módulos desejados. O sistema processa os parâmetros em tempo real, integrando bases oficiais e provedores parceiros para estruturar o relatório no painel.'
     },
     {
-      question: 'Os resultados são sempre completos?',
-      answer: 'Não. A quantidade e a precisão das informações podem variar conforme os dados informados, a disponibilidade das fontes e a atualização dos registros.'
+      question: 'Todas as consultas sempre encontram informações?',
+      answer: 'Não. A quantidade de dados encontrados depende da existência de registros nos provedores e da informação pesquisada. Se nenhum dado for localizado na base, o saldo não é consumido indevidamente.'
     },
     {
-      question: 'Posso consultar qualquer pessoa?',
-      answer: 'As consultas devem ser realizadas somente para finalidades legítimas e de acordo com a legislação aplicável. O usuário é responsável pela pesquisa realizada e pelo uso das informações obtidas.'
+      question: 'Os dados estão sempre atualizados?',
+      answer: 'A atualização e a disponibilidade variam de acordo com a fonte pública ou o provedor consultado. Trabalhamos com integrações diretas para buscar sempre a versão cadastral mais recente disponível.'
     },
     {
-      question: 'É necessário informar a senha da pessoa pesquisada?',
-      answer: 'Não. A plataforma não solicita senhas de redes sociais, contas bancárias, e-mails ou outros serviços pertencentes à pessoa pesquisada.'
+      question: 'O Consultas Brasil é um serviço do governo?',
+      answer: 'Não. O Consultas Brasil é uma plataforma privada e independente. Não representamos nem temos vínculo oficial com a Receita Federal, Detran, Senatran ou qualquer órgão público.'
     },
     {
-      question: 'Como escolho a consulta correta?',
-      answer: 'Acesse as páginas de consulta de CPF, telefone, CNPJ, nome ou placa e confira a explicação sobre os dados e módulos disponíveis em cada categoria.'
-    },
-    {
-      question: 'Como entro em contato com o suporte?',
-      answer: 'O atendimento deve ser solicitado pelos canais oficiais apresentados na página de contato ou dentro do painel do usuário.'
+      question: 'Como devo utilizar as informações encontradas?',
+      answer: 'As informações obtidas devem ser utilizadas de maneira ética, responsável e estritamente em conformidade com a legislação aplicável, incluindo as diretrizes da Lei Geral de Proteção de Dados (LGPD).'
     }
   ];
 

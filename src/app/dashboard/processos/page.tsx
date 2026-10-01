@@ -5,9 +5,41 @@ import { realizarConsulta, getPricing } from '@/app/actions/consultas';
 import { getUserProfile } from '@/app/actions/perfil';
 import { validarChave } from '@/lib/validators';
 import { toast } from 'sonner';
-import { Search, Loader2, FlaskConical, HelpCircle, ChevronDown, Zap } from 'lucide-react';
+import { Search, Loader2, FlaskConical, HelpCircle, ChevronDown, Zap, Scale, FileText, Users, Building2, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { DataViewer } from '@/components/DataViewer';
 import { Tooltip } from '@/components/Tooltip';
+
+// Módulos e escopo de dados cobertos na consulta de processos judiciais
+const COBERTURA_PROCESSUAL = [
+  {
+    id: 'dados_processuais',
+    title: 'Dados do Processo & CNJ',
+    icon: Scale,
+    desc: 'Número único CNJ, Vara, Comarca, Tribunal de origem, Grau de jurisdição e data de distribuição.',
+    tags: ['Número CNJ', 'Comarca/Vara', 'Tribunal', 'Data de Abertura']
+  },
+  {
+    id: 'fase_situacao',
+    title: 'Fase & Tramitação',
+    icon: FileText,
+    desc: 'Situação atual do processo (Ativo, Arquivado, Suspenso, Em Grau de Recurso) e últimas movimentações registradas.',
+    tags: ['Status Atual', 'Andamentos', 'Fase Recursal', 'Último Despacho']
+  },
+  {
+    id: 'partes_advogados',
+    title: 'Polos, Partes & OAB',
+    icon: Users,
+    desc: 'Identificação de Autores, Réus, Interessados, Terceiros, Advogados representantes e respectivos números de OAB.',
+    tags: ['Autor / Réu', 'Advogados', 'Número OAB', 'Tipo de Participação']
+  },
+  {
+    id: 'cobertura_tribunais',
+    title: 'Abrangência Nacional',
+    icon: Building2,
+    desc: 'Varredura unificada em Tribunais de Justiça Estaduais (TJ), Justiça Federal (TRF), Justiça Trabalhista (TRT) e Tribunais Superiores (STJ/STF).',
+    tags: ['TJ Estadual', 'TRF Federal', 'TRT Trabalho', 'STJ / STF']
+  }
+];
 
 export default function ProcessosPage() {
 
@@ -219,6 +251,74 @@ export default function ProcessosPage() {
               </Tooltip>
             </div>
           </div>
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-gray-400">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-500" />
+            <span>Cobrança segura: O saldo só é debitado se a consulta localizar registros válidos.</span>
+          </div>
+          <div className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-gray-300">
+            <span>Tempo médio de resposta:</span>
+            <span className="text-emerald-500 font-bold">1 a 3 segundos</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. O que dá para pesquisar e dados cobertos na consulta */}
+      <section className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+              <Scale className="w-5 h-5 text-emerald-500" />
+              2. O que você recebe nesta consulta
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400">
+              Varredura completa em diários oficiais e sistemas processuais de todo o Brasil.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl self-start sm:self-auto">
+            <span className="text-xs text-slate-600 dark:text-gray-300 font-medium">Tabela Oficial:</span>
+            <span className="text-sm font-bold text-emerald-500">
+              R$ {cost.toFixed(2).replace('.', ',')} / busca
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {COBERTURA_PROCESSUAL.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div 
+                key={item.id}
+                className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm hover:border-emerald-500/40 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-3 group-hover:scale-105 transition-transform">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm mb-1.5">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-gray-400 leading-relaxed mb-4">
+                    {item.desc}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-white/5">
+                  {item.tags.map((tag, tagIdx) => (
+                    <span 
+                      key={tagIdx}
+                      className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-300"
+                    >
+                      <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 

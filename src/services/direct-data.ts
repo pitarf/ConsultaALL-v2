@@ -316,8 +316,17 @@ export async function performSmartSearch(
               const data = transformDirectDataAdvanced(rawData, selectedModules);
               
               if (selectedModules.includes('processos')) {
-                const cpf = rawData?.cpf || rawData?.retorno?.cpf;
-                if (cpf) {
+                const cpf = (
+                  rawData?.cpf || 
+                  rawData?.taxIdNumber || 
+                  rawData?.documento || 
+                  rawData?.retorno?.cpf || 
+                  rawData?.retorno?.taxIdNumber ||
+                  item.taxIdNumber ||
+                  item.cpf
+                )?.toString().replace(/\D/g, '');
+
+                if (cpf && cpf.length === 11) {
                   const procRes = await consultaProcessos(cpf);
                   if (procRes.success) {
                     data['Processos_Judiciais'] = procRes.data;
@@ -510,6 +519,17 @@ export async function consultaCpfPlus(cpf: string, selectedModules: string[] = [
       }
 
       return { success: true, data };
+    }
+
+    // Se a busca principal de CPF não localizou retorno mas o usuário só pediu 'processos'
+    if (selectedModules.length === 1 && selectedModules[0] === 'processos') {
+      const procRes = await consultaProcessos(cleanCpf);
+      if (procRes.success) {
+        return {
+          success: true,
+          data: { 'Processos_Judiciais': procRes.data }
+        };
+      }
     }
     
     const rawMsg = res.metaDados?.mensagem || res.metaDados?.resultado || 'Nenhum registro encontrado.';
@@ -812,6 +832,17 @@ export async function consultaCnpjPlus(cnpj: string, selectedModules: string[] =
       }
 
       return { success: true, data };
+    }
+
+    // Se a busca principal de CNPJ não localizou retorno mas o usuário só pediu 'processos'
+    if (selectedModules.length === 1 && selectedModules[0] === 'processos') {
+      const procRes = await consultaProcessos(cleanCnpj);
+      if (procRes.success) {
+        return {
+          success: true,
+          data: { 'Processos_Judiciais': procRes.data }
+        };
+      }
     }
     
     const rawMsg = res.metaDados?.mensagem || res.metaDados?.resultado || 'Nenhum registro encontrado.';

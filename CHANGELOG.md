@@ -2,12 +2,41 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
-## [1.2.0] - 2026-09-29
+## [1.2.2] - 2026-10-01
+### Otimizado
+- **Otimização Estratégica & SEO da Home Page (`https://consultasbrasil.net/`):**
+  - **Identidade e Responsividade Preservadas:** Mantida toda a identidade visual verde/escuro (`#04130d`), estética premium, componentes nativos do painel e tabela de preços reais.
+  - **Heading Único:** Definição rigorosa de apenas 1 tag `<h1>` na página: *"Consulta CPF, CNPJ, Telefone e Placa Online"*.
+  - **Formulário de Busca Interativo (`HomeSearchBox`):** Suporte às 5 modalidades completas (`CPF`, `CNPJ`, `Telefone`, `Placa`, `Nome`) com labels, placeholders e botões específicos e touch target mínimo de 44px.
+  - **Seção Tipos de Consulta:** H2 *"Escolha o tipo de consulta online"* com 5 cards dedicados e CTAs específicos, preservando rotas atuais da plataforma.
+  - **Faixa de Benefícios:** 4 pilares em destaque (*Disponível 24 horas*, *Pagamento via Pix*, *Sem mensalidade obrigatória*, *Diversas modalidades*).
+  - **Como Funciona:** H2 *"Como fazer uma consulta online?"* estruturado nos 3 passos sequenciais (*Informe o dado*, *Selecione os módulos*, *Consulte o resultado*).
+  - **Preços Transparentes:** H2 *"Preços das consultas online"* com texto explicativo e aviso pós-tabela sobre uso exclusivo de saldo nos módulos escolhidos.
+  - **Fontes Explicadas:** H2 *"Como funcionam as fontes das consultas?"* com os blocos *Fontes públicas*, *Provedores integrados* e *Organização dos resultados*, complementado com disclaimer de independência de órgãos públicos.
+  - **Nova Seção Editorial (SEO):** Inserida seção com H2 *"Consultas online no Consultas Brasil"* com 8 parágrafos densos e informativos sobre as modalidades e conformidade no HTML inicial renderizado.
+  - **Casos de Uso Práticos:** H2 *"Quando uma consulta online pode ser útil?"* com 6 cards (*Conferência cadastral*, *Verificação de empresas*, *Pesquisa de telefone*, *Consulta veicular*, *Atualização de cadastros*, *Pesquisa complementar*).
+  - **FAQ Institucional Completo:** H2 *"Perguntas frequentes sobre consultas online"* com 8 perguntas e respostas claras.
+  - **Estrutura Semântica e Schemas:** Encapsulamento com `<main>`, dados estruturados JSON-LD (`Organization`, `WebSite`, `FAQPage`) estritamente sem dados fictícios.
+  - **Compilação e Integridade:** Build Next.js 16 validado com sucesso sem erros.
+
+## [1.2.1] - 2026-10-01
+### Adicionado & Otimizado
+- **Ativação e Detalhamento da Consulta de Processos Judiciais (`/dashboard/processos`):**
+  - **Tabela de Preço Dinâmica e Transparente:** Exibição clara do custo por consulta sincronizado diretamente com a tabela `ModulePricing` (`processos`, categoria *Crédito e Histórico*).
+  - **Cards com Escopo Completo de Pesquisa:** Adicionada seção visual de dados cobertos exibindo o que dá para consultar:
+    - *Dados do Processo & CNJ:* Número unificado CNJ, Vara, Comarca, Tribunal de origem, Grau e data de distribuição.
+    - *Fase & Tramitação:* Situação (Ativo/Arquivado/Suspenso), andamentos recentes e despachos.
+    - *Polos, Partes & OAB:* Identificação de autor, réu, advogados representantes e inscrição na OAB.
+    - *Abrangência Nacional:* Varredura em Tribunais Estaduais (TJ), Federais (TRF), Trabalhistas (TRT) e Superiores (STJ/STF).
+  - **Garantia de Cobrança Justa:** Indicação visual de proteção com tempo médio de resposta (1 a 3s) e garantia de que o saldo só é debitado se a consulta localizar registros válidos.
+  - **Resiliência do Serviço:** Refinamento em `src/services/direct-data.ts` para consulta de processos direta mesmo quando a base de cadastro básico estiver vazia, e suporte aprofundado a candidatos homônimos com extração direta de CPF.
 ### Adicionado & Implantado em Produção
 - **Deploy Oficial em Produção na VPS Hostinger (`consultasbrasil.net`):**
   - **Repositório Sincronizado:** Push oficial de todas as branches e histórico atualizado em `origin main`.
   - **Provisionamento na VPS (`179.236.224.178`):** Clone do projeto, injeção de credenciais de produção no `.env`, build otimizado da imagem Docker em modo Next.js `standalone`.
   - **Containerização:** Containers `consultaall-app` (Next.js 16) e `consultaall-db` rodando em background com reinício automático (`restart: always`).
+  - **Banco de Dados PostgreSQL Docker:** Volume persistente `postgres-data`, schema de 14 tabelas inicializado e 25 módulos de consulta pré-populados.
+  - **Usuário Administrador Criado:** Conta master de administrador provisionada no banco local (`rfpita.ti@gmail.com`) com role `ADMIN` e saldo inicial para testes.
   - **Nginx Proxy Reverso:** Configuração e ativação com `client_max_body_size 50M`, headers de proxy reverso (`X-Forwarded-Proto`, `Upgrade`, `Connection`).
   - **Certificado SSL Let's Encrypt:** Certificados emitidos e instalados para `consultasbrasil.net` e `www.consultasbrasil.net` com redirecionamento forçado para HTTPS (301) e renovação automática.
   - **Verificação de Integridade:** Testes de requisição HTTP 200 confirmados na Home, Login, Cadastro, rotas de consulta e arquivos de imagem `/logo.png` e `/favicon.png`.

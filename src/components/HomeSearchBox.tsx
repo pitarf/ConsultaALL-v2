@@ -5,7 +5,7 @@ import { Search, Loader2, CheckCircle2, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 
 export default function HomeSearchBox() {
-  const [type, setType] = useState<'cpf' | 'placa' | 'telefone'>('cpf');
+  const [type, setType] = useState<'cpf' | 'cnpj' | 'telefone' | 'placa' | 'nome'>('cpf');
   const [value, setValue] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -13,9 +13,9 @@ export default function HomeSearchBox() {
   const [showResult, setShowResult] = useState(false);
 
   const steps = [
-    'Conectando ao banco de dados...',
-    'Consultando indexadores da Receita Federal...',
-    'Filtrando informações públicas registradas...',
+    'Conectando à plataforma...',
+    'Consultando indexadores e registros oficiais...',
+    'Verificando módulos e bases disponíveis...',
     'Gerando relatório de preview...'
   ];
 
@@ -26,6 +26,16 @@ export default function HomeSearchBox() {
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  };
+
+  const formatCNPJ = (v: string) => {
+    v = v.replace(/\D/g, '');
+    if (v.length > 14) v = v.slice(0, 14);
+    return v
+      .replace(/(\d{2})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1/$2')
+      .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
   };
 
   const formatTelefone = (v: string) => {
@@ -50,6 +60,8 @@ export default function HomeSearchBox() {
 
     if (type === 'cpf') {
       setValue(formatCPF(rawVal));
+    } else if (type === 'cnpj') {
+      setValue(formatCNPJ(rawVal));
     } else if (type === 'telefone') {
       setValue(formatTelefone(rawVal));
     } else if (type === 'placa') {
@@ -61,6 +73,8 @@ export default function HomeSearchBox() {
           rawVal = rawVal.replace(/^([A-Z]{3})([0-9]{4})$/, '$1-$2');
         }
       }
+      setValue(rawVal);
+    } else if (type === 'nome') {
       setValue(rawVal);
     }
   };
@@ -79,7 +93,7 @@ export default function HomeSearchBox() {
           }
           return prev + 1;
         });
-      }, 800);
+      }, 700);
     }
     return () => clearInterval(interval);
   }, [loading]);
@@ -92,43 +106,30 @@ export default function HomeSearchBox() {
 
     if (type === 'cpf') {
       if (cleanVal.length !== 11) {
-        setError('Insira um CPF válido.');
+        setError('Insira um CPF válido com 11 dígitos.');
         return;
       }
-
-      // CPFs inválidos conhecidos
-      const invalidCpfs = [
-        '00000000000', '11111111111', '22222222222', '33333333333', 
-        '44444444444', '55555555555', '66666666666', '77777777777', 
-        '88888888888', '99999999999', '12345678909', '12345678910',
-        '12345678911'
-      ];
-      if (invalidCpfs.includes(cleanVal)) {
-        setError('Insira um CPF válido.');
+    } else if (type === 'cnpj') {
+      if (cleanVal.length !== 14) {
+        setError('Insira um CNPJ válido com 14 dígitos.');
         return;
       }
     } else if (type === 'telefone') {
       if (cleanVal.length !== 10 && cleanVal.length !== 11) {
-        setError('Insira um Telefone válido.');
-        return;
-      }
-
-      // Telefones inválidos
-      const invalidTelephones = [
-        '0000000000', '1111111111', '2222222222', '3333333333', '4444444444',
-        '5555555555', '6666666666', '7777777777', '8888888888', '9999999999',
-        '00000000000', '11111111111', '22222222222', '33333333333', '44444444444',
-        '55555555555', '66666666666', '77777777777', '88888888888', '99999999999'
-      ];
-      if (invalidTelephones.includes(cleanVal)) {
-        setError('Insira um Telefone válido.');
+        setError('Insira um telefone válido com DDD (10 ou 11 dígitos).');
         return;
       }
     } else if (type === 'placa') {
       const cleanPlaca = value.replace(/-/g, '').toUpperCase();
       const isPlacaValida = /^[A-Z]{3}[0-9]{4}$/.test(cleanPlaca) || /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/.test(cleanPlaca);
       if (!isPlacaValida) {
-        setError('Insira uma Placa válida (Ex: ABC1D23 ou ABC-1234).');
+        setError('Insira uma placa válida (Ex: ABC1D23 ou ABC-1234).');
+        return;
+      }
+    } else if (type === 'nome') {
+      const trimmed = value.trim();
+      if (!trimmed || trimmed.split(' ').length < 2) {
+        setError('Digite o nome completo (nome e sobrenome).');
         return;
       }
     }
@@ -137,11 +138,48 @@ export default function HomeSearchBox() {
     setShowResult(false);
   };
 
+  const getFormConfig = () => {
+    switch (type) {
+      case 'cpf':
+        return {
+          label: 'Digite o CPF para consultar',
+          placeholder: '000.000.000-00',
+          btnText: 'Consultar CPF'
+        };
+      case 'cnpj':
+        return {
+          label: 'Digite o CNPJ para consultar',
+          placeholder: '00.000.000/0000-00',
+          btnText: 'Consultar CNPJ'
+        };
+      case 'telefone':
+        return {
+          label: 'Digite o telefone para consultar',
+          placeholder: '(11) 99999-9999',
+          btnText: 'Consultar telefone'
+        };
+      case 'placa':
+        return {
+          label: 'Digite a placa para consultar',
+          placeholder: 'ABC1D23',
+          btnText: 'Consultar placa'
+        };
+      case 'nome':
+        return {
+          label: 'Digite o nome completo',
+          placeholder: 'Nome e sobrenome',
+          btnText: 'Consultar nome'
+        };
+    }
+  };
+
+  const config = getFormConfig();
+
   return (
     <div className="w-full bg-white/90 dark:bg-[#081c14]/80 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 rounded-3xl p-4 sm:p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)] max-w-xl mx-auto transition-all duration-300">
       {/* Tabs com Pill Container Suave e Touch Targets ergonômicos */}
-      <div className="flex bg-slate-100/90 dark:bg-black/40 p-1.5 rounded-2xl mb-5 sm:mb-6 gap-1.5 sm:gap-2 border border-slate-200/50 dark:border-white/5">
-        {(['cpf', 'placa', 'telefone'] as const).map((t) => (
+      <div className="grid grid-cols-5 bg-slate-100/90 dark:bg-black/40 p-1.5 rounded-2xl mb-5 sm:mb-6 gap-1 border border-slate-200/50 dark:border-white/5">
+        {(['cpf', 'cnpj', 'telefone', 'placa', 'nome'] as const).map((t) => (
           <button
             key={t}
             type="button"
@@ -151,42 +189,43 @@ export default function HomeSearchBox() {
               setError(null);
               setShowResult(false);
             }}
-            className={`flex-1 min-h-[44px] py-2.5 px-2 text-xs sm:text-sm font-extrabold rounded-xl transition-all duration-300 capitalize tracking-tight touch-manipulation select-none flex items-center justify-center ${
+            className={`min-h-[44px] py-2 px-1 text-[11px] sm:text-xs md:text-sm font-extrabold rounded-xl transition-all duration-300 capitalize tracking-tight touch-manipulation select-none flex items-center justify-center ${
               type === t
                 ? 'bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-md shadow-emerald-600/30 scale-[1.02]'
                 : 'text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-white/5'
             }`}
           >
-            {t === 'telefone' ? 'Telefone' : t === 'cpf' ? 'CPF' : 'Placa'}
+            {t === 'telefone' ? 'Telefone' : t === 'cpf' ? 'CPF' : t === 'cnpj' ? 'CNPJ' : t === 'placa' ? 'Placa' : 'Nome'}
           </button>
         ))}
       </div>
 
       {!loading && !showResult && (
         <form onSubmit={handleSearch} className="space-y-4">
-          <div className="relative group">
-            <input
-              type="text"
-              value={value}
-              onChange={handleInputChange}
-              placeholder={
-                type === 'cpf'
-                  ? 'Digite o CPF (Ex: 000.000.000-00)'
-                  : type === 'placa'
-                  ? 'Digite a Placa (Ex: ABC1D23)'
-                  : 'Telefone com DDD (Ex: 11 99999-9999)'
-              }
-              className="w-full min-h-[48px] bg-slate-50/80 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl pl-4 sm:pl-5 pr-14 sm:pr-16 py-3.5 sm:py-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-black/50 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 text-xs sm:text-sm font-semibold tracking-tight shadow-inner"
-            />
-            <button
-              type="submit"
-              disabled={!value.trim()}
-              aria-label="Buscar dado cadastral"
-              className="absolute right-2 top-2 bottom-2 min-h-[40px] min-w-[44px] px-3.5 sm:px-5 btn-premium text-white rounded-xl transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none shadow-md shadow-emerald-600/20 active:scale-95 touch-manipulation"
-            >
-              <Search className="w-4 h-4" />
-            </button>
+          <div className="space-y-1.5 text-left">
+            <label htmlFor="search-input" className="block text-xs font-bold text-slate-700 dark:text-gray-300 ml-1">
+              {config.label}
+            </label>
+            <div className="relative group">
+              <input
+                id="search-input"
+                type="text"
+                value={value}
+                onChange={handleInputChange}
+                placeholder={config.placeholder}
+                className="w-full min-h-[48px] bg-slate-50/80 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl pl-4 sm:pl-5 pr-4 py-3.5 sm:py-4 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-black/50 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 text-xs sm:text-sm font-semibold tracking-tight shadow-inner"
+              />
+            </div>
           </div>
+
+          <button
+            type="submit"
+            disabled={!value.trim()}
+            className="w-full min-h-[48px] btn-premium text-white font-bold py-3.5 px-6 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none text-sm touch-manipulation"
+          >
+            <Search className="w-4 h-4" />
+            <span>{config.btnText}</span>
+          </button>
           
           {error && (
             <div className="flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 p-3.5 rounded-2xl border border-rose-200 dark:border-rose-500/20 animate-in fade-in slide-in-from-top-1 duration-200">
