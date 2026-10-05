@@ -2,6 +2,16 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.3] - 2026-10-05
+### Otimizado & Corrigido
+- **Gestão de Preços Dinâmica no Painel Admin (`/admin/precos`):**
+  - **Barra de Pesquisa Instantânea:** Campo de busca em tempo real com ícone e limpeza rápida para localizar qualquer módulo imediatamente por nome, ID ou descrição (ex: *Processos Judiciais*, *CPF*, *Veículos*).
+  - **Filtro de Categorias em Chips/Pills:** Seletores horizontais com scroll suave para isolar categorias (*Crédito e Histórico*, *Dados pessoais*, *Empresas*, *Veículos*, etc.).
+  - **Atalho Rápido para Processos Judiciais:** Botão dedicado no topo para focar e editar diretamente o módulo de processos.
+  - **Mobile-First Real & Cards Touch:** Substituição da tabela de 12 colunas no mobile por cards ergonômicos com touch targets de no mínimo 44px/48px, evitando que botões de salvar/cancelar fiquem ocultos ou cortados.
+  - **Suporte Amplo a Vírgula e Ponto Decimal:** Input aceita digitação com vírgula (`3,30`) ou ponto (`3.30`) sem truncamento ou rejeição no teclado virtual de smartphones.
+  - **Revalidação Imediata de Cache:** Atualização em cascata nas páginas `/admin/precos`, `/dashboard/processos`, `/dashboard` e `/` garantindo que o novo valor apareça instantaneamente tanto para o admin quanto para o usuário comum.
+
 ## [1.2.2] - 2026-10-01
 ### Otimizado
 - **Otimização Estratégica & SEO da Home Page (`https://consultasbrasil.net/`):**

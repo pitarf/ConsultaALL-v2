@@ -160,6 +160,11 @@
 - [x] **Certificado SSL Let's Encrypt:** Certificados gerados com sucesso via Certbot com renovação automática e redirecionamento HTTPS permanente (301).
 - [x] **Testes de Conectividade:** Verificação de resposta HTTP 200 via `curl` e `Invoke-WebRequest` na Home, telas de Login, API e assets de Branding (`/logo.png` e `/favicon.png`).
 
-
-
-
+## SPLIT 11: Gestão Dinâmica de Preços & Ergonomia Mobile no Admin (✅ CONCLUÍDO)
+*Este split foca na usabilidade da tabela de preços administrativa, permitindo busca instantânea, edição simplificada e flexibilidade total no celular e desktop.*
+- [x] **Busca Instantânea em Tempo Real:** Campo de busca rápida no topo da tela com filtro por nome, id e descrição do módulo.
+- [x] **Filtros por Categoria:** Chips/pills horizontais para isolar qualquer categoria (*Crédito e Histórico*, *Dados pessoais*, *Empresas*, *Veículos*, etc.).
+- [x] **Atalho Rápido para Processos Judiciais:** Botão com um clique para destacar e focar o módulo judicial.
+- [x] **Layout Mobile Ergonômico:** Cards touch dedicados no mobile com touch targets de 44px+ para edição e salvamento confortável no smartphone.
+- [x] **Tolerância a Vírgula e Ponto:** Tratamento automático de input numérico (`3,30` ou `3.30`).
+- [x] **Revalidação de Cache Integrada:** Revalidação de `/admin/precos`, `/dashboard/processos`, `/dashboard` e `/` após alteração.

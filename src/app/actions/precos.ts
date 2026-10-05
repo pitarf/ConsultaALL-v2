@@ -48,6 +48,8 @@ export async function atualizarPrecoModulo(id: string, novoPreco: number) {
   });
 
   revalidatePath('/admin/precos');
+  revalidatePath('/dashboard/processos');
+  revalidatePath('/dashboard');
   revalidatePath('/');
   return { success: true };
 }
