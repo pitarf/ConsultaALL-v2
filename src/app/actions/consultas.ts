@@ -44,13 +44,20 @@ export async function realizarConsulta(
   }
 
   // Verifica se o dado está na Blocklist (Bloqueio LGPD)
-  const blocklistValue = target === 'placa' 
-    ? cleanQuery.replace(/-/g, '').toUpperCase() 
-    : cleanQuery.replace(/\D/g, '');
+  let blocklistValue = '';
+  if (target === 'placa') {
+    blocklistValue = cleanQuery.replace(/-/g, '').toUpperCase();
+  } else if (target === 'nome') {
+    blocklistValue = cleanQuery.trim().toUpperCase().replace(/\s+/g, ' ');
+  } else {
+    blocklistValue = cleanQuery.replace(/\D/g, '');
+  }
 
   if (blocklistValue) {
     const isBlocked = await prisma.blockedData.findFirst({
-      where: { value: blocklistValue }
+      where: target === 'nome'
+        ? { type: 'NOME', value: { equals: blocklistValue, mode: 'insensitive' } }
+        : { value: blocklistValue }
     });
 
     if (isBlocked) {
@@ -151,6 +158,24 @@ export async function realizarConsulta(
 
       // Se retornou múltiplos candidatos (Etapa 1 V2 grátis)
       if (apiResult.isMultiple) {
+        // Filtra candidatos que estejam na Blocklist (por Nome ou CPF)
+        if (Array.isArray(apiResult.candidates) && apiResult.candidates.length > 0) {
+          const blockedItems = await prisma.blockedData.findMany({ select: { value: true } });
+          const blockedSet = new Set(blockedItems.map((b) => b.value.toUpperCase()));
+
+          apiResult.candidates = apiResult.candidates.filter((c: any) => {
+            const nomeCand = (c.name || '').trim().toUpperCase().replace(/\s+/g, ' ');
+            const cpfCand = (c.taxIdNumber || '').replace(/\D/g, '');
+            if (blockedSet.has(nomeCand) || (cpfCand && blockedSet.has(cpfCand))) {
+              return false;
+            }
+            return true;
+          });
+
+          if (apiResult.candidates.length === 0) {
+            return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
+          }
+        }
         try {
           const sortedModules = [...selectedModules].sort().join(',');
           await prisma.searchHistory.create({

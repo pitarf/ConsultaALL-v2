@@ -168,3 +168,10 @@
 - [x] **Layout Mobile Ergonômico:** Cards touch dedicados no mobile com touch targets de 44px+ para edição e salvamento confortável no smartphone.
 - [x] **Tolerância a Vírgula e Ponto:** Tratamento automático de input numérico (`3,30` ou `3.30`).
 - [x] **Revalidação de Cache Integrada:** Revalidação de `/admin/precos`, `/dashboard/processos`, `/dashboard` e `/` após alteração.
+
+## SPLIT 12: Bloqueio de Consultas por Nome Completo - LGPD (✅ CONCLUÍDO)
+*Este split foca na extensão da Blocklist LGPD para permitir o bloqueio direto de consultas por Nome Completo, além de CPF, CNPJ, Placa e Telefone.*
+- [x] **Backend & Sanitização (`admin.ts`):** Inclusão do tipo `'NOME'` em `addBlockedData`, com preservação de letras maiúsculas e validação mínima de 3 caracteres.
+- [x] **Validação nas Consultas (`consultas.ts`):** Verificação case-insensitive da blocklist para buscas diretas por Nome, bloqueando o acesso e impedindo cobrança.
+- [x] **Filtragem de Candidatos Homônimos:** Exclusão automática de pessoas bloqueadas (por Nome ou CPF) no resultado de busca com múltiplos candidatos.
+- [x] **Interface Administrativa (`BloqueiosClient.tsx`):** Opção "Nome Completo" no seletor de dados, placeholders dinâmicos, badge exclusiva roxa e touch targets ergonômicos.

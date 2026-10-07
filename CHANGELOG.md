@@ -2,6 +2,15 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.4] - 2026-10-07
+### Adicionado & Otimizado
+- **Bloqueio de Consultas por Nome Completo (LGPD / Blocklist):**
+  - **Ativação no Painel Admin (`/admin/bloqueios`):** Inclusão da opção "Nome Completo" no seletor de dados bloqueados, com validação de pelo menos 3 caracteres e suporte a maiúsculas e minúsculas.
+  - **Higienização Adequada:** Armazenamento preservando caracteres alfabéticos em maiúsculas sem espaços duplos.
+  - **Bloqueio Efetivo nas Consultas (`consultas.ts`):** Verificação instantânea do termo pesquisado por Nome na blocklist com recusa imediata de consulta protegendo o titular ("Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD)").
+  - **Filtragem de Candidatos Homônimos:** Eliminação automática de candidatos retornados pela busca cuja titularidade (Nome ou CPF) esteja presente na base de bloqueio, omitindo o registro e preservando o saldo do usuário se não houver candidatos permitidos.
+  - **Interface Visual Aprimorada:** Badge exclusiva roxa para o tipo `NOME`, placeholders contextuais e botões com área de toque mínima de 44px/48px.
+
 ## [1.2.3] - 2026-10-05
 ### Otimizado & Corrigido
 - **Gestão de Preços Dinâmica no Painel Admin (`/admin/precos`):**
