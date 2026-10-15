@@ -2,6 +2,12 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.5] - 2026-10-15
+### Adicionado & Atualizado
+- **Google Tag & Google Analytics 4 (`gtag.js`):**
+  - **Atualização da Tag Oficial:** Configuração da Google Tag com ID `G-DBX6TJE825` no layout raiz (`src/app/layout.tsx`) utilizando `next/script` com estratégia `afterInteractive` para máximo desempenho e precisão no rastreamento de acessos e conversões.
+  - **Disparo de Eventos Preservado:** Manutenção da integração de eventos de conversão e recarga manual (`manual_event_PURCHASE`).
+
 ## [1.2.4] - 2026-10-07
 ### Adicionado & Otimizado
 - **Bloqueio de Consultas por Nome Completo (LGPD / Blocklist):**

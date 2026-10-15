@@ -175,3 +175,8 @@
 - [x] **Validação nas Consultas (`consultas.ts`):** Verificação case-insensitive da blocklist para buscas diretas por Nome, bloqueando o acesso e impedindo cobrança.
 - [x] **Filtragem de Candidatos Homônimos:** Exclusão automática de pessoas bloqueadas (por Nome ou CPF) no resultado de busca com múltiplos candidatos.
 - [x] **Interface Administrativa (`BloqueiosClient.tsx`):** Opção "Nome Completo" no seletor de dados, placeholders dinâmicos, badge exclusiva roxa e touch targets ergonômicos.
+
+## SPLIT 13: Integração do Google Tag Manager & Google Analytics 4 (✅ CONCLUÍDO)
+*Este split foca na ativação da tag oficial do Google Analytics 4 para métricas e rastreamento de acessos e eventos.*
+- [x] **Instalação da Tag Oficial:** Injeção do script `https://www.googletagmanager.com/gtag/js?id=G-DBX6TJE825` e inicialização do `gtag` com `afterInteractive` no layout raiz.
+- [x] **Validação Técnica de Build:** Compilação do Next.js sem avisos ou falhas.

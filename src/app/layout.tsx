@@ -93,8 +93,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >
+        {/* Google tag (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-W9LEXZJ5HG"
+          src="https://www.googletagmanager.com/gtag/js?id=G-DBX6TJE825"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -103,7 +104,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-W9LEXZJ5HG');
+            gtag('config', 'G-DBX6TJE825');
           `}
         </Script>
         <main className="flex-1 flex flex-col">
