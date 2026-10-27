@@ -186,3 +186,11 @@
 - [x] **Timeout Global do Axios:** Ampliação de 8s (8000ms) para 18s (18000ms) em `direct-data.ts`.
 - [x] **Processos Judiciais Estendido:** Timeout de `consultaProcessos` ampliado de 5s para 16s.
 - [x] **Consultas Veiculares Protegidas:** Timers estendidos para bases Senatran (10s) e Detran (8s).
+
+
+## SPLIT 15: Termos de Uso e Termo de Ciência LGPD Pós-Cadastro (✅ CONCLUÍDO)
+*Este split foca na conformidade jurídica LGPD, termos de uso obrigatórios e fluxo de onboarding com termos de ciência e responsabilidade.*
+- [x] **Accordion e Checkboxes no Cadastro:** Inclusão de "Termos de Uso e Responsabilidade" expansível com texto de vedação de ilícitos e 2 checkboxes obrigatórios validados no client e no server.
+- [x] **Modal de Ciência LGPD no Dashboard:** Criação do `TermoCienciaModal` com os 7 parágrafos jurídicos e botão "Prosseguir".
+- [x] **Orquestração com Modal de WhatsApp:** Bloqueio do `PromoModal` até a assinatura/confirmação formal do termo de responsabilidade.
+- [x] **Migração de Banco de Dados:** Campo `hasAcceptedTerms` registrado no Prisma e aplicado na tabela `User` do PostgreSQL na VPS.

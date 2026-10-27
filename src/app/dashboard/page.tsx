@@ -9,6 +9,7 @@ import { Search, Loader2, HelpCircle, FlaskConical, Zap, ChevronDown } from 'luc
 import { DataViewer } from '@/components/DataViewer';
 import { Tooltip } from '@/components/Tooltip';
 import PromoModal from '@/components/PromoModal';
+import TermoCienciaModal from '@/components/TermoCienciaModal';
 
 // Estrutura visual base (custos serão sobrescritos pelo banco)
 const INITIAL_DATA_MODULES = [
@@ -67,6 +68,7 @@ export default function DashboardPage() {
   const [isDemo, setIsDemo] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<any>(null);
+  const [termoAceito, setTermoAceito] = useState(false);
 
   // Carrega preços reais e verifica se é admin
   useEffect(() => {
@@ -598,10 +600,17 @@ export default function DashboardPage() {
       )}
 
       {userProfile && (
-        <PromoModal 
-          hasSeenPopup={userProfile.hasSeenPromoPopup} 
-          userWhatsapp={userProfile.whatsapp} 
-        />
+        <>
+          <TermoCienciaModal 
+            hasAcceptedTerms={userProfile.hasAcceptedTerms || termoAceito}
+            onAccepted={() => setTermoAceito(true)}
+          />
+          <PromoModal 
+            hasSeenPopup={userProfile.hasSeenPromoPopup} 
+            userWhatsapp={userProfile.whatsapp} 
+            canShow={userProfile.hasAcceptedTerms || termoAceito}
+          />
+        </>
       )}
     </div>
   );

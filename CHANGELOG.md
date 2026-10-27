@@ -2,6 +2,17 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.7] - 2026-10-27
+### Adicionado & Conformidade Jurídica
+- **Termos de Uso, Responsabilidade e Conformidade LGPD no Cadastro e Dashboard:**
+  - **Formulário de Cadastro (`/cadastro`):**
+    - Adicionado o título interativo colapsável *"Termos de Uso e Responsabilidade"* com chevron animado, revelando os compromissos de uso legítimo e proibição de atividades ilícitas.
+    - Inclusão dos 2 checkboxes obrigatórios sempre visíveis: *"Li e aceito os Termos de Uso e as regras de utilização responsável."* e *"Declaro ter tomado conhecimento da Política de Privacidade."*, validados tanto no frontend quanto na Server Action (`auth.ts`).
+  - **Pop-up Pós-Cadastro (`TermoCienciaModal`):**
+    - Modal de tela cheia obrigatório *"Termo de Ciência, Responsabilidade e Uso Legítimo"* com os artigos da LGPD (Lei nº 13.709/2018) e botão *"Prosseguir"*.
+    - Sequenciamento perfeito no Dashboard: o modal de desconto/WhatsApp (`PromoModal`) aguarda o aceite formal do termo antes de ser exibido.
+  - **Persistência no Banco de Dados:** Coluna `hasAcceptedTerms` adicionada ao modelo `User` e registrada no PostgreSQL.
+
 ## [1.2.6] - 2026-10-26
 ### Otimizado & Resiliência
 - **Resiliência e Aumento de Timeout do Provedor DirectData (`direct-data.ts`):**

@@ -8,9 +8,10 @@ import { X, Gift, Phone, Sparkles } from 'lucide-react';
 interface PromoModalProps {
   hasSeenPopup: boolean;
   userWhatsapp: string | null;
+  canShow?: boolean;
 }
 
-export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalProps) {
+export default function PromoModal({ hasSeenPopup, userWhatsapp, canShow = true }: PromoModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [whatsapp, setWhatsapp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -34,15 +35,15 @@ export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalPro
   };
 
   useEffect(() => {
-    // Só abre o modal se ele nunca tiver visto o popup E não tiver WhatsApp cadastrado
-    if (!hasSeenPopup && !userWhatsapp) {
-      // Pequeno delay para a página carregar
+    // Só abre o modal se ele nunca tiver visto o popup E não tiver WhatsApp cadastrado E estiver liberado (ex: termo já aceito)
+    if (!hasSeenPopup && !userWhatsapp && canShow) {
+      // Delay de 1.5s para transição suave
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [hasSeenPopup, userWhatsapp]);
+  }, [hasSeenPopup, userWhatsapp, canShow]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,14 +135,14 @@ export default function PromoModal({ hasSeenPopup, userWhatsapp }: PromoModalPro
               <button
                 type="button"
                 onClick={handleClose}
-                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center justify-center active:scale-95"
+                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center justify-center active:scale-95 cursor-pointer"
               >
                 Agora Não
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50 flex items-center justify-center active:scale-95"
+                className="w-full sm:flex-1 min-h-[44px] py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50 flex items-center justify-center active:scale-95 cursor-pointer"
               >
                 {loading ? 'Cadastrando...' : 'Quero Desconto!'}
               </button>

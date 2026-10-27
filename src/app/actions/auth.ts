@@ -58,6 +58,12 @@ export async function register(prevState: any, formData: FormData) {
   }
 
   const { name, email, password } = result.data;
+  const acceptTerms = formData.get('acceptTerms');
+  const acceptPrivacy = formData.get('acceptPrivacy');
+
+  if (!acceptTerms || !acceptPrivacy) {
+    return { error: 'É obrigatório aceitar os Termos de Uso e a Política de Privacidade para prosseguir.' };
+  }
 
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
@@ -110,6 +116,7 @@ export async function register(prevState: any, formData: FormData) {
         passwordHash,
         balance: 0.0, // Saldo inicial zerado
         hasSeenPromoPopup: false, // Força a exibição do popup logo após o cadastro
+        hasAcceptedTerms: false, // Força a exibição do Termo de Ciência no primeiro login
         trafficSource,
         referralCode,
         referredById,
