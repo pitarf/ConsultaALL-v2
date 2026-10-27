@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useEffect, useState, Suspense } from 'react';
-import { register, loginWithGoogle } from '@/app/actions/auth';
+import { register, registerWithGoogle } from '@/app/actions/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -35,12 +35,25 @@ function RegisterContent() {
   }, [state, router, searchParams]);
 
   /**
-   * Valida o preenchimento obrigatório dos checkboxes antes do envio
+   * Valida o preenchimento obrigatório dos checkboxes antes do envio tradicional
    */
   const handleClientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!aceitouTermos || !aceitouPrivacidade) {
       e.preventDefault();
+      setShowTerms(true);
       toast.error('Por favor, marque as caixas aceitando os Termos de Uso e a Política de Privacidade.');
+      return;
+    }
+  };
+
+  /**
+   * Valida o aceite obrigatório antes de prosseguir para o cadastro com Google
+   */
+  const handleGoogleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!aceitouTermos || !aceitouPrivacidade) {
+      e.preventDefault();
+      setShowTerms(true);
+      toast.error('Para criar sua conta com o Google, você deve aceitar os Termos de Uso e a Política de Privacidade.');
       return;
     }
   };
@@ -209,7 +222,9 @@ function RegisterContent() {
             </div>
           </div>
 
-          <form action={loginWithGoogle} className="mt-4">
+          <form action={registerWithGoogle} onSubmit={handleGoogleSubmit} className="mt-4">
+            <input type="hidden" name="acceptTerms" value={aceitouTermos ? "on" : ""} />
+            <input type="hidden" name="acceptPrivacy" value={aceitouPrivacidade ? "on" : ""} />
             <button
               type="submit"
               className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 rounded-xl transition-all shadow-sm cursor-pointer border border-slate-200 min-h-[48px]"

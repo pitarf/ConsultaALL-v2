@@ -4,13 +4,17 @@ Todas as mudanças notáveis para este projeto serão documentadas neste arquivo
 
 ## [1.2.7] - 2026-10-27
 ### Adicionado & Conformidade Jurídica
-- **Termos de Uso, Responsabilidade e Conformidade LGPD no Cadastro e Dashboard:**
+- **Termos de Uso, Responsabilidade e Bloqueio Obrigatório de Cadastro (Email & Google):**
+  - **Bloqueio Rigoroso de Cadastro Sem Aceite:**
+    - Cadastro tradicional (Email/Senha): Bloqueado no frontend e validado com rejeição na Server Action `register` caso as caixas de aceite não estejam marcadas.
+    - Cadastro com Google OAuth: O botão "Google" na tela de cadastro valida o aceite no client-side (`handleGoogleSubmit`) abrindo o accordion dos termos e disparando notificação Toast caso desmarcado.
+    - Blindagem no Backend do Google OAuth (`registerWithGoogle` & callback): Emissão de cookie seguro temporário de consentimento. Caso uma tentativa de criação de conta chegue ao callback sem o consentimento dos termos, a criação do usuário é sumariamente recusada e o visitante é redirecionado para `/cadastro?error=Voce_deve_aceitar_os_Termos_de_Uso_e_Privacidade_para_criar_sua_conta`. Usuários já existentes continuam com login regular e sem atrito.
   - **Formulário de Cadastro (`/cadastro`):**
     - Adicionado o título interativo colapsável *"Termos de Uso e Responsabilidade"* com chevron animado, revelando os compromissos de uso legítimo e proibição de atividades ilícitas.
-    - Inclusão dos 2 checkboxes obrigatórios sempre visíveis: *"Li e aceito os Termos de Uso e as regras de utilização responsável."* e *"Declaro ter tomado conhecimento da Política de Privacidade."*, validados tanto no frontend quanto na Server Action (`auth.ts`).
+    - Inclusão dos 2 checkboxes obrigatórios sempre visíveis: *"Li e aceito os Termos de Uso e as regras de utilização responsável."* e *"Declaro ter tomado conhecimento da Política de Privacidade."*.
   - **Pop-up Pós-Cadastro (`TermoCienciaModal`):**
     - Modal de tela cheia obrigatório *"Termo de Ciência, Responsabilidade e Uso Legítimo"* com os artigos da LGPD (Lei nº 13.709/2018) e botão *"Prosseguir"*.
-    - Sequenciamento perfeito no Dashboard: o modal de desconto/WhatsApp (`PromoModal`) aguarda o aceite formal do termo antes de ser exibido.
+    - Sequenciamento perfeito no Dashboard: o modal de desconto/WhatsApp (`PromoModal`) só tem permissão de abertura após o aceite formal do termo LGPD.
   - **Persistência no Banco de Dados:** Coluna `hasAcceptedTerms` adicionada ao modelo `User` e registrada no PostgreSQL.
 
 ## [1.2.6] - 2026-10-26

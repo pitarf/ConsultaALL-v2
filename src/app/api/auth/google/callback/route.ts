@@ -78,6 +78,17 @@ export async function GET(request: NextRequest) {
 
     if (!user) {
       const cookieStore = await cookies();
+      const hasAcceptedConsent = cookieStore.get('accepted_terms_consent')?.value;
+
+      // Bloqueia criacao de conta nova se nao houve aceite previo dos termos no /cadastro
+      if (!hasAcceptedConsent) {
+        console.warn(`Tentativa de criação de conta Google sem consentimento de termos para ${email}`);
+        return NextResponse.redirect(`${appUrl}/cadastro?error=Voce_deve_aceitar_os_Termos_de_Uso_e_Privacidade_para_criar_sua_conta`);
+      }
+
+      // Remove o cookie temporario de consentimento
+      cookieStore.delete('accepted_terms_consent');
+
       const trafficSource = cookieStore.get('trafficSource')?.value || 'orgânico';
 
       // Captura o cookie de indicação (referral)
@@ -118,6 +129,7 @@ export async function GET(request: NextRequest) {
           name: name || 'Usuário Google',
           passwordHash: null, // Sem senha
           balance: 0.0,
+          hasAcceptedTerms: false, // Forca exibicao do termo LGPD
           hasSeenPromoPopup: false, // Força a exibição do popup logo após o cadastro
           trafficSource,
           referralCode,

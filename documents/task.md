@@ -188,9 +188,13 @@
 - [x] **Consultas Veiculares Protegidas:** Timers estendidos para bases Senatran (10s) e Detran (8s).
 
 
-## SPLIT 15: Termos de Uso e Termo de Ciência LGPD Pós-Cadastro (✅ CONCLUÍDO)
-*Este split foca na conformidade jurídica LGPD, termos de uso obrigatórios e fluxo de onboarding com termos de ciência e responsabilidade.*
+## SPLIT 15: Termos de Uso, Bloqueio Obrigatório e Termo de Ciência LGPD (✅ CONCLUÍDO)
+*Este split foca na conformidade jurídica LGPD, termos de uso obrigatórios, bloqueio estrito de cadastro (Email e Google) e fluxo de onboarding com termos de ciência e responsabilidade.*
 - [x] **Accordion e Checkboxes no Cadastro:** Inclusão de "Termos de Uso e Responsabilidade" expansível com texto de vedação de ilícitos e 2 checkboxes obrigatórios validados no client e no server.
+- [x] **Bloqueio Rigoroso no Cadastro com Google:**
+  - O botão de cadastro com o Google intercepta cliques sem o aceite dos termos, alertando o usuário via Toast e expandindo o accordion.
+  - Server Action `registerWithGoogle` valida o formulário e emite cookie seguro de consentimento.
+  - Callback OAuth `/api/auth/google/callback` rejeita a criação de contas novas sem o consentimento dos termos e redireciona para `/cadastro`. Contas já existentes continuam acessando o login normalmente.
 - [x] **Modal de Ciência LGPD no Dashboard:** Criação do `TermoCienciaModal` com os 7 parágrafos jurídicos e botão "Prosseguir".
-- [x] **Orquestração com Modal de WhatsApp:** Bloqueio do `PromoModal` até a assinatura/confirmação formal do termo de responsabilidade.
+- [x] **Orquestração com Modal de WhatsApp:** Bloqueio do `PromoModal` até a confirmação formal do termo de responsabilidade.
 - [x] **Migração de Banco de Dados:** Campo `hasAcceptedTerms` registrado no Prisma e aplicado na tabela `User` do PostgreSQL na VPS.

@@ -136,6 +136,39 @@ export async function logout() {
   redirect('/login');
 }
 
+/**
+ * Inicia o fluxo de cadastro com o Google exigindo previamente o aceite dos Termos e Privacidade.
+ */
+export async function registerWithGoogle(formData: FormData) {
+  const acceptTerms = formData.get('acceptTerms');
+  const acceptPrivacy = formData.get('acceptPrivacy');
+
+  if (!acceptTerms || !acceptPrivacy) {
+    redirect('/cadastro?error=Voce_deve_aceitar_os_Termos_de_Uso_e_a_Politica_de_Privacidade');
+  }
+
+  const cookieStore = await cookies();
+  cookieStore.set('accepted_terms_consent', 'true', {
+    maxAge: 15 * 60, // 15 minutos
+    path: '/',
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const redirectUri = `${appUrl}/api/auth/google/callback`;
+
+  if (!clientId) {
+    console.error('Google OAuth não configurado no .env');
+    redirect('/cadastro?error=O_Cadastro_com_Google_nao_esta_configurado');
+  }
+
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=openid email profile&prompt=select_account`;
+  
+  redirect(url);
+}
+
 export async function loginWithGoogle() {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
