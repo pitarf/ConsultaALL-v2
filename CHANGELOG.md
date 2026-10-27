@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.6] - 2026-10-26
+### Otimizado & Resiliência
+- **Resiliência e Aumento de Timeout do Provedor DirectData (`direct-data.ts`):**
+  - **Timeout Global Ampliado:** Timeout do cliente Axios (`axiosV3`) ampliado de 8s (8000ms) para 18s (18000ms), prevenindo quedas prematuras por timeout em horários de pico ou buscas multi-módulos.
+  - **Processos Judiciais Resiliente:** Timeout de `consultaProcessos` estendido de 5s para 16s, garantindo tempo adequado para varredura completa de tribunais estaduais, federais e superiores.
+  - **Consultas Veiculares Protegidas:** Ajuste dos timeouts de `ConsultaVeicular` (Senatran para 10s) e bases estaduais/Detrans (para 8s) com fallback acelerado.
+
 ## [1.2.5] - 2026-10-15
 ### Adicionado & Atualizado
 - **Google Tag & Google Analytics 4 (`gtag.js`):**

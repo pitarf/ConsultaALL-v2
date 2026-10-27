@@ -36,10 +36,10 @@ async function getDirectDataConfig() {
   return { token, baseUrl, v3Url };
 }
 
-// Agente para ignorar erros de SSL na V3 com timeout global seguro de 8s (evita travamentos infinitos)
+// Agente para ignorar erros de SSL na V3 com timeout global resiliente de 18s (evita falhas prematuras em horários de pico)
 const axiosV3 = axios.create({
   httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-  timeout: 8000
+  timeout: 18000
 });
 
 // Helper para sanitizar mensagens de erro da API evitando expor termos técnicos ou JSONs brutos
@@ -110,13 +110,13 @@ export async function consultaVeicular(placa: string, selectedModules: string[] 
 
   try {
     const promises: Promise<any>[] = [
-      fetchEndpoint('ConsultaVeicular', 6000) // 1. Rota Nacional oficial (Senatran) - Rápida (~1s)
+      fetchEndpoint('ConsultaVeicular', 10000) // 1. Rota Nacional oficial (Senatran)
     ];
 
     // 2. Se o usuário solicitou débitos/multas, busca também a base Estadual
-    // Timeout de 3.5s para não travar o cliente caso o Detran estadual esteja com lentidão
+    // Timeout resiliente de 8s para suportar eventuais lentidões dos Detrans estaduais
     if (selectedModules.includes('veiculo_debitos')) {
-      promises.push(fetchEndpoint('ConsultaVeicularEstadual', 3500));
+      promises.push(fetchEndpoint('ConsultaVeicularEstadual', 8000));
     }
 
     const [nacionalRes, estadualRes] = await Promise.all(promises);
@@ -126,9 +126,9 @@ export async function consultaVeicular(placa: string, selectedModules: string[] 
     // Fallback rápido: se Nacional falhar, tenta Gravame (mais rápido e estável)
     let gravame: any = null;
     if (!nacional) {
-      gravame = await fetchEndpoint('ConsultaVeicularGravame', 4000);
+      gravame = await fetchEndpoint('ConsultaVeicularGravame', 7000);
       if (!gravame && !estadual) {
-        estadual = await fetchEndpoint('ConsultaVeicularEstadual', 4000);
+        estadual = await fetchEndpoint('ConsultaVeicularEstadual', 7000);
       }
     }
 
@@ -477,7 +477,7 @@ export async function consultaProcessos(cpfOrCnpj: string) {
   const url = `${v3Url}/api/ProcessosJudiciaisCompleta?TOKEN=${token}&${paramName}=${cleanDoc}`;
 
   try {
-    const response = await axiosV3.get(url, { timeout: 5000 });
+    const response = await axiosV3.get(url, { timeout: 16000 });
     const res = response.data;
 
     if (res.retorno) {

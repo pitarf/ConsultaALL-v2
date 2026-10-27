@@ -180,3 +180,9 @@
 *Este split foca na ativação da tag oficial do Google Analytics 4 para métricas e rastreamento de acessos e eventos.*
 - [x] **Instalação da Tag Oficial:** Injeção do script `https://www.googletagmanager.com/gtag/js?id=G-DBX6TJE825` e inicialização do `gtag` com `afterInteractive` no layout raiz.
 - [x] **Validação Técnica de Build:** Compilação do Next.js sem avisos ou falhas.
+
+## SPLIT 14: Resiliência de Timeout da DirectData (✅ CONCLUÍDO)
+*Este split foca na prevenção de timeouts prematuros no parceiro DirectData durante horários de pico e consultas pesadas de tribunais.*
+- [x] **Timeout Global do Axios:** Ampliação de 8s (8000ms) para 18s (18000ms) em `direct-data.ts`.
+- [x] **Processos Judiciais Estendido:** Timeout de `consultaProcessos` ampliado de 5s para 16s.
+- [x] **Consultas Veiculares Protegidas:** Timers estendidos para bases Senatran (10s) e Detran (8s).
