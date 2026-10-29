@@ -58,3 +58,9 @@ Cada uma destas páginas explica o funcionamento técnico de cada consulta e a f
 
 ## Visualização por Mês Atual no Dashboard do Administrador
 - **Mês Atual Consolidado:** O filtro rápido do Dashboard de Administração agora apresenta a opção "Mês Atual", consolidando o faturamento, custos de provedor e volume de cadastros desde o dia 1º do mês corrente até a data de hoje, substituindo a janela flutuante dos últimos 30 dias.
+
+## Uso do Painel Administrativo em Dispositivos Móveis (Celulares)
+O Painel Administrativo conta com adaptação móvel completa:
+- **Gestão de Usuários no Celular:** Visualize clientes em formato de cartões limpos. Cada cartão exibe o saldo em destaque, datas de acesso e botões grandes para ajuste de saldo, validação de depósitos Pix e auditoria.
+- **Aprovação Rápida de Vendas:** As recargas Pix pendentes exibem botões de aprovação em largura total com confirmação instantânea.
+- **Auditoria de Custos e Gráficos:** Gráficos e resumos financeiros adaptam-se dinamicamente sem rolagem lateral desconfortável.

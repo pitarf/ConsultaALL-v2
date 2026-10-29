@@ -43,6 +43,8 @@
 - [x] **Metadata Inteligente:** SEO Dinâmico gerado automaticamente a partir do banco de dados.
 
 ### 🔐 Segurança e Gestão Admin (✅ CONCLUÍDO)
+- [x] **Painel Administrativo 100% Responsivo & Mobile-First:** Refatoração de todas as tabelas e métricas do Admin (/admin, /admin/usuarios, /admin/vendas, /admin/custos, /admin/bloqueios) com padrão dual (cards móveis ergonômicos + touch targets 44px+ no mobile e tabelas completas no desktop) sem overflow horizontal.
+
 - [x] **Gestão de Preços:** Aba administrativa para alterar valores de cada módulo em tempo real.
 - [x] **Checkpoint de Segurança Admin:** Senha secundária mestra (@212121@) no ambiente (.env).
 - [x] **Proteção Anti-Brute Force:** Limite de 3 tentativas na senha admin com bloqueio automático de 1h.

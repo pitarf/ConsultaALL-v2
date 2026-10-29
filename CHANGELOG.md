@@ -2,6 +2,17 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.9] - 2026-10-29
+### Aprimorado & Responsividade Mobile-First (Painel Administrativo)
+- **Refatoração Completa do Painel Administrativo (`/admin`):**
+  - **Padrão Dual (Desktop Table / Mobile Touch Cards):**
+    - `src/app/admin/usuarios/UserTableClient.tsx`: No desktop mantém tabela densa; no mobile (`md:hidden`) renderiza cards verticais elegantes com avatar, saldo em destaque, badges de cargo e status, datas formatadas e barra de ações touch (`min-h-[44px]`) para ajuste de saldo, validação Pix, histórico de auditoria, promoção de cargo e banimento.
+    - `src/app/admin/vendas/VendasClient.tsx`: Cards móveis com valores Pix destacados, status com badges coloridas, cópia instantânea de ID PushinPay com feedback visual e botão "Aprovar Pix Manualmente" full-width com altura mínima de 44px.
+    - `src/app/admin/custos/CustosClient.tsx`: Breakdown por dia e histórico detalhado adaptados para cards móveis ergonômicos com exibição de faturamento, custo do provedor e lucro líquido.
+    - `src/app/admin/bloqueios/BloqueiosClient.tsx`: Formulário e lista de bloqueios LGPD com botões e badges de tipo com alvos touch adequados e confirmação de exclusão.
+    - `src/app/admin/page.tsx` & `src/components/admin/PerformanceChart.tsx`: Cards de métricas com paddings adaptativos `p-4 sm:p-6 lg:p-8`, seletor de períodos com scroll horizontal suave (`overflow-x-auto`) e gráfico de desempenho sem estouro lateral em telas de 360px a 414px.
+  - **Acessibilidade e Usabilidade:** Eliminação de qualquer barra de rolagem horizontal indesejada no corpo do painel, garantindo touch targets de no mínimo 44px em todos os controles interativos.
+
 ## [1.2.8] - 2026-10-29
 ### Aprimorado & Métricas
 - **Ajuste do Filtro de Período para Mês Atual no Dashboard Administrativo (`/admin`):**

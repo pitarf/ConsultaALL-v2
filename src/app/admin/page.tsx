@@ -5,6 +5,10 @@ import PerformanceChart from '@/components/admin/PerformanceChart';
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * Página principal do Dashboard Administrativo.
+ * Totalmente reformulada com visualização mobile-first (dual-view cards/tabelas e touch targets confortáveis).
+ */
 export default async function AdminDashboardPage({
   searchParams,
 }: {
@@ -35,17 +39,17 @@ export default async function AdminDashboardPage({
       default: return 'Período';
     }
   };
-   const newUsersCount = advanced.chartData.reduce((sum, d) => sum + d.users, 0);
+  const newUsersCount = advanced.chartData.reduce((sum, d) => sum + d.users, 0);
 
   return (
-    <div className="max-w-6xl mx-auto pb-20 space-y-8">
+    <div className="max-w-6xl mx-auto pb-16 sm:pb-20 space-y-6 sm:space-y-8 overflow-x-hidden min-w-0">
       {/* 1. Header Banner */}
-      <div className="bg-gradient-to-r from-[#0a1e17] to-[#0f2e24] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-emerald-900/30 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden min-w-0">
+      <div className="bg-gradient-to-r from-[#0a1e17] to-[#0f2e24] text-white p-4 sm:p-6 lg:p-8 rounded-3xl shadow-lg border border-emerald-900/30 flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden min-w-0">
         <div className="space-y-1 min-w-0">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
             Dashboard Administrativo
           </h1>
-          <p className="text-white/70 text-sm font-medium">
+          <p className="text-white/70 text-xs sm:text-sm font-medium">
             Visão panorâmica consolidada para o período: <span className="font-bold text-emerald-400">{getPeriodLabel(currentPeriod)}</span>.
           </p>
         </div>
@@ -54,10 +58,10 @@ export default async function AdminDashboardPage({
         </div>
       </div>
 
-      {/* 3. Grid de Métricas de Hoje vs Período */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* 2. Grid de Métricas de Hoje vs Período */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {/* MÉTRICAS DE HOJE */}
-        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-6 text-left space-y-6">
+        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 text-left space-y-5">
           <h2 className="text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Métricas de Hoje
@@ -98,7 +102,7 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* MÉTRICAS DO PERÍODO */}
-        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-6 text-left space-y-6">
+        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 text-left space-y-5">
           <h2 className="text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
             Métricas do Período
@@ -129,10 +133,10 @@ export default async function AdminDashboardPage({
         </div>
       </div>
 
-      {/* 4. Banner de Fluxo de Caixa Geral */}
-      <div className="bg-[#0a1e17] dark:bg-[#061510] text-white p-6 md:p-8 rounded-3xl border border-emerald-900/30 shadow-lg text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
+      {/* 3. Banner de Fluxo de Caixa Geral */}
+      <div className="bg-[#0a1e17] dark:bg-[#061510] text-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-emerald-900/30 shadow-lg text-left flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden min-w-0">
         <div className="space-y-1">
-          <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+          <h3 className="text-xs sm:text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
             <span className="text-emerald-500">$</span>
             Fluxo de Caixa Geral (Pix + Operação)
           </h3>
@@ -140,32 +144,32 @@ export default async function AdminDashboardPage({
             Faturamento bruto de depósitos Pix menos taxas do gateway Pix e custo total de consumo de APIs da DirectData.
           </p>
         </div>
-        <div className="grid grid-cols-2 sm:flex sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8 md:gap-12 mt-6 md:mt-0 w-full md:w-auto min-w-0">
+        <div className="grid grid-cols-2 sm:flex sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-8 md:gap-12 mt-2 md:mt-0 w-full md:w-auto min-w-0">
           <div className="min-w-0">
             <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Depósitos Pix (Bruto)</p>
-            <p className="text-lg md:text-xl font-bold mt-1">
+            <p className="text-base sm:text-lg md:text-xl font-bold mt-1">
               R$ {advanced.monthlyRevenue.toFixed(2).replace('.', ',')}
             </p>
           </div>
           <div className="min-w-0">
             <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest text-red-300">Taxas Pix Descontadas</p>
-            <p className="text-lg md:text-xl font-bold mt-1 text-red-400">
+            <p className="text-base sm:text-lg md:text-xl font-bold mt-1 text-red-400">
               -R$ {advanced.monthlyPixFees.toFixed(2).replace('.', ',')}
             </p>
           </div>
           <div className="col-span-2 sm:col-span-1 min-w-0">
             <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest text-emerald-300">Lucro Real Operacional</p>
-            <p className="text-lg md:text-xl font-bold mt-1 text-emerald-400">
+            <p className="text-base sm:text-lg md:text-xl font-bold mt-1 text-emerald-400">
               R$ {advanced.monthlyProfit.toFixed(2).replace('.', ',')}
             </p>
           </div>
         </div>
       </div>
 
-      {/* 5. 5 Cards do Período */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      {/* 4. 5 Cards do Período */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
         {/* Card 1: Faturamento */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
+        <div className="glass-panel p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <DollarSign className="w-4 h-4" />
           </div>
@@ -179,7 +183,7 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 2: Custo da API */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-red-500/25 transition-all">
+        <div className="glass-panel p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-red-500/25 transition-all">
           <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center mb-4">
             <Activity className="w-4 h-4" />
           </div>
@@ -193,7 +197,7 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 3: Lucro Real */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
+        <div className="glass-panel p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <TrendingUp className="w-4 h-4" />
           </div>
@@ -207,7 +211,7 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 4: ROI Comercial */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-purple-500/25 transition-all">
+        <div className="glass-panel p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-purple-500/25 transition-all">
           <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center mb-4">
             <Globe className="w-4 h-4" />
           </div>
@@ -221,7 +225,7 @@ export default async function AdminDashboardPage({
         </div>
 
         {/* Card 5: Novos Cadastros */}
-        <div className="glass-panel p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all col-span-2 md:col-span-1">
+        <div className="glass-panel p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm text-left flex flex-col justify-between hover:border-emerald-500/25 transition-all col-span-1 sm:col-span-2 lg:col-span-1">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
             <Users className="w-4 h-4" />
           </div>
@@ -235,16 +239,17 @@ export default async function AdminDashboardPage({
         </div>
       </div>       
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-in fade-in duration-700">
-        {/* Gráfico de Faturamento Diário */}
-        <div className="lg:col-span-2">
+      {/* 5. Gráfico + Top Módulos */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 animate-in fade-in duration-700 min-w-0">
+        {/* Gráfico de Desempenho */}
+        <div className="lg:col-span-2 min-w-0">
           <PerformanceChart data={advanced.chartData} />
         </div>
 
         {/* Top Serviços */}
-        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-8">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <Activity className="w-5 h-5 text-primary" />
+        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 min-w-0">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+            <Activity className="w-5 h-5 text-primary shrink-0" />
             Módulos mais Rentáveis
           </h2>
 
@@ -252,8 +257,8 @@ export default async function AdminDashboardPage({
             {metrics.topQueries.map((q, idx) => (
               <div key={idx} className="space-y-2">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="font-bold text-slate-600 dark:text-gray-300 uppercase tracking-tighter">{q.target.split('-')[0]}</span>
-                  <span className="text-xs font-mono text-primary font-bold">{q._count.target} pedidos</span>
+                  <span className="font-bold text-slate-600 dark:text-gray-300 uppercase tracking-tighter truncate mr-2">{q.target.split('-')[0]}</span>
+                  <span className="text-xs font-mono text-primary font-bold shrink-0">{q._count.target} pedidos</span>
                 </div>
                 <div className="w-full h-2 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
                   <div 
@@ -270,15 +275,17 @@ export default async function AdminDashboardPage({
         </div>
       </div>
 
-      {/* SEÇÃO 3: HISTÓRICO DE ÚLTIMOS DEPÓSITOS E CONSULTAS DO DIA */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 animate-in fade-in duration-800">
-        {/* Últimos Depósitos */}
-        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-8">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <DollarSign className="w-5 h-5 text-emerald-500" />
+      {/* 6. HISTÓRICO DE ÚLTIMOS DEPÓSITOS E CONSULTAS DO DIA */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-8 sm:mt-12 animate-in fade-in duration-800 min-w-0">
+        {/* Últimos Depósitos Recebidos (Dual View: Desktop Tabela / Mobile Cards) */}
+        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 min-w-0">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+            <DollarSign className="w-5 h-5 text-emerald-500 shrink-0" />
             Últimos Depósitos Recebidos
           </h2>
-          <div className="overflow-x-auto">
+
+          {/* Versão Desktop: Tabela */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
               <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
                 <tr>
@@ -319,15 +326,55 @@ export default async function AdminDashboardPage({
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile: Cards Informativos */}
+          <div className="md:hidden space-y-3">
+            {metrics.recentSales.map((sale, idx) => (
+              <div 
+                key={idx} 
+                className="p-4 rounded-2xl bg-slate-50/70 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-2.5"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="font-bold text-sm text-slate-800 dark:text-white truncate">
+                      {sale.user?.name || 'Cliente'}
+                    </p>
+                    <p className="text-xs text-slate-400 dark:text-gray-500 truncate">
+                      {sale.user?.email || 'Sem e-mail'}
+                    </p>
+                  </div>
+                  <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-green-500/10 text-green-600 dark:text-green-400">
+                    Sucesso
+                  </span>
+                </div>
+                <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-white/5">
+                  <span className="text-xs text-slate-500 dark:text-gray-400">
+                    {new Date(sale.createdAt).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}{' '}
+                    {new Date(sale.createdAt).toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                  <span className="text-base font-bold text-emerald-600 dark:text-emerald-400">
+                    R$ {sale.amount.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+              </div>
+            ))}
+            {metrics.recentSales.length === 0 && (
+              <p className="text-center py-8 text-slate-400 dark:text-gray-600 text-sm italic">
+                Nenhum depósito recente.
+              </p>
+            )}
+          </div>
         </div>
 
-        {/* Consultas Realizadas Hoje */}
-        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-8">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <Search className="w-5 h-5 text-primary" />
+        {/* Consultas Realizadas Hoje (Dual View: Desktop Tabela / Mobile Cards) */}
+        <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 min-w-0">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+            <Search className="w-5 h-5 text-primary shrink-0" />
             Consultas Realizadas Hoje
           </h2>
-          <div className="overflow-x-auto">
+
+          {/* Versão Desktop: Tabela */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
               <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
                 <tr>
@@ -356,18 +403,43 @@ export default async function AdminDashboardPage({
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile: Cards */}
+          <div className="md:hidden space-y-2.5">
+            {metrics.todayQueriesList.map((q, idx) => (
+              <div 
+                key={idx}
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50/70 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 gap-3"
+              >
+                <span className="font-bold text-xs sm:text-sm text-slate-800 dark:text-white uppercase tracking-tight truncate">
+                  {q.target.replace(/-/g, ' ')}
+                </span>
+                <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-xl text-xs font-bold font-mono bg-primary/10 text-primary">
+                  {q.count} {q.count === 1 ? 'consulta' : 'consultas'}
+                </span>
+              </div>
+            ))}
+            {metrics.todayQueriesList.length === 0 && (
+              <p className="text-center py-8 text-slate-400 dark:text-gray-600 text-sm italic">
+                Nenhuma consulta realizada hoje.
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Tabela de Atribuição por Origem de Tráfego (UTMs) */}
-      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-8 mt-12 animate-in fade-in duration-1000">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-          <Globe className="w-5 h-5 text-primary" />
+      {/* 7. Tabela de Atribuição por Origem de Tráfego (Dual View: Desktop Tabela / Mobile Cards) */}
+      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 lg:p-8 mt-8 sm:mt-12 animate-in fade-in duration-1000 min-w-0">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+          <Globe className="w-5 h-5 text-primary shrink-0" />
           Atribuição de Tráfego (Canais & UTMs)
         </h2>
-        <p className="text-sm text-slate-500 dark:text-gray-400 mb-6">Acompanhe a origem dos cadastros, o faturamento gerado por cada canal e o retorno sobre investimento (ROI).</p>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mb-6">
+          Acompanhe a origem dos cadastros, o faturamento gerado por cada canal e o retorno sobre investimento (ROI).
+        </p>
         
-        <div className="overflow-x-auto">
+        {/* Versão Desktop: Tabela */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
             <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
               <tr>
@@ -417,6 +489,59 @@ export default async function AdminDashboardPage({
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Versão Mobile: Cards Informativos */}
+        <div className="md:hidden space-y-3">
+          {advanced.attributionTable.map((row, idx) => (
+            <div 
+              key={idx}
+              className="p-4 rounded-2xl bg-slate-50/70 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 space-y-3"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-sm sm:text-base text-slate-800 dark:text-white capitalize truncate">
+                  {row.source}
+                </span>
+                <span className={`shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                  row.roi > 0 
+                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
+                    : 'bg-red-500/10 text-red-600 dark:text-red-400'
+                }`}>
+                  ROI: {row.roi > 0 ? `+${row.roi}%` : `${row.roi}%`}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-100 dark:border-white/5">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-gray-500 block">Cadastros</span>
+                  <span className="font-semibold text-slate-800 dark:text-white">{row.usersCount}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-gray-500 block">Faturamento</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                    R$ {row.faturamento.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-gray-500 block">Custos</span>
+                  <span className="font-medium text-red-500">
+                    R$ {row.custos.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-gray-500 block">Lucro Líquido</span>
+                  <span className="font-bold text-slate-900 dark:text-white">
+                    R$ {row.lucro.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+          {advanced.attributionTable.length === 0 && (
+            <p className="text-center py-8 text-slate-400 dark:text-gray-600 text-sm italic">
+              Nenhum tráfego atribuído registrado.
+            </p>
+          )}
         </div>
       </div>
     </div>

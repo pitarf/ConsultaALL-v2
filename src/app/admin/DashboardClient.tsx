@@ -18,6 +18,10 @@ interface Props {
   initialEnd?: string;
 }
 
+/**
+ * Componente cliente para controle de filtros temporais do Dashboard Administrativo.
+ * Otimizado para telas mobile (touch targets >= 44px e scroll horizontal suave sem quebras).
+ */
 export default function DashboardClient({ currentPeriod, initialStart, initialEnd }: Props) {
   const router = useRouter();
   const [showDatePicker, setShowDatePicker] = useState(currentPeriod === 'custom');
@@ -32,9 +36,9 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-      {/* Filtros Rápidos */}
-      <div className="flex items-center bg-black/20 dark:bg-black/35 p-1 rounded-2xl border border-white/10 shadow-inner gap-1 overflow-x-auto no-scrollbar w-full max-w-full">
+    <div className="flex flex-col items-stretch gap-3 w-full">
+      {/* Barra de Filtros Rápidos com rolagem suave horizontal e touch target mínimo de 44px */}
+      <div className="flex items-center bg-black/25 dark:bg-black/40 p-1.5 rounded-2xl border border-white/10 shadow-inner gap-1.5 overflow-x-auto flex-nowrap scrollbar-none w-full max-w-full">
         {PERIODS.map((p) => {
           const active = currentPeriod === p.value;
           return (
@@ -45,10 +49,10 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
                 setShowDatePicker(false);
                 router.push(`/admin?period=${p.value}`);
               }}
-              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
+              className={`min-h-[44px] px-3.5 sm:px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap inline-flex items-center justify-center shrink-0 active:scale-95 ${
                 active
                   ? 'bg-emerald-600 text-white shadow-md'
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
+                  : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
             >
               {p.label}
@@ -58,45 +62,48 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
         <button
           type="button"
           onClick={() => setShowDatePicker(!showDatePicker)}
-          className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${
+          className={`min-h-[44px] px-3.5 sm:px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap inline-flex items-center justify-center gap-1.5 shrink-0 active:scale-95 ${
             currentPeriod === 'custom'
               ? 'bg-emerald-600 text-white shadow-md'
-              : 'text-white/70 hover:text-white hover:bg-white/5'
+              : 'text-white/70 hover:text-white hover:bg-white/10'
           }`}
         >
-          <Calendar className="w-3.5 h-3.5" />
-          Filtrar Data
+          <Calendar className="w-3.5 h-3.5 shrink-0" />
+          <span>Filtrar Data</span>
         </button>
       </div>
 
-      {/* Inputs de Data (Colapsável) */}
+      {/* Formulário de Período Customizado Responsivo */}
       {showDatePicker && (
-        <form onSubmit={applyCustomFilter} className="flex flex-row flex-wrap items-center gap-2 bg-slate-800/80 dark:bg-card border border-white/10 rounded-2xl p-2 animate-in fade-in slide-in-from-top-1 duration-200">
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-bold text-white/50 px-1">De:</span>
+        <form 
+          onSubmit={applyCustomFilter} 
+          className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 bg-slate-900/90 dark:bg-card border border-white/10 rounded-2xl p-3 animate-in fade-in slide-in-from-top-1 duration-200"
+        >
+          <div className="flex items-center gap-1.5 flex-1 min-w-[130px]">
+            <span className="text-[10px] font-bold text-white/60 shrink-0">De:</span>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-emerald-500"
+              className="w-full min-h-[44px] bg-black/40 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-emerald-500"
             />
           </div>
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-bold text-white/50 px-1">Até:</span>
+          <div className="flex items-center gap-1.5 flex-1 min-w-[130px]">
+            <span className="text-[10px] font-bold text-white/60 shrink-0">Até:</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-emerald-500"
+              className="w-full min-h-[44px] bg-black/40 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-emerald-500"
             />
           </div>
           <button
             type="submit"
-            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1 rounded-lg text-xs shadow-md transition-all active:scale-95"
+            className="min-h-[44px] bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs shadow-md transition-all active:scale-95 inline-flex items-center justify-center shrink-0"
           >
-            OK
+            Aplicar
           </button>
         </form>
       )}

@@ -148,3 +148,9 @@ Para garantir que nenhuma consulta trave o frontend em carregamento infinito:
 - **Filtro Padrão Mês Atual:**
   - O parâmetro `period='month'` agrupa e consolida as métricas financeiras desde o primeiro dia do mês corrente às `00:00:00` no fuso horário de Brasília (`America/Sao_Paulo`, UTC-3) até o instante atual.
   - A renderização do gráfico diário preenche sequencialmente todos os dias do mês atual (`daysInMonth`), garantindo alinhamento de escala e plotagem precisa de receitas e cadastros.
+
+## Responsividade Mobile-First no Painel Admin (/admin)
+Todas as telas do painel administrativo seguem o padrão Dual de visualização:
+- **Desktop (`hidden md:block`):** Mantém as tabelas de alta densidade informacional.
+- **Mobile (`md:hidden`):** Converte registros em cards móveis individuais com espaçamento ergonômico, informações organizadas em grids de fácil leitura e botões com alvos touch mínimos de 44px (`min-h-[44px]`).
+- **Containers Fluídos:** Utilização de `p-4 sm:p-6 lg:p-8` e barras de ferramentas com rolagem horizontal (`overflow-x-auto scrollbar-none`) para evitar quebras em telas estreitas (360px a 414px).
