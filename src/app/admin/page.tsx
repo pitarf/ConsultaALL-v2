@@ -22,7 +22,7 @@ export default async function AdminDashboardPage({
     switch (p) {
       case 'today': return 'Hoje';
       case 'week': return 'Últimos 7 Dias';
-      case 'month': return 'Últimos 30 Dias';
+      case 'month': return 'Mês Atual';
       case 'year': return 'Ano Atual';
       case 'all': return 'Histórico Completo';
       case 'custom':

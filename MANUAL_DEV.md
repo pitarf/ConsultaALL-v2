@@ -144,6 +144,7 @@ Para garantir que nenhuma consulta trave o frontend em carregamento infinito:
   - **Desacoplamento em Background:** Logs de auditoria (`SystemLog`), comissões de afiliados e Web Push notifications rodam de forma assíncrona após o commit, sem segurar a resposta HTTP.
   - **Idempotência Instantânea:** Se a transação já constar como `COMPLETED` (por aprovação manual do admin ou retentativa da PushinPay), a rota retorna HTTP 200 de imediato, permitindo que o botão "Reprocessar Webhook" no painel da PushinPay marque o status como verde com sucesso.
 
-
-
-
+### 8. Filtros de Período e Métricas Administrativas (`/admin`)
+- **Filtro Padrão Mês Atual:**
+  - O parâmetro `period='month'` agrupa e consolida as métricas financeiras desde o primeiro dia do mês corrente às `00:00:00` no fuso horário de Brasília (`America/Sao_Paulo`, UTC-3) até o instante atual.
+  - A renderização do gráfico diário preenche sequencialmente todos os dias do mês atual (`daysInMonth`), garantindo alinhamento de escala e plotagem precisa de receitas e cadastros.

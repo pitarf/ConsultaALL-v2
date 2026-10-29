@@ -198,3 +198,9 @@
 - [x] **Modal de Ciência LGPD no Dashboard:** Criação do `TermoCienciaModal` com os 7 parágrafos jurídicos e botão "Prosseguir".
 - [x] **Orquestração com Modal de WhatsApp:** Bloqueio do `PromoModal` até a confirmação formal do termo de responsabilidade.
 - [x] **Migração de Banco de Dados:** Campo `hasAcceptedTerms` registrado no Prisma e aplicado na tabela `User` do PostgreSQL na VPS.
+
+## SPLIT 16: Filtro de Mês Atual no Dashboard Administrativo (✅ CONCLUÍDO)
+*Este split foca na substituição da janela rolante de 30 dias pelo consolidado do mês civil atual no dashboard e relatórios de desempenho.*
+- [x] **Filtros Rápidos (`DashboardClient.tsx`):** Atualização do chip de seleção de período para "Mês Atual".
+- [x] **Identificação de Período (`page.tsx`):** Tradução do cabeçalho da visualização panorâmica para "Mês Atual".
+- [x] **Agregação e Escala (`admin.ts`):** Ajuste de `startDate` para o dia 1 do mês corrente no horário de Brasília (UTC-3) e preenchimento diário de todo o mês no gráfico (`daysInMonth`).

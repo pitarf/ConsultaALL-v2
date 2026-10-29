@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.8] - 2026-10-29
+### Aprimorado & Métricas
+- **Ajuste do Filtro de Período para Mês Atual no Dashboard Administrativo (`/admin`):**
+  - **Substituição de Período:** Substituído o filtro fixo de "30 Dias" pelo filtro "Mês Atual" no seletor de períodos (`DashboardClient.tsx`) e na visualização panorâmica de métricas (`page.tsx`).
+  - **Cálculo Preciso por Horário de Brasília:** A data inicial (`startDate`) passa a considerar o dia 1 do mês corrente às 00:00:00 UTC-3, consolidando faturamento Pix, custos de API e ROI do mês corrente.
+  - **Escala Diária do Gráfico:** O gráfico de desempenho preenche todos os dias do mês atual (do dia 1 até o último dia do mês corrente) sequencialmente com suporte a zeros preenchidos sem quebra de escala.
+
 ## [1.2.7] - 2026-10-27
 ### Adicionado & Conformidade Jurídica
 - **Termos de Uso, Responsabilidade e Bloqueio Obrigatório de Cadastro (Email & Google):**

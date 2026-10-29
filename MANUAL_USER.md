@@ -56,3 +56,5 @@ Na página inicial do site, você encontra atalhos diretos para as páginas expl
 - Consulta por nome
 Cada uma destas páginas explica o funcionamento técnico de cada consulta e a finalidade recomendada para cada busca.
 
+## Visualização por Mês Atual no Dashboard do Administrador
+- **Mês Atual Consolidado:** O filtro rápido do Dashboard de Administração agora apresenta a opção "Mês Atual", consolidando o faturamento, custos de provedor e volume de cadastros desde o dia 1º do mês corrente até a data de hoje, substituindo a janela flutuante dos últimos 30 dias.

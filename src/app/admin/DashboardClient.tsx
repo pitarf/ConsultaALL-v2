@@ -7,7 +7,7 @@ import { Calendar } from 'lucide-react';
 const PERIODS = [
   { value: 'today', label: 'Hoje' },
   { value: 'week', label: '7 Dias' },
-  { value: 'month', label: '30 Dias' },
+  { value: 'month', label: 'Mês Atual' },
   { value: 'year', label: 'Ano' },
   { value: 'all', label: 'Tudo' }
 ];

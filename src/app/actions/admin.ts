@@ -493,9 +493,8 @@ export async function getAdvancedMetrics(period: string = 'month', customStart?:
     startOfBr.setUTCHours(0, 0, 0, 0);
     startDate = new Date(startOfBr.getTime() - BR_OFFSET_MS);
   } else if (period === 'month') {
-    const startOfBr = new Date(nowBr);
-    startOfBr.setUTCDate(nowBr.getUTCDate() - 29);
-    startOfBr.setUTCHours(0, 0, 0, 0);
+    // Início do mês atual (dia 1 do mês corrente às 00:00:00 no horário de Brasília)
+    const startOfBr = new Date(Date.UTC(nowBr.getUTCFullYear(), nowBr.getUTCMonth(), 1, 0, 0, 0, 0));
     startDate = new Date(startOfBr.getTime() - BR_OFFSET_MS);
   } else if (period === 'year') {
     const startOfBr = new Date(nowBr.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
@@ -608,9 +607,12 @@ export async function getAdvancedMetrics(period: string = 'month', customStart?:
       chartMap.set(getLocalDateKey(d), { faturamento: 0, cadastros: 0 });
     }
   } else if (period === 'month') {
-    for (let i = 29; i >= 0; i--) {
-      const d = new Date(nowBr.getTime() - BR_OFFSET_MS);
-      d.setDate(d.getDate() - i);
+    // Preenche com todos os dias do mês atual (do dia 1 até o último dia do mês corrente)
+    const year = nowBr.getUTCFullYear();
+    const month = nowBr.getUTCMonth();
+    const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const d = new Date(Date.UTC(year, month, day, 12, 0, 0));
       chartMap.set(getLocalDateKey(d), { faturamento: 0, cadastros: 0 });
     }
   } else if (period === 'custom' && customStart && customEnd) {
