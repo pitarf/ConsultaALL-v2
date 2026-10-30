@@ -64,3 +64,7 @@ O Painel Administrativo conta com adaptação móvel completa:
 - **Gestão de Usuários no Celular:** Visualize clientes em formato de cartões limpos. Cada cartão exibe o saldo em destaque, datas de acesso e botões grandes para ajuste de saldo, validação de depósitos Pix e auditoria.
 - **Aprovação Rápida de Vendas:** As recargas Pix pendentes exibem botões de aprovação em largura total com confirmação instantânea.
 - **Auditoria de Custos e Gráficos:** Gráficos e resumos financeiros adaptam-se dinamicamente sem rolagem lateral desconfortável.
+
+## Consulta por CPF: Garantia de Dados e Nome da Mãe
+Toda busca efetuada pelo documento CPF traz automaticamente os dados básicos de identificação (Nome completo, CPF formatado, Nome da Mãe, Nome do Pai, Data de Nascimento, Idade, Sexo e Situação Cadastral).
+Caso você também contrate o módulo "Parentes", os nomes da mãe e do pai são incluídos na lista de vínculos familiares para facilitar a conferência.

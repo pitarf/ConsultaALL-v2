@@ -43,6 +43,8 @@
 - [x] **Metadata Inteligente:** SEO Dinâmico gerado automaticamente a partir do banco de dados.
 
 ### 🔐 Segurança e Gestão Admin (✅ CONCLUÍDO)
+- [x] **Enriquecimento de Filiação e Dados Básicos Obrigatórios no CPF:** Resiliência total na busca por CPF garantindo entrega perpétua de Nome da Mãe, filiação e dados civis com fallback automático para Pesquisa Avançada V2 caso a API direta não localize a mãe.
+
 - [x] **Painel Administrativo 100% Responsivo & Mobile-First:** Refatoração de todas as tabelas e métricas do Admin (/admin, /admin/usuarios, /admin/vendas, /admin/custos, /admin/bloqueios) com padrão dual (cards móveis ergonômicos + touch targets 44px+ no mobile e tabelas completas no desktop) sem overflow horizontal.
 
 - [x] **Gestão de Preços:** Aba administrativa para alterar valores de cada módulo em tempo real.

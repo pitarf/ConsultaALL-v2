@@ -506,6 +506,39 @@ export async function consultaCpfPlus(cpf: string, selectedModules: string[] = [
     const res = response.data;
 
     if (res.retorno) {
+      // Se a consulta principal não retornou o nome da mãe, tenta enriquecimento resiliente via Pesquisa Avançada V2
+      if (!res.retorno.nomeMae && res.retorno.nome) {
+        try {
+          const advFilter = await filterNaturalPerson({ fullName: res.retorno.nome });
+          if (advFilter?.success && Array.isArray(advFilter.listFilters) && advFilter.listFilters.length > 0) {
+            const match = advFilter.listFilters.find((c: any) => {
+              const candCpf = (c.cpf || '').replace(/\D/g, '');
+              return candCpf && cleanCpf.includes(candCpf);
+            }) || advFilter.listFilters[0];
+
+            if (match?.id) {
+              const procRes = await processingIds([match.id], `Enriquecimento CPF: ${cleanCpf}`);
+              if (procRes?.success && procRes?.searchUid) {
+                for (let i = 0; i < 5; i++) {
+                  await new Promise(r => setTimeout(r, 1500));
+                  const viewRes = await viewSearch(procRes.searchUid);
+                  const item = viewRes?.viewSearch?.searchItems?.[0];
+                  if (item && [4, 5, 7].includes(item.resultId)) {
+                    const advRaw = item.returnJson?.retorno || item.returnJson || {};
+                    if (advRaw.nomeMae) res.retorno.nomeMae = advRaw.nomeMae;
+                    if (!res.retorno.nomePai && advRaw.nomePai) res.retorno.nomePai = advRaw.nomePai;
+                    if (!res.retorno.dataNascimento && advRaw.dataNascimento) res.retorno.dataNascimento = advRaw.dataNascimento;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+        } catch (enrichErr) {
+          console.warn('Enriquecimento de filiação via Pesquisa Avançada falhou silenciosamente:', enrichErr);
+        }
+      }
+
       const data = transformDirectDataPlus(res.retorno, selectedModules);
       
       // Se selecionou o módulo de processos judiciais, busca em paralelo
@@ -553,7 +586,14 @@ export async function consultaCpfPlus(cpf: string, selectedModules: string[] = [
 
 function transformDirectDataPlus(raw: any, selectedModules: string[]) {
   const result: any = {};
-  if (selectedModules.includes('dados_basicos') || selectedModules.includes('documentos')) {
+  // Dados Pessoais sempre incluídos como base fundamental de identificação civil
+  const deveIncluirDadosPessoais = 
+    selectedModules.length === 0 ||
+    selectedModules.includes('dados_basicos') || 
+    selectedModules.includes('documentos') ||
+    Boolean(raw.nome || raw.cpf);
+
+  if (deveIncluirDadosPessoais) {
     result['Dados_Pessoais'] = {
       nome: raw.nome,
       cpf: raw.cpf,
@@ -561,8 +601,8 @@ function transformDirectDataPlus(raw: any, selectedModules: string[]) {
       data_nascimento: raw.dataNascimento,
       idade: raw.idade,
       signo: raw.signo,
-      nome_mae: raw.nomeMae,
-      nome_pai: raw.nomePai,
+      nome_mae: raw.nomeMae || 'Não informado / Não consta',
+      nome_pai: raw.nomePai || 'Não informado / Não consta',
       situacao_cadastral: raw.situacaoCadastral,
       data_situacao: raw.dataSituacaoCadastral,
       obito: raw.obito
@@ -600,8 +640,20 @@ function transformDirectDataPlus(raw: any, selectedModules: string[]) {
     };
   }
   if (selectedModules.includes('parentes')) {
+    const listaParentes = Array.isArray(raw.parentescos) 
+      ? raw.parentescos.map((p: any) => `${p.nome} (${p.grauParentesco})`) 
+      : [];
+
+    // Garante que o nome da mãe e do pai apareçam com destaque se existirem
+    if (raw.nomeMae && !listaParentes.some((p: string) => p.toLowerCase().includes(raw.nomeMae.toLowerCase()))) {
+      listaParentes.unshift(`${raw.nomeMae} (Mãe)`);
+    }
+    if (raw.nomePai && !listaParentes.some((p: string) => p.toLowerCase().includes(raw.nomePai.toLowerCase()))) {
+      listaParentes.unshift(`${raw.nomePai} (Pai)`);
+    }
+
     result['Vinculos_Familiares'] = {
-      lista: Array.isArray(raw.parentescos) ? raw.parentescos.map((p: any) => `${p.nome} (${p.grauParentesco})`) : []
+      lista: listaParentes
     };
   }
   if (selectedModules.includes('poder_aquisitivo') || selectedModules.includes('dados_trabalhistas')) {
@@ -744,15 +796,22 @@ function transformDirectDataAdvanced(rawResponse: any, selectedModules: string[]
   const result: any = {};
   const raw = rawResponse.retorno || rawResponse;
 
-  if (selectedModules.includes('dados_basicos') || selectedModules.includes('documentos')) {
+  // Dados Pessoais sempre incluídos como base fundamental de identificação civil
+  const deveIncluirDadosPessoais = 
+    selectedModules.length === 0 ||
+    selectedModules.includes('dados_basicos') || 
+    selectedModules.includes('documentos') ||
+    Boolean(raw.nome || raw.nome_completo || raw.cpf);
+
+  if (deveIncluirDadosPessoais) {
     result['Dados_Pessoais'] = {
       nome: raw.nome || raw.nome_completo,
       cpf: raw.cpf,
       rg: raw.rg,
       data_nascimento: raw.dataNascimento || raw.nascimento,
       sexo: raw.sexo,
-      nome_mae: raw.nomeMae || raw.mae,
-      nome_pai: raw.nomePai || raw.pai,
+      nome_mae: raw.nomeMae || raw.mae || 'Não informado / Não consta',
+      nome_pai: raw.nomePai || raw.pai || 'Não informado / Não consta',
       estado_civil: raw.estadoCivil || raw.estado_civil,
       signo: raw.signo,
       situacao_cadastral: raw.situacaoCadastral,
@@ -791,8 +850,21 @@ function transformDirectDataAdvanced(rawResponse: any, selectedModules: string[]
 
   if (selectedModules.includes('parentes')) {
     const parentes = raw.parentescos || raw.parentes;
+    const listaParentes = Array.isArray(parentes) 
+      ? parentes.map((p: any) => `${p.nome} (${p.vinculo || p.grauParentesco || 'Parente'})`) 
+      : [];
+
+    const mae = raw.nomeMae || raw.mae;
+    const pai = raw.nomePai || raw.pai;
+    if (mae && !listaParentes.some((p: string) => p.toLowerCase().includes(mae.toLowerCase()))) {
+      listaParentes.unshift(`${mae} (Mãe)`);
+    }
+    if (pai && !listaParentes.some((p: string) => p.toLowerCase().includes(pai.toLowerCase()))) {
+      listaParentes.unshift(`${pai} (Pai)`);
+    }
+
     result['Vinculos_Familiares'] = {
-      lista: Array.isArray(parentes) ? parentes.map((p: any) => `${p.nome} (${p.vinculo || 'Parente'})`) : []
+      lista: listaParentes
     };
   }
 

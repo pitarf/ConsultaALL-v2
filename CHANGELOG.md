@@ -2,6 +2,14 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.10] - 2026-10-30
+### Aprimorado & Enriquecimento de Filiação (CPF)
+- **Garantia de Filiação e Dados Pessoais na Consulta de CPF:**
+  - **Inclusão Obrigatória de Dados Pessoais:** O bloco `Dados_Pessoais` (Nome completo, CPF, Nome da Mãe, Nome do Pai, Data de Nascimento, Idade, Sexo e Situação Cadastral) agora é SEMPRE retornado nas consultas por CPF, independentemente de quais módulos adicionais o usuário selecionou no checkout.
+  - **Injeção Automática em Vínculos Familiares:** Quando o módulo "Parentes" for solicitado, caso o nome da mãe ou do pai estejam cadastrados na identificação civil mas não constem na lista da Receita, eles são injetados automaticamente no topo de `Vinculos_Familiares` (`Nome da Mãe (Mãe)` e `Nome do Pai (Pai)`).
+  - **Enriquecimento com Pesquisa Avançada V2 (R$ 0,36):** Caso a consulta direta `CadastroPessoaFisicaPlus` retorne o campo de nome da mãe nulo ou vazio, o sistema aciona automaticamente a Pesquisa Avançada V2 (`FilterNaturalPerson` + `ProcessingIds` + `ViewSearch`), realizando a varredura profunda para capturar a filiação materna.
+  - **Pré-seleção no Dashboard:** O formulário do Dashboard (`src/app/dashboard/page.tsx`) já inicia com a opção `dados_basicos` pré-selecionada por padrão.
+
 ## [1.2.9] - 2026-10-29
 ### Aprimorado & Responsividade Mobile-First (Painel Administrativo)
 - **Refatoração Completa do Painel Administrativo (`/admin`):**

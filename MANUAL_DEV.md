@@ -154,3 +154,9 @@ Todas as telas do painel administrativo seguem o padrão Dual de visualização:
 - **Desktop (`hidden md:block`):** Mantém as tabelas de alta densidade informacional.
 - **Mobile (`md:hidden`):** Converte registros em cards móveis individuais com espaçamento ergonômico, informações organizadas em grids de fácil leitura e botões com alvos touch mínimos de 44px (`min-h-[44px]`).
 - **Containers Fluídos:** Utilização de `p-4 sm:p-6 lg:p-8` e barras de ferramentas com rolagem horizontal (`overflow-x-auto scrollbar-none`) para evitar quebras em telas estreitas (360px a 414px).
+
+## Consulta por CPF e Enriquecimento de Filiação Materna
+Ao realizar consultas por CPF via `consultaCpfPlus`:
+- **Entrega Permanente de Identificação:** Os dados de `Dados_Pessoais` (incluindo `nome_mae` e `nome_pai`) são entregues obrigatoriamente no resultado final para que o cliente nunca receba uma busca sem saber quem é a pessoa pesquisada.
+- **Enriquecimento com Pesquisa Avançada V2:** Se a API de CPF retornar o registro sem o nome da mãe preenchido, a função dispara automaticamente um enriquecimento transparente chamando a Pesquisa Avançada V2 (`FilterNaturalPerson` -> `ProcessingIds` -> `ViewSearch`), consolidando os dados mais completos possíveis do titular.
+- **Módulo Parentes:** Se o módulo `parentes` for contratado pelo cliente, a mãe e o pai são garantidos no topo da listagem de parentesco.

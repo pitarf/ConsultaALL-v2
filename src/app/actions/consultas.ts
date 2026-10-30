@@ -65,13 +65,19 @@ export async function realizarConsulta(
     }
   }
 
-  if (!selectedModules || selectedModules.length === 0) {
+  // Para consulta por CPF, garante que 'dados_basicos' esteja sempre presente nos módulos para identificação civil
+  let effectiveModules = [...selectedModules];
+  if (target === 'cpf' && !effectiveModules.includes('dados_basicos')) {
+    effectiveModules = ['dados_basicos', ...effectiveModules];
+  }
+
+  if (!effectiveModules || effectiveModules.length === 0) {
     return { error: 'Nenhum conjunto de dados selecionado.' };
   }
 
   // Busca os preços dinamicos no banco
   const prices = await prisma.modulePricing.findMany({
-    where: { id: { in: selectedModules } }
+    where: { id: { in: effectiveModules } }
   });
 
   if (prices.length === 0) {
@@ -330,7 +336,7 @@ export async function realizarConsulta(
 
       const executeApi = async () => {
         if (target === 'cpf') {
-          return await consultaCpfPlus(cleanQuery, selectedModules);
+          return await consultaCpfPlus(cleanQuery, effectiveModules);
         } else if (target === 'cnpj') {
           return await consultaCnpjPlus(cleanQuery, selectedModules);
         } else if (target === 'placa') {

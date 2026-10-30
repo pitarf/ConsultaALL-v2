@@ -58,7 +58,7 @@ export default function DashboardPage() {
   const [modules, setModules] = useState(INITIAL_DATA_MODULES);
   
   // Estado para guardar quais IDs de módulos estão marcados
-  const [selectedModules, setSelectedModules] = useState<string[]>([]);
+  const [selectedModules, setSelectedModules] = useState<string[]>(['dados_basicos']);
   
   const [loading, setLoading] = useState(false);
   const [resultado, setResultado] = useState<any>(null);
