@@ -160,3 +160,8 @@ Ao realizar consultas por CPF via `consultaCpfPlus`:
 - **Entrega Permanente de Identificação:** Os dados de `Dados_Pessoais` (incluindo `nome_mae` e `nome_pai`) são entregues obrigatoriamente no resultado final para que o cliente nunca receba uma busca sem saber quem é a pessoa pesquisada.
 - **Enriquecimento com Pesquisa Avançada V2:** Se a API de CPF retornar o registro sem o nome da mãe preenchido, a função dispara automaticamente um enriquecimento transparente chamando a Pesquisa Avançada V2 (`FilterNaturalPerson` -> `ProcessingIds` -> `ViewSearch`), consolidando os dados mais completos possíveis do titular.
 - **Módulo Parentes:** Se o módulo `parentes` for contratado pelo cliente, a mãe e o pai são garantidos no topo da listagem de parentesco.
+
+## Exportação de Consultas em PDF (src/utils/pdf-report.ts)
+A funcionalidade de exportação de relatórios em PDF utiliza renderização nativa de impressão com alta fidelidade vetorial:
+- **Sem Dependência de Chromium no Servidor:** O relatório é gerado dinamicamente via `generateReportHtml` e aberto em popup com disparo de `window.print()`, permitindo salvar como PDF diretamente pelo navegador do cliente. Possui fallback em `iframe` oculto caso bloqueadores de popup estejam ativos.
+- **Integração no DataViewer:** O componente `src/components/DataViewer.tsx` expõe o botão "Exportar PDF" automaticamente para qualquer tela do sistema (`/dashboard`, `/dashboard/veiculos`, `/dashboard/empresas`, `/dashboard/processos`, `/dashboard/enderecos` e no modal de histórico `HistoryList`).

@@ -319,7 +319,7 @@ export default function VeiculosPage() {
       {/* Resultado */}
       {resultado && (
         <div className="mt-8">
-          <DataViewer data={resultado} title="Relatório do Veículo" />
+          <DataViewer data={resultado} title="Relatório do Veículo" query={chaveValor} target="placa" />
         </div>
       )}
     </div>

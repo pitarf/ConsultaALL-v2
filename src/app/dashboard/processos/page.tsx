@@ -437,7 +437,7 @@ export default function ProcessosPage() {
 
       {resultado && (
         <div className="mt-8">
-          <DataViewer data={resultado} title="Relatório de Processos Judiciais" />
+          <DataViewer data={resultado} title="Relatório de Processos Judiciais" query={chaveValor} target={chaveTipo} />
         </div>
       )}
     </div>

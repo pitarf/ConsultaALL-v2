@@ -68,3 +68,10 @@ O Painel Administrativo conta com adaptação móvel completa:
 ## Consulta por CPF: Garantia de Dados e Nome da Mãe
 Toda busca efetuada pelo documento CPF traz automaticamente os dados básicos de identificação (Nome completo, CPF formatado, Nome da Mãe, Nome do Pai, Data de Nascimento, Idade, Sexo e Situação Cadastral).
 Caso você também contrate o módulo "Parentes", os nomes da mãe e do pai são incluídos na lista de vínculos familiares para facilitar a conferência.
+
+## Como Exportar Consultas em PDF (Dossiê Profissional)
+Ao realizar qualquer consulta no sistema (seja de CPF, Nome, CNPJ, Veículo ou Processos Judiciais):
+1. No topo do resultado da pesquisa, clique no botão verde **"Exportar PDF"**.
+2. A janela de impressão do seu navegador será aberta com o Dossiê Cadastral timbrado e formatado em padrão A4.
+3. No destino da impressora, selecione **"Salvar como PDF"** e clique em **Salvar**.
+O documento emitido conta com número de protocolo confidencial, carimbo de autenticação digital e aviso de conformidade com a LGPD.

@@ -43,6 +43,8 @@
 - [x] **Metadata Inteligente:** SEO Dinâmico gerado automaticamente a partir do banco de dados.
 
 ### 🔐 Segurança e Gestão Admin (✅ CONCLUÍDO)
+- [x] **Exportação de Consultas em PDF (Dossiê Cadastral & Inteligência):** Utilitário nativo de alta definição (`pdf-report.ts`) integrado ao `DataViewer` permitindo emissão de dossiês timbrados confidenciais com protocolo, grids formatados, processos judiciais e conformidade LGPD.
+
 - [x] **Enriquecimento de Filiação e Dados Básicos Obrigatórios no CPF:** Resiliência total na busca por CPF garantindo entrega perpétua de Nome da Mãe, filiação e dados civis com fallback automático para Pesquisa Avançada V2 caso a API direta não localize a mãe.
 
 - [x] **Painel Administrativo 100% Responsivo & Mobile-First:** Refatoração de todas as tabelas e métricas do Admin (/admin, /admin/usuarios, /admin/vendas, /admin/custos, /admin/bloqueios) com padrão dual (cards móveis ergonômicos + touch targets 44px+ no mobile e tabelas completas no desktop) sem overflow horizontal.

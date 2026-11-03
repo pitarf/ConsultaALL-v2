@@ -280,7 +280,7 @@ export default function EmpresasPage() {
       {/* Resultado */}
       {resultado && (
         <div className="mt-8">
-          <DataViewer data={resultado} title="Relatório da Empresa" />
+          <DataViewer data={resultado} title="Relatório da Empresa" query={chaveValor} target="cnpj" />
         </div>
       )}
     </div>

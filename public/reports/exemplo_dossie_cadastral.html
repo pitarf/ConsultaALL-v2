@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossiê Cadastral &amp; Relatório de Inteligência - ConsultasBrasil</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #0f172a;
+      background-color: #f8fafc;
+      line-height: 1.5;
+      font-size: 12px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .action-bar {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .action-bar-info { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+
+    .action-bar-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .action-buttons { display: flex; gap: 10px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary { background: #059669; color: #ffffff; }
+    .btn-primary:hover { background: #047857; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+    .document-page {
+      max-width: 860px;
+      margin: 24px auto;
+      background: #ffffff;
+      padding: 36px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    .report-header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      background: #059669;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .report-subtitle {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 4px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-meta { text-align: right; font-size: 11px; color: #475569; }
+
+    .confidential-tag {
+      display: inline-block;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .meta-line { margin-top: 2px; font-size: 10.5px; }
+    .meta-line strong { color: #0f172a; }
+
+    .section-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .section-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .section-body { padding: 14px; }
+
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 16px;
+    }
+
+    .fields-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px 16px;
+    }
+
+    .field-item {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 5px;
+    }
+
+    .field-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .field-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+      word-break: break-word;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .badge-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-alert { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .badge-info { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .data-table th {
+      background: #f8fafc;
+      color: #475569;
+      text-align: left;
+      padding: 6px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .data-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      vertical-align: top;
+    }
+
+    .list-pill {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 5px;
+      font-size: 11.5px;
+      color: #1e293b;
+      display: block;
+    }
+
+    .processo-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #ffffff;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .processo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+
+    .processo-cnj {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 800;
+      color: #1e3a8a;
+    }
+
+    .report-footer {
+      margin-top: 30px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+    }
+
+    .legal-warning { max-width: 65%; line-height: 1.4; }
+    .security-stamp { text-align: right; font-family: monospace; font-weight: 600; }
+
+    @media print {
+      body { background-color: #ffffff !important; font-size: 11px !important; }
+      .action-bar { display: none !important; }
+      .document-page { margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; }
+      .section-card { border-color: #cbd5e1 !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+      .section-header { background: #0f172a !important; color: #ffffff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .badge-status { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      @page { size: A4 portrait; margin: 14mm 10mm 14mm 10mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="action-bar no-print">
+    <div class="action-bar-info">
+      <span class="action-bar-badge">Visualização de Impressão</span>
+      <span>Dossiê pronto para exportação em PDF.</span>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-secondary" onclick="window.close()">Fechar</button>
+      <button class="btn btn-primary" onclick="window.print()">Salvar em PDF / Imprimir</button>
+    </div>
+  </div>
+
+  <div class="document-page">
+    <header class="report-header">
+      <div>
+        <div class="brand-title">
+          <span class="brand-dot"></span>
+          ConsultasBrasil
+        </div>
+        <div class="report-subtitle">Dossiê Cadastral &amp; Relatório de Inteligência</div>
+      </div>
+      <div class="header-meta">
+        <div class="confidential-tag">DOCUMENTO CONFIDENCIAL</div>
+        <div class="meta-line">Protocolo: <strong>DOSSIE-20261103-2L5D89</strong></div>
+        <div class="meta-line">Emissão: <strong>03/11/2026, 14:40:39</strong></div>
+        <div class="meta-line">Termo Consultado: <strong>983.245.352-68</strong></div>
+      </div>
+    </header>
+
+    <main>
+      
+    <div class="section-card">
+      <div class="section-header"><span>Dados Pessoais</span></div>
+      <div class="section-body">
+    <div class="fields-grid">
+          <div class="field-item">
+            <span class="field-label">nome</span>
+            <span class="field-value">Daygoro Agnaldo Okubo</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">cpf</span>
+            <span class="field-value"><span style="font-family: monospace;">983.245.352-68</span></span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">rg</span>
+            <span class="field-value">12.345.678-9 SSP/SP</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">data nascimento</span>
+            <span class="field-value">23/04/1988</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">idade</span>
+            <span class="field-value">38</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">signo</span>
+            <span class="field-value">Touro</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">sexo</span>
+            <span class="field-value">Masculino</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">nome mae</span>
+            <span class="field-value">Maria Auresisa Xavier</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">nome pai</span>
+            <span class="field-value">Agnaldo Okubo</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">situacao cadastral</span>
+            <span class="field-value"><span class="badge-status badge-success">REGULAR</span></span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">data situacao</span>
+            <span class="field-value">18/09/2025</span>
+          </div>
+        </div></div></div>
+    <div class="section-card">
+      <div class="section-header"><span>Telefones</span></div>
+      <div class="section-body">
+    <div style="margin-top: 14px;"><div class="field-label" style="margin-bottom: 6px;">lista (3)</div><div class="list-pill">• (11) 98765-4321 (VIVO - WhatsApp)</div><div class="list-pill">• (11) 3456-7890 (Fixo Residencial)</div><div class="list-pill">• (93) 99123-4567 (CLARO - Celular)</div></div></div></div>
+    <div class="section-card">
+      <div class="section-header"><span>Emails</span></div>
+      <div class="section-body">
+    <div style="margin-top: 14px;"><div class="field-label" style="margin-bottom: 6px;">lista (2)</div><div class="list-pill">• daygoro.okubo@gmail.com</div><div class="list-pill">• contato.daygoro@outlook.com</div></div></div></div>
+    <div class="section-card">
+      <div class="section-header"><span>Localizacao</span></div>
+      <div class="section-body">
+    <div style="margin-top: 14px;"><div class="field-label" style="margin-bottom: 6px;">enderecos (2)</div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Logradouro</th>
+                  <th>Número</th>
+                  <th>Bairro</th>
+                  <th>Cidade/UF</th>
+                  <th>CEP</th>
+                </tr>
+              </thead>
+              <tbody>
+            
+                <tr>
+                  <td>TV GEN GURJAO (Apto 32)</td>
+                  <td>240</td>
+                  <td>Centro</td>
+                  <td>MONTE ALEGRE/PA</td>
+                  <td>68220-000</td>
+                </tr>
+              
+                <tr>
+                  <td>AV PAULISTA (Conj 81)</td>
+                  <td>1500</td>
+                  <td>BELA VISTA</td>
+                  <td>SAO PAULO/SP</td>
+                  <td>01310-200</td>
+                </tr>
+              </tbody></table></div></div></div>
+    <div class="section-card">
+      <div class="section-header"><span>Vinculos Familiares</span></div>
+      <div class="section-body">
+    <div style="margin-top: 14px;"><div class="field-label" style="margin-bottom: 6px;">lista (4)</div><div class="list-pill">• Maria Auresisa Xavier (Mãe)</div><div class="list-pill">• Agnaldo Okubo (Pai)</div><div class="list-pill">• Juliana Sayuri Okubo (Irmã)</div><div class="list-pill">• Kenji Okubo (Irmão)</div></div></div></div>
+    <div class="section-card">
+      <div class="section-header"><span>Renda e Trabalho</span></div>
+      <div class="section-body">
+    <div class="fields-grid">
+          <div class="field-item">
+            <span class="field-label">renda estimada</span>
+            <span class="field-value">R$ 7.850,00</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">faixa salarial</span>
+            <span class="field-value">De 4 a 6 salários mínimos</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">classe social</span>
+            <span class="field-value">B2</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">ocupacao cbo</span>
+            <span class="field-value">Analista de Sistemas / TI</span>
+          </div>
+        
+          <div class="field-item">
+            <span class="field-label">codigo cbo</span>
+            <span class="field-value">212405</span>
+          </div>
+        </div></div></div>
+    <div class="section-card">
+      <div class="section-header">
+        <span>Processos_Judiciais</span>
+        <span>1 PROCESSO</span>
+      </div>
+      <div class="section-body">
+  
+      <div style="margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0;">
+        <span class="field-label">Documento Consultado</span>
+        <span class="field-value" style="font-family: monospace; font-size: 13px;">983.245.352-68</span>
+      </div>
+    
+        <div class="processo-card">
+          <div class="processo-header">
+            <div>
+              <div class="processo-cnj">5007289-29.2022.8.21.0013</div>
+              <div style="font-size: 10.5px; color: #64748b; font-weight: 600; margin-top: 2px;">
+                TJ-SP • Direito Civil
+              </div>
+            </div>
+            <span class="badge-status badge-info">Arquivamento Definitivo</span>
+          </div>
+
+          <div class="fields-grid-3" style="margin-bottom: 10px;">
+            <div class="field-item">
+              <span class="field-label">Distribuição</span>
+              <span class="field-value">20/05/2022</span>
+            </div>
+            <div class="field-item">
+              <span class="field-label">Valor da Causa</span>
+              <span class="field-value">R$ 14.434,47</span>
+            </div>
+            <div class="field-item">
+              <span class="field-label">Comarca / Vara</span>
+              <span class="field-value">São Paulo</span>
+            </div>
+          </div>
+      <div style="margin-top: 8px;"><div class="field-label" style="margin-bottom: 4px;">Partes do Processo</div>
+            <div style="font-size: 11px; padding: 3px 0; border-bottom: 1px dashed #f1f5f9;">
+              <strong>[Ativo]</strong> Daygoro Agnaldo Okubo 
+              <span style="color: #64748b;">(Autor) - 983.245.352-68</span>
+            </div>
+          
+            <div style="font-size: 11px; padding: 3px 0; border-bottom: 1px dashed #f1f5f9;">
+              <strong>[Passivo]</strong> Banco Santander Brasil S.A. 
+              <span style="color: #64748b;">(Réu) - 90.400.888/0001-42</span>
+            </div>
+          </div></div></div></div>
+    </main>
+
+    <footer class="report-footer">
+      <div class="legal-warning">
+        <strong>Conformidade LGPD (Lei nº 13.709/2018):</strong> Relatório gerado exclusivamente para finalidades legítimas e juridicamente fundamentadas. O solicitante assume total responsabilidade legal pelo sigilo e tratamento posterior das informações.
+      </div>
+      <div class="security-stamp">
+        ConsultasBrasil<br>
+        AUTENTICAÇÃO: VERIFICADA
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => { window.print(); }, 400);
+    });
+  </script>
+</body>
+</html>

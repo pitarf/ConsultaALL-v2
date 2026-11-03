@@ -340,7 +340,7 @@ export default function EnderecosPage() {
 
       {resultado && (
         <div className="mt-8">
-          <DataViewer data={resultado} title="Relatório de Localizações e Contatos" />
+          <DataViewer data={resultado} title="Relatório de Localizações e Contatos" query={chaveValor} target={chaveTipo} />
         </div>
       )}
     </div>

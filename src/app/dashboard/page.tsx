@@ -595,7 +595,7 @@ export default function DashboardPage() {
       {/* Resultado */}
       {resultado && (
         <div className="mt-8">
-          <DataViewer data={resultado} title="Relatório de Consulta" />
+          <DataViewer data={resultado} title="Relatório de Consulta" query={chaveValor} target={chaveTipo} />
         </div>
       )}
 

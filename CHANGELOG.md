@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.11] - 2026-11-03
+### Adicionado & Dossiê Executivo
+- **Exportação de Consultas em PDF (Dossiê Cadastral & Relatório de Inteligência):**
+  - **Mecanismo Nativo Vetorial:** Criação do utilitário `src/utils/pdf-report.ts` que gera relatórios A4 em HTML com CSS inline profissional e regras de quebra de página (`break-inside: avoid`), disparando a janela de impressão nativa (`window.print`) com textos 100% selecionáveis e alta nitidez sem consumo de RAM no servidor.
+  - **Botão Universal "Exportar PDF":** Integrado no componente central `src/components/DataViewer.tsx` ao lado do botão de dados brutos com touch target ergonômico (`min-h-[44px]`), atendendo todas as consultas da plataforma (CPF, CNPJ, Veículos, Processos Judiciais, Endereços e Histórico).
+  - **Identidade Visual Timbrada:** Cabeçalho confidencial com protocolo único (`DOSSIE-YYYYMMDD-XXXX`), data/hora de emissão, termo consultado, grids organizados e rodapé com aviso de conformidade LGPD (Lei nº 13.709/2018) e carimbo de autenticação digital.
+
 ## [1.2.10] - 2026-10-30
 ### Aprimorado & Enriquecimento de Filiação (CPF)
 - **Garantia de Filiação e Dados Pessoais na Consulta de CPF:**

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { 
   User, FileText, MapPin, Phone, CreditCard, Activity, 
-  Users, Car, Briefcase, GraduationCap, Eye, EyeOff 
+  Users, Car, Briefcase, GraduationCap, Eye, EyeOff, FileDown 
 } from 'lucide-react';
+import { exportToPdf } from '@/utils/pdf-report';
 
 interface DataViewerProps {
   data: any;
   title?: string;
+  query?: string;
+  target?: string;
 }
 
-export function DataViewer({ data, title }: DataViewerProps) {
+export function DataViewer({ data, title, query, target }: DataViewerProps) {
   const [showRaw, setShowRaw] = useState(false);
 
   if (!data) return null;
@@ -194,7 +197,16 @@ export function DataViewer({ data, title }: DataViewerProps) {
           <div className="w-2 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(79,70,229,0.5)] shrink-0" />
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight break-words">{title || 'Relatório de Consulta'}</h2>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <button 
+            type="button"
+            onClick={() => exportToPdf({ data, title: title || 'Relatório de Consulta', query, target })}
+            className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2 text-sm font-semibold px-4 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl shadow-md shadow-primary/20 transition-all active:scale-95 cursor-pointer select-none"
+            title="Exportar ou Imprimir Relatório em PDF"
+          >
+            <FileDown className="w-4 h-4" />
+            <span>Exportar PDF</span>
+          </button>
           <button 
             type="button"
             onClick={() => setShowRaw(!showRaw)}
