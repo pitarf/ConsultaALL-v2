@@ -542,7 +542,7 @@ export default function DashboardPage() {
                         <p><span className="font-semibold text-slate-400">CPF:</span> {c.taxIdNumber || 'Não informado'}</p>
                         <p><span className="font-semibold text-slate-400">Nascimento:</span> {c.dateOfBirth ? (c.dateOfBirth.includes('/') || c.dateOfBirth.includes('*') ? c.dateOfBirth : new Date(c.dateOfBirth).toLocaleDateString('pt-BR', { timeZone: 'UTC' })) : 'Não informado'}</p>
                         <p><span className="font-semibold text-slate-400">Mãe:</span> {c.motherName ? c.motherName.toUpperCase() : 'Não informado'}</p>
-                        <p><span className="font-semibold text-slate-400">Localização:</span> {c.city || 'Desconhecida'} - {c.state || 'XX'}</p>
+                        <p><span className="font-semibold text-slate-400">Localização:</span> {c.city ? `${c.city} - ${c.state || 'XX'}` : 'Resultado após confirmar e consultar'}</p>
                       </div>
                       <button
                         type="button"

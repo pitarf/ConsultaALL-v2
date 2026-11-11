@@ -210,3 +210,8 @@
 - [x] **Filtros Rápidos (`DashboardClient.tsx`):** Atualização do chip de seleção de período para "Mês Atual".
 - [x] **Identificação de Período (`page.tsx`):** Tradução do cabeçalho da visualização panorâmica para "Mês Atual".
 - [x] **Agregação e Escala (`admin.ts`):** Ajuste de `startDate` para o dia 1 do mês corrente no horário de Brasília (UTC-3) e preenchimento diário de todo o mês no gráfico (`daysInMonth`).
+
+## SPLIT 17: Clareza Visual na Seleção de Candidatos (✅ CONCLUÍDO)
+*Este split ajusta os placeholders de localização não revelados na etapa prévia de seleção de homônimos para indicar claramente que os dados serão entregues após a confirmação.*
+- [x] **Substituição de Texto em Candidatos:** Alteração do fallback "Desconhecida" para "Resultado após confirmar e consultar" nas telas de consulta geral, processos judiciais e endereços.
+- [x] **Formatação Limpa:** Ocultação de sufixos residuais de UF quando a cidade não estiver presente.

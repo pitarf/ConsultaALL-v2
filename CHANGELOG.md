@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.12] - 2026-11-11
+### Aprimorado & Interface de Candidatos
+- **Ajuste de Mensagem de Prévia de Localização:**
+  - Substituído o placeholder anterior "Desconhecida" na listagem de candidatos antes da consulta definitiva por "Resultado após confirmar e consultar".
+  - Atualizado em todas as telas de seleção de homônimos/candidatos: Dashboard Principal (`src/app/dashboard/page.tsx`), Processos Judiciais (`src/app/dashboard/processos/page.tsx`) e Localizador de Endereços (`src/app/dashboard/enderecos/page.tsx`).
+  - Tratamento visual limpo: se a cidade não estiver presente na prévia, exibe diretamente `"Resultado após confirmar e consultar"` sem formatador pendente de estado (`- XX`).
+
 ## [1.2.11] - 2026-11-03
 ### Adicionado & Dossiê Executivo
 - **Exportação de Consultas em PDF (Dossiê Cadastral & Relatório de Inteligência):**

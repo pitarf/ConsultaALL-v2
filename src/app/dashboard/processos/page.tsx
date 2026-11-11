@@ -392,7 +392,7 @@ export default function ProcessosPage() {
                         <p className="font-bold text-slate-800 dark:text-white text-base capitalize">{c.name.toLowerCase()}</p>
                         <p><span className="font-semibold text-slate-400">CPF:</span> {c.taxIdNumber || 'Não informado'}</p>
                         <p><span className="font-semibold text-slate-400">Mãe:</span> {c.motherName || 'Não informado'}</p>
-                        <p><span className="font-semibold text-slate-400">Localização:</span> {c.city || 'Desconhecida'} - {c.state || 'XX'}</p>
+                        <p><span className="font-semibold text-slate-400">Localização:</span> {c.city ? `${c.city} - ${c.state || 'XX'}` : 'Resultado após confirmar e consultar'}</p>
                       </div>
                       <button
                         type="button"
