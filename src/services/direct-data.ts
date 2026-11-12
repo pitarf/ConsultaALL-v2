@@ -359,6 +359,13 @@ export async function performSmartSearch(
         }
         
         if (filterRes?.success && filterRes?.listFilters && filterRes.listFilters.length > 0) {
+          const sanitizeCandidateStr = (val: any) => {
+            if (!val || typeof val !== 'string') return val;
+            const t = val.trim();
+            if (t.toLowerCase().includes('desconhecid') || t.toUpperCase() === 'XX' || t === 'N/I') return null;
+            return t;
+          };
+
           return {
             success: true,
             isMultiple: true,
@@ -366,10 +373,10 @@ export async function performSmartSearch(
               id: c.id,
               name: c.fullName || c.name || (isPhone ? phone : cleanQuery),
               dateOfBirth: c.dateOfBirth,
-              motherName: c.motherName,
+              motherName: sanitizeCandidateStr(c.motherName),
               taxIdNumber: c.cpf || c.taxIdNumber, // CPF mascarado
-              state: c.state,
-              city: c.city
+              state: sanitizeCandidateStr(c.state),
+              city: sanitizeCandidateStr(c.city)
             }))
           };
         }
