@@ -3,11 +3,18 @@
 import { verifySession } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
 import { fazerConsultaAPI } from '@/services/api-consulta';
-import { performSmartSearch, consultaCpfPlus, consultaVeicular, consultaCnpjPlus } from '@/services/direct-data';
+import { performSmartSearch, consultaCpfPlus, consultaVeicular, consultaCnpjPlus, consultaProcessos } from '@/services/direct-data';
 import { validarChave } from '@/lib/validators';
 
 export async function getPricing() {
   return prisma.modulePricing.findMany();
+}
+
+export async function getSearchSettings() {
+  const setting = await prisma.systemSetting.findFirst();
+  return {
+    allowNameSearch: setting?.allowNameSearch ?? true,
+  };
 }
 
 export async function realizarConsulta(
@@ -24,6 +31,14 @@ export async function realizarConsulta(
     return { error: 'Sessão expirada. Faça login novamente.' };
   }
 
+  // Se a busca for por Nome, verifica se está habilitada globalmente nas configurações do sistema
+  if (target === 'nome') {
+    const settings = await prisma.systemSetting.findFirst();
+    if (settings && settings.allowNameSearch === false) {
+      return { error: 'A consulta por Nome está temporariamente desativada pela plataforma.' };
+    }
+  }
+
   // Validação de Segurança e Sanitização (Remoção de espaços, parênteses, traços e símbolos)
   let cleanQuery = query.trim();
   if (target === 'telefone') {
@@ -36,6 +51,8 @@ export async function realizarConsulta(
     cleanQuery = cleanQuery.replace(/\D/g, '');
   } else if (target === 'placa') {
     cleanQuery = cleanQuery.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+  } else if (target === 'nome') {
+    cleanQuery = cleanQuery.replace(/\s+/g, ' ');
   }
 
   const validation = validarChave(target, cleanQuery);
@@ -44,47 +61,53 @@ export async function realizarConsulta(
   }
 
   // Verifica se o dado está na Blocklist (Bloqueio LGPD)
-  let blocklistValue = '';
-  if (target === 'placa') {
-    blocklistValue = cleanQuery.replace(/-/g, '').toUpperCase();
-  } else if (target === 'nome') {
-    blocklistValue = cleanQuery.trim().toUpperCase().replace(/\s+/g, ' ');
-  } else {
-    blocklistValue = cleanQuery.replace(/\D/g, '');
-  }
+  let isBlocked = false;
+  if (target === 'nome') {
+    const normalizedName = cleanQuery
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toUpperCase();
 
-  if (blocklistValue) {
-    const isBlocked = await prisma.blockedData.findFirst({
-      where: target === 'nome'
-        ? { type: 'NOME', value: { equals: blocklistValue, mode: 'insensitive' } }
-        : { value: blocklistValue }
+    const blocked = await prisma.blockedData.findFirst({
+      where: { type: 'NOME', value: normalizedName }
     });
-
-    if (isBlocked) {
-      return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
+    if (blocked) isBlocked = true;
+  } else if (target === 'placa') {
+    const cleanPlaca = cleanQuery.replace(/-/g, '').toUpperCase();
+    const blocked = await prisma.blockedData.findFirst({
+      where: { value: cleanPlaca }
+    });
+    if (blocked) isBlocked = true;
+  } else {
+    const digits = cleanQuery.replace(/\D/g, '');
+    if (digits) {
+      const blocked = await prisma.blockedData.findFirst({
+        where: { value: digits }
+      });
+      if (blocked) isBlocked = true;
     }
   }
 
-  // Para consulta por CPF, garante que 'dados_basicos' esteja sempre presente nos módulos para identificação civil
-  let effectiveModules = [...selectedModules];
-  if (target === 'cpf' && !effectiveModules.includes('dados_basicos')) {
-    effectiveModules = ['dados_basicos', ...effectiveModules];
+  if (isBlocked) {
+    return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
   }
 
-  if (!effectiveModules || effectiveModules.length === 0) {
+  if (!selectedModules || selectedModules.length === 0) {
     return { error: 'Nenhum conjunto de dados selecionado.' };
   }
 
   // Busca os preços dinamicos no banco
   const prices = await prisma.modulePricing.findMany({
-    where: { id: { in: effectiveModules } }
+    where: { id: { in: selectedModules } }
   });
 
   if (prices.length === 0) {
     return { error: 'Módulos inválidos ou não encontrados.' };
   }
 
-  const totalCost = prices.reduce((acc, module) => acc + module.price, 0);
+  const rawCost = prices.reduce((acc, module) => acc + module.price, 0);
+  const totalCost = Math.round(rawCost * 100) / 100;
 
   if (totalCost <= 0) {
     return { error: 'Custo de consulta inválido.' };
@@ -109,8 +132,8 @@ export async function realizarConsulta(
           success: true,
           isMultiple: true,
           candidates: [
-            { id: "demo-1", name: target === 'telefone' ? `TITULAR DO TELEFONE ${cleanQuery}` : `${cleanQuery.toUpperCase()} CANDIDATO 1`, dateOfBirth: "1985-04-12T00:00:00", motherName: "MARIA DA SILVA DE SOUZA", taxIdNumber: "***.123.456-**", state: "SP", city: "São Paulo" },
-            { id: "demo-2", name: target === 'telefone' ? `VÍNCULO ADICIONAL ${cleanQuery}` : `${cleanQuery.toUpperCase()} CANDIDATO 2`, dateOfBirth: "1990-08-20T00:00:00", motherName: "JOSEFA ALVES DE OLIVEIRA", taxIdNumber: "***.789.012-**", state: "RJ", city: "Rio de Janeiro" }
+            { id: "demo-1", name: target === 'telefone' ? 'Titular do Telefone (Perfil 1)' : `${cleanQuery.toUpperCase()} (Perfil 1)`, dateOfBirth: null, motherName: null, taxIdNumber: "***.123.456-**", state: null, city: null, isPhoneSearch: target === 'telefone' },
+            { id: "demo-2", name: target === 'telefone' ? 'Titular Vinculado (Perfil 2)' : `${cleanQuery.toUpperCase()} (Perfil 2)`, dateOfBirth: null, motherName: null, taxIdNumber: "***.789.012-**", state: null, city: null, isPhoneSearch: target === 'telefone' }
           ]
         };
       }
@@ -164,24 +187,50 @@ export async function realizarConsulta(
 
       // Se retornou múltiplos candidatos (Etapa 1 V2 grátis)
       if (apiResult.isMultiple) {
-        // Filtra candidatos que estejam na Blocklist (por Nome ou CPF)
         if (Array.isArray(apiResult.candidates) && apiResult.candidates.length > 0) {
-          const blockedItems = await prisma.blockedData.findMany({ select: { value: true } });
-          const blockedSet = new Set(blockedItems.map((b) => b.value.toUpperCase()));
-
-          apiResult.candidates = apiResult.candidates.filter((c: any) => {
-            const nomeCand = (c.name || '').trim().toUpperCase().replace(/\s+/g, ' ');
-            const cpfCand = (c.taxIdNumber || '').replace(/\D/g, '');
-            if (blockedSet.has(nomeCand) || (cpfCand && blockedSet.has(cpfCand))) {
-              return false;
-            }
-            return true;
+          const allBlocked = await prisma.blockedData.findMany({
+            select: { type: true, value: true }
           });
 
-          if (apiResult.candidates.length === 0) {
-            return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
+          if (allBlocked.length > 0) {
+            const blockedNames = new Set(allBlocked.filter(b => b.type === 'NOME').map(b => b.value));
+            const blockedCpfs = new Set(allBlocked.filter(b => b.type === 'CPF').map(b => b.value));
+
+            apiResult.candidates = apiResult.candidates.filter((cand: any) => {
+              const candNameNorm = cand.name
+                ? cand.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase()
+                : '';
+              if (blockedNames.has(candNameNorm)) return false;
+
+              const candCpf = cand.taxIdNumber ? cand.taxIdNumber.replace(/\D/g, '') : '';
+              if (candCpf && blockedCpfs.has(candCpf)) return false;
+
+              return true;
+            });
+
+            if (apiResult.candidates.length === 0) {
+              return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
+            }
           }
         }
+
+        // Blindagem de segurança comercial: na busca por telefone, oculta o nome real e dados sensíveis antes do pagamento
+        if (Array.isArray(apiResult.candidates)) {
+          const totalCands = apiResult.candidates.length;
+          apiResult.candidates = apiResult.candidates.map((cand: any, idx: number) => ({
+            id: cand.id,
+            name: target === 'telefone'
+              ? (totalCands > 1 ? `Titular Vinculado (Perfil ${idx + 1})` : 'Titular do Telefone')
+              : cand.name,
+            taxIdNumber: cand.taxIdNumber, // Apenas os 3 dígitos do CPF com máscara
+            motherName: null,
+            dateOfBirth: null,
+            city: null,
+            state: null,
+            isPhoneSearch: target === 'telefone'
+          }));
+        }
+
         try {
           const sortedModules = [...selectedModules].sort().join(',');
           await prisma.searchHistory.create({
@@ -204,7 +253,10 @@ export async function realizarConsulta(
 
       // Se NÃO for isMultiple mas tiver data (ex: fallback V3 de leads que já achou direto o registro!)
       if (apiResult.data) {
-        if (user.balance < totalCost) {
+        const userCentavos = Math.round((user.balance || 0) * 100);
+        const costCentavos = Math.round(totalCost * 100);
+
+        if (userCentavos < costCentavos) {
           return { error: `Saldo insuficiente. Esta consulta requer R$ ${totalCost.toFixed(2).replace('.', ',')}.` };
         }
 
@@ -220,7 +272,7 @@ export async function realizarConsulta(
           });
 
           const updatedUser = await tx.user.update({
-            where: { id: user.id, balance: { gte: totalCost } },
+            where: { id: user.id, balance: { gte: totalCost - 0.005 } },
             data: { balance: { decrement: totalCost } }
           });
 
@@ -330,13 +382,34 @@ export async function realizarConsulta(
       };
     } else {
       // Se NÃO houver cache e não for teste, checa saldo e chama API REAL
-      if (user.balance < totalCost) {
+      const userCentavos = Math.round((user.balance || 0) * 100);
+      const costCentavos = Math.round(totalCost * 100);
+
+      if (userCentavos < costCentavos) {
         return { error: `Saldo insuficiente. Esta consulta requer R$ ${totalCost.toFixed(2).replace('.', ',')}.` };
       }
 
       const executeApi = async () => {
-        if (target === 'cpf') {
-          return await consultaCpfPlus(cleanQuery, effectiveModules);
+        // Se a busca for exclusivamente pelo módulo de processos judiciais via CPF ou CNPJ
+        if (selectedModules.length === 1 && selectedModules[0] === 'processos' && (target === 'cpf' || target === 'cnpj')) {
+          const procRes = await consultaProcessos(cleanQuery);
+          if (procRes.success) {
+            return {
+              success: true,
+              data: {
+                Documento: cleanQuery,
+                Tipo_Documento: target.toUpperCase(),
+                Processos_Judiciais: procRes.data
+              }
+            };
+          } else {
+            return {
+              success: false,
+              message: procRes.message || 'Nenhum processo judicial localizado para este documento.'
+            };
+          }
+        } else if (target === 'cpf') {
+          return await consultaCpfPlus(cleanQuery, selectedModules);
         } else if (target === 'cnpj') {
           return await consultaCnpjPlus(cleanQuery, selectedModules);
         } else if (target === 'placa') {
@@ -421,6 +494,29 @@ export async function realizarConsulta(
       return { success: true, data: apiResult.data, newBalance: user.balance, isDemo: true };
     }
 
+    // Checagem LGPD de segurança pós-retorno da API
+    if (apiResult.data) {
+      const pData = apiResult.data.Dados_Pessoais || apiResult.data.dados_pessoais;
+      const retCpf = pData?.cpf ? pData.cpf.replace(/\D/g, '') : null;
+      const retNome = pData?.nome
+        ? pData.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase()
+        : null;
+
+      if (retCpf || retNome) {
+        const isBlockedPost = await prisma.blockedData.findFirst({
+          where: {
+            OR: [
+              ...(retCpf ? [{ type: 'CPF', value: retCpf }] : []),
+              ...(retNome ? [{ type: 'NOME', value: retNome }] : [])
+            ]
+          }
+        });
+        if (isBlockedPost) {
+          return { error: 'Este registro está indisponível para consulta por solicitação do titular (Direitos LGPD).' };
+        }
+      }
+    }
+
 function hasMeaningfulData(val: any): boolean {
   if (val === null || val === undefined) return false;
   if (typeof val === 'boolean' || typeof val === 'number') return true;
@@ -488,7 +584,7 @@ function hasMeaningfulData(val: any): boolean {
 
       // Atualiza saldo do usuário GARANTINDO que ele tem saldo suficiente no momento exato do débito (Prevenção de Race Condition)
       const updatedUser = await tx.user.update({
-        where: { id: user.id, balance: { gte: totalCost } },
+        where: { id: user.id, balance: { gte: totalCost - 0.005 } },
         data: { balance: { decrement: totalCost } },
       });
 
