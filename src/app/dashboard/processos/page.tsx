@@ -8,7 +8,13 @@ import { toast } from 'sonner';
 import { Search, Loader2, FlaskConical, HelpCircle, ChevronDown, Zap, Scale, FileText, Users, Building2, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { DataViewer } from '@/components/DataViewer';
 import { Tooltip } from '@/components/Tooltip';
-import { formatCandidateLocation, formatCandidateMother, formatCandidateTaxId } from '@/utils/candidate-helpers';
+import { 
+  formatCandidateTitle,
+  formatCandidateLocation, 
+  formatCandidateMother, 
+  formatCandidateTaxId,
+  MENSAGEM_LIBERACAO
+} from '@/utils/candidate-helpers';
 
 // Módulos e escopo de dados cobertos na consulta de processos judiciais
 const COBERTURA_PROCESSUAL = [
@@ -387,55 +393,58 @@ export default function ProcessosPage() {
             return (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {paginatedCandidates.map((c) => (
-                    <div key={c.id} className="border border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-black/20 p-4 sm:p-5 rounded-2xl flex flex-col justify-between hover:border-primary/40 transition-all">
-                                            <div className="space-y-2 text-sm text-slate-600 dark:text-gray-300 break-words">
-                        <p className="font-bold text-slate-800 dark:text-white text-base capitalize">{c.name.toLowerCase()}</p>
-                        {(() => {
-                          const cpf = formatCandidateTaxId(c.taxIdNumber);
-                          const mother = formatCandidateMother(c.motherName);
-                          const loc = formatCandidateLocation(c.city, c.state);
+                  {paginatedCandidates.map((c, index) => {
+                    const isPhone = Boolean(c.isPhoneSearch || chaveTipo === 'telefone');
+                    const candidateTitle = formatCandidateTitle(c.name, isPhone, startIndex + index, candidates.length);
 
-                          return (
-                            <>
-                              <p>
-                                <span className="font-semibold text-slate-400">CPF:</span>{' '}
-                                {cpf.isPlaceholder ? (
-                                  <span className="text-primary font-medium">{cpf.text}</span>
-                                ) : (
-                                  cpf.text
+                    return (
+                      <div key={c.id} className="border border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-black/20 p-4 sm:p-5 rounded-2xl flex flex-col justify-between hover:border-primary/40 transition-all">
+                        <div className="space-y-2 text-sm text-slate-600 dark:text-gray-300 break-words">
+                          <p className="font-bold text-slate-800 dark:text-white text-base">{candidateTitle}</p>
+                          {(() => {
+                            const cpf = formatCandidateTaxId(c.taxIdNumber);
+                            const mother = formatCandidateMother(c.motherName);
+                            const loc = formatCandidateLocation(c.city, c.state);
+
+                            return (
+                              <>
+                                {isPhone && (
+                                  <p>
+                                    <span className="font-semibold text-slate-400">Nome:</span>{' '}
+                                    <span className="text-primary font-medium">{MENSAGEM_LIBERACAO}</span>
+                                  </p>
                                 )}
-                              </p>
-                              <p>
-                                <span className="font-semibold text-slate-400">Mãe:</span>{' '}
-                                {mother.isPlaceholder ? (
+                                <p>
+                                  <span className="font-semibold text-slate-400">CPF:</span>{' '}
+                                  {cpf.isPlaceholder ? (
+                                    <span className="text-primary font-medium">{cpf.text}</span>
+                                  ) : (
+                                    cpf.text
+                                  )}
+                                </p>
+                                <p>
+                                  <span className="font-semibold text-slate-400">Mãe:</span>{' '}
                                   <span className="text-primary font-medium">{mother.text}</span>
-                                ) : (
-                                  mother.text
-                                )}
-                              </p>
-                              <p>
-                                <span className="font-semibold text-slate-400">Localização:</span>{' '}
-                                {loc.isPlaceholder ? (
+                                </p>
+                                <p>
+                                  <span className="font-semibold text-slate-400">Localização:</span>{' '}
                                   <span className="text-primary font-medium">{loc.text}</span>
-                                ) : (
-                                  loc.text
-                                )}
-                              </p>
-                            </>
-                          );
-                        })()}
+                                </p>
+                              </>
+                            );
+                          })()}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleSelectCandidate(c.id)}
+                          disabled={loading}
+                          className="mt-5 w-full min-h-[44px] bg-primary hover:bg-primary-hover text-white py-2.5 px-4 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
+                        >
+                          Selecionar e Consultar Processos
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => handleSelectCandidate(c.id)}
-                        disabled={loading}
-                        className="mt-5 w-full min-h-[44px] bg-primary hover:bg-primary-hover text-white py-2.5 px-4 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
-                      >
-                        Selecionar e Consultar Processos
-                      </button>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {totalCandidatePages > 1 && (
