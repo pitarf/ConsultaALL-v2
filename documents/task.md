@@ -215,3 +215,8 @@
 *Este split ajusta os placeholders de localização não revelados na etapa prévia de seleção de homônimos para indicar claramente que os dados serão entregues após a confirmação.*
 - [x] **Substituição de Texto em Candidatos:** Alteração do fallback "Desconhecida" para "Resultado após confirmar e consultar" nas telas de consulta geral, processos judiciais e endereços.
 - [x] **Formatação Limpa:** Ocultação de sufixos residuais de UF quando a cidade não estiver presente.
+
+## SPLIT 18: Telefone 100% Pesquisa Avançada V2 (✅ CONCLUÍDO)
+*Este split remove o fallback simplificado de Enriquecimento de Lead e unifica as buscas por telefone na Pesquisa Avançada V2 para entrega completa de dados e filiação.*
+- [x] **Remoção de Fallback de Lead:** Eliminada a chamada para `EnriquecimentoLead` em `direct-data.ts`.
+- [x] **Pesquisa Avançada Completa:** Busca por telefone agora sempre gera e processa via Pesquisa Avançada V2 (`ProcessingIds` + `ViewSearch`).

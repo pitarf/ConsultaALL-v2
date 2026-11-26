@@ -2,6 +2,12 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.2.13] - 2026-11-26
+### Aprimorado & Pesquisa Avançada por Telefone
+- **Migração Definitiva de Telefone para Pesquisa Avançada V2:**
+  - Removido o fallback síncrono para o endpoint `EnriquecimentoLead` na busca por telefone em `src/services/direct-data.ts`.
+  - A busca por telefone passa a operar exclusivamente através do fluxo da Pesquisa Avançada V2 (`FilterNaturalPerson` -> seleção de perfil -> `ProcessingIds` e `ViewSearch`), garantindo entrega cadastral completa (nome da mãe, filiação, parentescos e histórico).
+
 ## [1.2.12] - 2026-11-11
 ### Aprimorado & Interface de Candidatos
 - **Ajuste de Mensagem de Prévia de Localização:**
